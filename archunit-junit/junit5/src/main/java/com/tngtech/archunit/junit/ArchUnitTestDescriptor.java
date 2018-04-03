@@ -30,7 +30,6 @@ import org.junit.platform.engine.TestDescriptor;
 import org.junit.platform.engine.UniqueId;
 import org.junit.platform.engine.support.descriptor.AbstractTestDescriptor;
 import org.junit.platform.engine.support.descriptor.ClassSource;
-import org.junit.platform.engine.support.descriptor.MethodSource;
 import org.junit.platform.engine.support.hierarchical.Node;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -46,7 +45,7 @@ public class ArchUnitTestDescriptor extends AbstractTestDescriptor implements No
     private ClassCache classCache;
 
     ArchUnitTestDescriptor(UniqueId uniqueId, Class<?> testClass, ClassCache classCache) {
-        super(uniqueId.append("class", testClass.getName()), testClass.getSimpleName(), ClassSource.from(testClass));
+        super(uniqueId.append("class", testClass.getName()), testClass.getSimpleName());
         this.testClass = testClass;
         this.classCache = classCache;
 
@@ -66,7 +65,7 @@ public class ArchUnitTestDescriptor extends AbstractTestDescriptor implements No
         uniqueId = uniqueId.append("field", field.getName());
         return ArchRules.class.isAssignableFrom(field.getType())
                 ? new ArchUnitRulesDescriptor(uniqueId, getDeclaredRules(testClass, field), classes)
-                : new ArchUnitRuleDescriptor(uniqueId, getValue(field, null), classes, FieldSource.from(field));
+                : new ArchUnitRuleDescriptor(uniqueId, getValue(field, null), classes);
     }
 
     private static DeclaredArchRules getDeclaredRules(Class<?> testClass, Field field) {
@@ -87,8 +86,8 @@ public class ArchUnitTestDescriptor extends AbstractTestDescriptor implements No
         private final ArchRule rule;
         private final Supplier<JavaClasses> classes;
 
-        ArchUnitRuleDescriptor(UniqueId uniqueId, ArchRule rule, Supplier<JavaClasses> classes, FieldSource testSource) {
-            super(uniqueId.append("rule", rule.getDescription()), rule.getDescription(), testSource);
+        ArchUnitRuleDescriptor(UniqueId uniqueId, ArchRule rule, Supplier<JavaClasses> classes) {
+            super(uniqueId.append("rule", rule.getDescription()), rule.getDescription());
             this.rule = rule;
             this.classes = classes;
         }
@@ -111,7 +110,7 @@ public class ArchUnitTestDescriptor extends AbstractTestDescriptor implements No
         private final Supplier<JavaClasses> classes;
 
         ArchUnitMethodDescriptor(UniqueId uniqueId, Method method, Supplier<JavaClasses> classes) {
-            super(uniqueId.append("method", method.getName()), method.getName(), MethodSource.from(method));
+            super(uniqueId.append("method", method.getName()), method.getName());
             validate(method);
 
             this.method = method;

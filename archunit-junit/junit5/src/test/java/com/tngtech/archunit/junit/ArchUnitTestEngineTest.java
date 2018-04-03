@@ -2,7 +2,6 @@ package com.tngtech.archunit.junit;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -26,7 +25,6 @@ import org.junit.platform.engine.ExecutionRequest;
 import org.junit.platform.engine.TestDescriptor;
 import org.junit.platform.engine.UniqueId;
 import org.junit.platform.engine.support.descriptor.ClassSource;
-import org.junit.platform.engine.support.descriptor.MethodSource;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
@@ -38,7 +36,6 @@ import static com.tngtech.archunit.junit.testexamples.SimpleRuleField.SIMPLE_RUL
 import static com.tngtech.archunit.junit.testexamples.SimpleRuleMethod.SIMPLE_RULE_METHOD_NAME;
 import static java.util.Collections.singleton;
 import static java.util.function.Function.identity;
-import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -105,17 +102,6 @@ class ArchUnitTestEngineTest {
         }
 
         @Test
-        void source_of_a_single_test_class() {
-            EngineDiscoveryTestRequest discoveryRequest = new EngineDiscoveryTestRequest().withClass(SimpleRuleField.class);
-
-            TestDescriptor descriptor = testEngine.discover(discoveryRequest, uniqueTestId());
-
-            TestDescriptor child = getOnlyElement(descriptor.getChildren());
-
-            assertClassSource(child, SimpleRuleField.class);
-        }
-
-        @Test
         void multiple_test_classes() {
             EngineDiscoveryTestRequest discoveryRequest = new EngineDiscoveryTestRequest()
                     .withClass(SimpleRuleField.class)
@@ -137,9 +123,6 @@ class ArchUnitTestEngineTest {
             TestDescriptor ruleDescriptor = getOnlyTest(descriptor);
 
             assertThat(ruleDescriptor.getUniqueId()).isEqualTo(simpleRuleFieldTestId(uniqueId));
-            FieldSource testSource = ((FieldSource) ruleDescriptor.getSource().get());
-            assertThat(testSource.getClassName()).isEqualTo(SimpleRuleField.class.getName());
-            assertThat(testSource.getFieldName()).isEqualTo(SIMPLE_RULE_FIELD_NAME);
         }
 
         @Test
@@ -152,10 +135,6 @@ class ArchUnitTestEngineTest {
             TestDescriptor ruleDescriptor = getOnlyTest(descriptor);
 
             assertThat(ruleDescriptor.getUniqueId()).isEqualTo(simpleRuleMethodTestId(uniqueId));
-            MethodSource testSource = (MethodSource) ruleDescriptor.getSource().get();
-            assertThat(testSource.getClassName()).isEqualTo(SimpleRuleMethod.class.getName());
-            assertThat(testSource.getMethodName()).isEqualTo(SIMPLE_RULE_METHOD_NAME);
-            assertThat(testSource.getMethodParameterTypes()).isEqualTo(JavaClasses.class.getName());
         }
 
         @Test
@@ -183,28 +162,6 @@ class ArchUnitTestEngineTest {
             Set<UniqueId> actualIds = archRulesDescriptors.flatMap(d -> d.getChildren().stream())
                     .map(TestDescriptor::getUniqueId).collect(toSet());
             assertThat(actualIds).isEqualTo(expectedIds);
-        }
-
-        @Test
-        void a_simple_hierarchy__class_source() {
-            UniqueId uniqueId = uniqueTestId();
-            EngineDiscoveryTestRequest discoveryRequest = new EngineDiscoveryTestRequest().withClass(SimpleRuleLibrary.class);
-
-            TestDescriptor descriptor = testEngine.discover(discoveryRequest, uniqueId);
-
-            assertClassSource(getOnlyElement(descriptor.getChildren()), SimpleRuleLibrary.class);
-
-            List<TestDescriptor> archRulesDescriptors = getArchRulesDescriptorsOfOnlyChild(descriptor).collect(toList());
-
-            TestDescriptor testDescriptor = findRulesDescriptor(archRulesDescriptors, SimpleRules.class);
-            assertClassSource(testDescriptor, SimpleRules.class);
-            testDescriptor.getChildren().forEach(d ->
-                    assertThat(d.getSource().isPresent()).as("source is present").isTrue());
-
-            testDescriptor = findRulesDescriptor(archRulesDescriptors, SimpleRuleField.class);
-            assertClassSource(testDescriptor, SimpleRuleField.class);
-            testDescriptor.getChildren().forEach(d ->
-                    assertThat(d.getSource().isPresent()).as("source is present").isTrue());
         }
 
         private TestDescriptor getOnlyTest(TestDescriptor descriptor) {
