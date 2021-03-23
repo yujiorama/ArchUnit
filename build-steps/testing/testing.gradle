@@ -67,7 +67,9 @@ ext {
 
         testJdks().each { jdk ->
             def additionalTestTask = proj.tasks.create(name: "${testTask.name}${jdk.suffix}", type: Test) {
-                executable = findJavaExecutable(jdk.jdkPath)
+                javaLauncher = proj.javaToolchains.launcherFor {
+                    languageVersion = JavaLanguageVersion.of(jdk.javaVersion.getMajorVersion())
+                }
 
                 testClassesDirs = testTask.testClassesDirs
                 classpath = testTask.classpath

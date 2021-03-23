@@ -127,6 +127,11 @@ test.finalizedBy(jdk9Test, jdk15Test)
 
 [spotbugsJdk9test, spotbugsJdk15test]*.enabled = false
 
+// FIXME: The formatting crashes if the JDK is not high enough, and unfortunately it uses the Gradle JDK instead of the build JDK :-(
+spotlessJava.enabled = false
+// FIXME: Spotbugs doesn't detect com.tngtech.archunit.library.freeze.FreezingArchRule.ensureUnixLineBreaks(List) as used anymore
+spotbugsMain.enabled = false
+
 idea {
     module {
         sourceDirs += jdk9MainDirs.collect { file(it) }

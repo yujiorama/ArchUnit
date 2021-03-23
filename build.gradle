@@ -119,8 +119,15 @@ configure(subprojects.findAll { it.name != 'docs' }) {
 
     description createModuleDescription(rootProject.description, project)
 
-    sourceCompatibility = JavaVersion.VERSION_1_7
-    targetCompatibility = JavaVersion.VERSION_1_7
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(15)
+        }
+    }
+
+    tasks.withType(JavaCompile) {
+        sourceCompatibility = JavaVersion.VERSION_1_7
+    }
 
     javadoc {
         options.addBooleanOption('html5', true)

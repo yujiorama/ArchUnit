@@ -4,8 +4,9 @@ plugins {
 
 ext.moduleName = 'com.tngtech.archunit.javamodulestest'
 
-sourceCompatibility = JavaVersion.VERSION_1_9
-targetCompatibility = JavaVersion.VERSION_1_9
+tasks.withType(JavaCompile) {
+    sourceCompatibility = JavaVersion.VERSION_1_9
+}
 
 dependencies {
     testImplementation project(path: ':archunit', configuration: 'shadow')
