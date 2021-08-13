@@ -418,6 +418,16 @@ public class ImportTestUtils {
         }
 
         @Override
+        public Set<JavaMethodCall> createMethodReferenceCallsFor(JavaCodeUnit codeUnit) {
+            return Collections.emptySet();
+        }
+
+        @Override
+        public Set<JavaConstructorCall> createConstructorReferenceCallsFor(JavaCodeUnit codeUnit) {
+            return Collections.emptySet();
+        }
+
+        @Override
         public JavaClass resolveClass(String fullyQualifiedClassName) {
             throw new UnsupportedOperationException("Override me where necessary");
         }

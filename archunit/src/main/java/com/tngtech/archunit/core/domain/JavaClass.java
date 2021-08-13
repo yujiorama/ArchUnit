@@ -1042,7 +1042,11 @@ public class JavaClass
 
     @PublicAPI(usage = ACCESS)
     public Set<JavaAccess<?>> getAccessesFromSelf() {
-        return union(getFieldAccessesFromSelf(), getCallsFromSelf());
+        Set<JavaAccess<?>> accessesFromSelf = new HashSet<>();
+        accessesFromSelf.addAll(getFieldAccessesFromSelf());
+        accessesFromSelf.addAll(getCallsFromSelf());
+        accessesFromSelf.addAll(getReferenceCallsFromSelf());
+        return accessesFromSelf;
     }
 
     /**
@@ -1081,6 +1085,27 @@ public class JavaClass
     @PublicAPI(usage = ACCESS)
     public Set<JavaConstructorCall> getConstructorCallsFromSelf() {
         return members.getConstructorCallsFromSelf();
+    }
+
+    /**
+     * Returns all calls of this class to method or constructor references.
+     *
+     * @see #getMethodReferenceCallsFromSelf()
+     * @see #getConstructorReferenceCallsFromSelf()
+     */
+    @PublicAPI(usage = ACCESS)
+    public Set<JavaCall<?>> getReferenceCallsFromSelf() {
+        return union(getMethodReferenceCallsFromSelf(), getConstructorReferenceCallsFromSelf());
+    }
+
+    @PublicAPI(usage = ACCESS)
+    public Set<JavaMethodCall> getMethodReferenceCallsFromSelf() {
+        return members.getMethodReferenceCallsFromSelf();
+    }
+
+    @PublicAPI(usage = ACCESS)
+    public Set<JavaConstructorCall> getConstructorReferenceCallsFromSelf() {
+        return members.getConstructorReferenceCallsFromSelf();
     }
 
     /**
@@ -1689,6 +1714,33 @@ public class JavaClass
                     @Override
                     public Set<JavaCall<?>> apply(JavaClass input) {
                         return input.getCallsFromSelf();
+                    }
+                };
+
+        @PublicAPI(usage = ACCESS)
+        public static final ChainableFunction<JavaClass, Set<JavaMethodCall>> GET_METHOD_REFERENCE_CALLS_FROM_SELF =
+                new ChainableFunction<JavaClass, Set<JavaMethodCall>>() {
+                    @Override
+                    public Set<JavaMethodCall> apply(JavaClass input) {
+                        return input.getMethodReferenceCallsFromSelf();
+                    }
+                };
+
+        @PublicAPI(usage = ACCESS)
+        public static final ChainableFunction<JavaClass, Set<JavaConstructorCall>> GET_CONSTRUCTOR_REFERENCE_CALLS_FROM_SELF =
+                new ChainableFunction<JavaClass, Set<JavaConstructorCall>>() {
+                    @Override
+                    public Set<JavaConstructorCall> apply(JavaClass input) {
+                        return input.getConstructorReferenceCallsFromSelf();
+                    }
+                };
+
+        @PublicAPI(usage = ACCESS)
+        public static final ChainableFunction<JavaClass, Set<JavaCall<?>>> GET_REFERENCE_CALLS_FROM_SELF =
+                new ChainableFunction<JavaClass, Set<JavaCall<?>>>() {
+                    @Override
+                    public Set<JavaCall<?>> apply(JavaClass input) {
+                        return input.getReferenceCallsFromSelf();
                     }
                 };
 

@@ -74,6 +74,8 @@ class ClassGraphCreator implements ImportContext {
     private final SetMultimap<JavaCodeUnit, FieldAccessRecord> processedFieldAccessRecords = HashMultimap.create();
     private final SetMultimap<JavaCodeUnit, AccessRecord<MethodCallTarget>> processedMethodCallRecords = HashMultimap.create();
     private final SetMultimap<JavaCodeUnit, AccessRecord<ConstructorCallTarget>> processedConstructorCallRecords = HashMultimap.create();
+    private final SetMultimap<JavaCodeUnit, AccessRecord<MethodCallTarget>> processedMethodReferenceCallRecords = HashMultimap.create();
+    private final SetMultimap<JavaCodeUnit, AccessRecord<ConstructorCallTarget>> processedConstructorReferenceCallRecords = HashMultimap.create();
     private final Function<JavaClass, Set<String>> superclassStrategy;
     private final Function<JavaClass, Set<String>> interfaceStrategy;
 
@@ -162,6 +164,12 @@ class ClassGraphCreator implements ImportContext {
         for (RawAccessRecord constructorCallRecord : importRecord.getRawConstructorCallRecords()) {
             tryProcess(constructorCallRecord, AccessRecord.Factory.forConstructorCallRecord(), processedConstructorCallRecords);
         }
+        for (RawAccessRecord methodReferenceCallRecord : importRecord.getRawMethodReferenceCallRecords()) {
+            tryProcess(methodReferenceCallRecord, AccessRecord.Factory.forMethodCallRecord(), processedMethodReferenceCallRecords);
+        }
+        for (RawAccessRecord constructorReferenceCallRecord : importRecord.getRawConstructorReferenceCallRecords()) {
+            tryProcess(constructorReferenceCallRecord, AccessRecord.Factory.forConstructorCallRecord(), processedConstructorReferenceCallRecords);
+        }
     }
 
     private void ensureMetaAnnotationsArePresent() {
@@ -221,6 +229,24 @@ class ClassGraphCreator implements ImportContext {
     public Set<JavaConstructorCall> createConstructorCallsFor(JavaCodeUnit codeUnit) {
         ImmutableSet.Builder<JavaConstructorCall> result = ImmutableSet.builder();
         for (AccessRecord<ConstructorCallTarget> record : processedConstructorCallRecords.get(codeUnit)) {
+            result.add(accessBuilderFrom(new JavaConstructorCallBuilder(), record).build());
+        }
+        return result.build();
+    }
+
+    @Override
+    public Set<JavaMethodCall> createMethodReferenceCallsFor(JavaCodeUnit codeUnit) {
+        ImmutableSet.Builder<JavaMethodCall> result = ImmutableSet.builder();
+        for (AccessRecord<MethodCallTarget> record : processedMethodReferenceCallRecords.get(codeUnit)) {
+            result.add(accessBuilderFrom(new JavaMethodCallBuilder(), record).build());
+        }
+        return result.build();
+    }
+
+    @Override
+    public Set<JavaConstructorCall> createConstructorReferenceCallsFor(JavaCodeUnit codeUnit) {
+        ImmutableSet.Builder<JavaConstructorCall> result = ImmutableSet.builder();
+        for (AccessRecord<ConstructorCallTarget> record : processedConstructorReferenceCallRecords.get(codeUnit)) {
             result.add(accessBuilderFrom(new JavaConstructorCallBuilder(), record).build());
         }
         return result.build();
