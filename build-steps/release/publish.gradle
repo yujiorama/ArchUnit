@@ -146,6 +146,7 @@ task prepareRelease() {
         println executeCommand("git status")
         executeCommand("git checkout -b $releaseBranch")
         println executeCommand("git status")
+        3.times {println "Attempt $it: " + executeCommand('git rev-parse --abbrev-ref HEAD') }
         String currentBranch = executeCommand('git rev-parse --abbrev-ref HEAD')
         assert currentBranch == releaseBranch: "Mismatch: Should be on branch $releaseBranch but current branch is $currentBranch"
 
