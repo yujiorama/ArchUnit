@@ -143,7 +143,9 @@ task prepareRelease() {
         String releaseVersion = withCurrentVersion { int oldMajor, int oldMinor, int oldPatch, String oldSuffix -> "$oldMajor.$oldMinor.$oldPatch" }
 
         def releaseBranch = "release-$releaseVersion"
+        println executeCommand("git status")
         executeCommand("git checkout -b $releaseBranch")
+        println executeCommand("git status")
         String currentBranch = executeCommand('git rev-parse --abbrev-ref HEAD')
         assert currentBranch == releaseBranch: "Mismatch: Should be on branch $releaseBranch but current branch is $currentBranch"
 
