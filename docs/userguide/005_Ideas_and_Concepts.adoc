@@ -1,4 +1,5 @@
-== Ideas and Concepts
+[reftext="Ideas and Concepts"]
+== 考え方と概念（Ideas and Concepts）
 
 ArchUnit is divided into different layers, where the most important ones are the "Core" layer,
 the "Lang" layer and the "Library" layer. In short the Core layer deals with the basic
@@ -7,7 +8,15 @@ rule syntax to specify architecture rules in a succinct way. The Library layer c
 more complex predefined rules, like a layered architecture with several layers. The following
 section will explain these layers in more detail.
 
-=== Core
+ArchUnit は複数のレイヤーに分かれています。
+最も重要なレイヤーは「コアレイヤー」「言語レイヤー」「ライブラリレイヤー」です。
+「コアレイヤー」はバイトコードを Java オブジェクトにインポートする等の基本的な部品を含みます。
+「言語レイヤー」はアーキテクチャルールを簡潔に表現するルール構文を含みます。
+「ライブラリレイヤー」はいくつものレイヤーで構成されるレイヤーアーキテクチャのように、より複雑な定義済みルールを含みます。
+このセクションではそれぞれのレイヤーについてより詳しく説明します。
+
+[reftext="Core"]
+=== コアレイヤー（Core）
 
 Much of ArchUnit's core API resembles the Java Reflection API.
 There are classes like `JavaMethod`, `JavaField`, and more,
@@ -18,8 +27,16 @@ like `JavaMethodCall`, `JavaConstructorCall` or `JavaFieldAccess`.
 For example, it is possible to programmatically iterate over `javaClass.getAccessesFromSelf()`
 and react to the imported accesses between this Java class and other Java classes.
 
+ArchUnit のコア API の大部分は Java のリフレクション API とよく似た形式になっています。
+`JavaMethod` や `JavaField` などのクラスがありますし、`getName()` や `getMethods()`、`getRawType()` や `getRawParameterTypes()` 等のパブリック API （メソッド）があります。
+ArchUnit は、コード間の依存関係を表現するために必要な `JavaMethodCall` や `JavaConstructorCall` や `JavaFieldAccess` 等、これらの API の考え方を拡張しています。
+例えば、`javaClass.getAccessesFromSelf()` のように記述すれば、`javaClass` そのものと他のクラスの間に存在する内向きのアクセスを処理できるのです。
+
 To import compiled Java class files, ArchUnit provides the `ClassFileImporter`, which can
 for example be used to import packages from the classpath:
+
+コンパイルされた Java のクラスファイルをインポートするため、ArchUnit は `ClassFileImporter` を提供しています。
+このクラスは、クラスパスに存在するパッケージに所属するクラスをインポートできます。
 
 [source,java,options="nowrap"]
 ----
@@ -28,17 +45,29 @@ JavaClasses classes = new ClassFileImporter().importPackages("com.mycompany.myap
 
 For more information refer to <<The Core API>>.
 
-=== Lang
+より詳しい内容は <<The Core API>> を参照してください。
+
+[reftext="Lang"]
+=== 言語レイヤー（Lang）
 
 The Core API is quite powerful and offers a lot of information about the static structure
 of a Java program. However, tests directly using the Core API lack expressiveness,
 in particular with respect to architectural rules.
 
+コア API は、Java プログラムの静的な構造に関するさまざまな情報を取得するための強力な機能を提供します。
+しかし、テストコードから直接コア API を使うようにすると、特にアーキテクチャルールについて（意図の）表現力が損なわれてしまいます。
+
 For this reason ArchUnit provides the Lang API, which offers a powerful syntax to express rules
 in an abstract way. Most parts of the Lang API are composed as fluent APIs, i.e. an IDE can
 provide valuable suggestions on the possibilities the syntax offers.
 
+ArchUnit はこの問題を解決するため、より抽象的な形式でルールを表現する強力な構文を、言語 API として提供しています。
+言語 API の大部分はフルーエント API として組み合わせるものになります。
+そうすると、IDE は利用可能な構文の候補を提供できるのです。
+
 An example for a specified architecture rule would be:
+
+次の例は、具体的なアーキテクチャルールの1つです。
 
 [source,java,options="nowrap"]
 ----
@@ -48,6 +77,8 @@ ArchRule rule =
 ----
 
 Once a rule is composed, imported Java classes can be checked against it:
+
+定義したルールは、インポートした Java クラスをチェックできます。
 
 [source,java,options="nowrap"]
 ----
@@ -59,10 +90,20 @@ rule.check(importedClasses);
 The syntax ArchUnit provides is fully extensible and can thus be adjusted to almost any
 specific need. For further information, please refer to <<The Lang API>>.
 
-=== Library
+ArchUnit の提供する構文は全て拡張可能なので、あらゆる場面で必要に応じて調整できます。
+より詳しい内容は <<The Lang API>> を参照してください。
+
+[reftext="Library"]
+=== ライブラリレイヤー（Library）
 
 The Library API offers predefined complex rules for typical architectural goals. For example
 a succinct definition of a layered architecture via package definitions. Or rules to slice
 the code base in a certain way, for example in different areas of the domain, and enforce these
 slices to be acyclic or independent of each other. More detailed information is provided in
 <<The Library API>>.
+
+ライブラリ API は典型的なアーキテクチャを対象とする複雑な定義済みのルールを提供します。
+例えば、パッケージ定義に基づく簡潔なレイヤーアーキテクチャのルールが挙げられます。
+他にも、特定の断面でコードベースを横断するルールも定義されています。
+例えば、さまざまな分野を反映したドメインや、それぞれの断面が循環しないように強制したり、それぞれの断面の独立性を高めたりするようなルールがあります。
+より詳しい内容は <<The Library API>> を参照してください。

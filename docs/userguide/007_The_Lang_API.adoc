@@ -1,10 +1,16 @@
-== The Lang API
+[reftext="The Lang API"]
+== 言語 API（The Lang API）
 
-=== Composing Class Rules
+[reftext="Composing Class Rules"]
+=== クラスルールの合成（Composing Class Rules）
 
 <<The Core API>> is pretty powerful with regard to all the details from the bytecode
 that it provides to tests. However, tests written this way lack conciseness and fail to convey the
 architectural concept that they should assert. Consider:
+
+<<The Core API>> はテストするためにインポートしたバイトコードに関するあらゆる情報を扱えるため、とても強力です。
+しかし、コア API で記述したテストは簡潔とは言い難く、検証するべきアーキテクチャとしての考え方を上手く伝えられない場合があります。
+次のソースコードを検討してみましょう。
 
 [source,java,options="nowrap"]
 ----
@@ -36,9 +42,16 @@ access classes that reside in a package 'controller'"_. Nevertheless, it's hard 
 that code and distill that information. And the same process has to be done every time someone
 needs to understand the semantics of this rule.
 
+表現したいのは _「パッケージ名に 'service' を含むクラスはパッケージ名に 'controller' を含むクラスへアクセスしてはならない」_ というルールです。
+しかし、このソースコードからそのような意図を読み取るのは困難です。
+それに、このルールの意味を理解しなければならない人は全員が同じ困難なプロセスを体験しなければなりません。
+
 To solve this shortcoming, ArchUnit offers a high level API to express architectural concepts
 in a concise way. In fact, we can write code that is almost equivalent to the prose rule text
 mentioned before:
+
+この問題を解決するため、ArchUnit はアーキテクチャとしての考え方を分かりやすく表現するための高水準 API を提供しています。
+この API を使用すると、前に説明した文章のようにルールを記述できるのです。
 
 [source,java,options="nowrap"]
 ----
@@ -54,6 +67,11 @@ which refers to any number of packages. Thus "..service.." just expresses
 _"any package that contains some sub-package 'service'"_, e.g. `com.myapp.service.any`.
 If this test fails, it will report an `AssertionError` with the following message:
 
+話し言葉との違いはパッケージ記法に含まれる ".." で、これは任意のパッケージを表しています。
+つまり "..service.." は _「サブパッケージ 'service' を含む任意のパッケージ」_ という意味になるのです。
+例えば `com.myapp.service.any` などが挙げられます。
+このテストが失敗するときは、次のようなメッセージを含む `AssertionError` を報告するでしょう。
+
 [source,bash]
 ----
 java.lang.AssertionError: Architecture Violation [Priority: MEDIUM] -
@@ -68,6 +86,9 @@ So as a benefit, the assertion error contains the full rule text out of the box 
 all violations including the exact class and line number. The rule API also allows to combine
 predicates and conditions:
 
+表明エラーは、定義済みのルールに関する完全な文章を含んでおり、正確なクラス名と行番号を含む全ての違反を報告します。
+ルール API は述語式と条件式を組み合わせることができるようになっています。
+
 [source,java,options="nowrap"]
 ----
 noClasses()
@@ -79,12 +100,18 @@ noClasses()
 rule.check(importedClasses);
 ----
 
-=== Composing Member Rules
+[reftext="Composing Member Rules"]
+=== メンバールールの合成（Composing Member Rules）
 
 In addition to a predefined API to write rules about Java classes and their relations, there is
 an extended API to define rules for members of Java classes. This might be relevant, for example,
 if methods in a certain context need to be annotated with a specific annotation, or return
 types implementing a certain interface. The entry point is again `ArchRuleDefinition`, e.g.
+
+Java クラスとクラス間の関係を説明するルールを記述する定義済みの API に加えて、Java クラスのメンバーに関するルールを定義するための拡張 API があります。
+それぞれの API は関連性があります。
+例えば、あるメソッドは特定のコンテキストにおいて何らかのアノテーションで修飾しなければならないとか、メソッドの返り値の型は特定のインターフェイスを実装したクラスでなければならないとかです。
+ルールの入口はやはり `ArchRuleDefinition` です。
 
 [source,java,options="nowrap"]
 ----
@@ -99,9 +126,14 @@ rule.check(importedClasses);
 Besides `methods()`, `ArchRuleDefinition` offers the methods `members()`, `fields()`, `codeUnits()`, `constructors()`
 – and the corresponding negations `noMembers()`, `noFields()`, `noMethods()`, etc.
 
-=== Creating Custom Rules
+`ArchRuleDefinition` は、`methods()` に続けて `members()` `fields()` `codeUnits()` `constructors()` のようなメソッドと、それらの反対を意味する `noMembers()` `noFields()` `noMethods()` のようなメソッドを提供しています。
+
+[reftext="Creating Custom Rules"]
+=== 独自ルールの作成（Creating Custom Rules）
 
 In fact, most architectural rules take the form
+
+ほとんどのアーキテクチャとしてのルールは次のような形式になります。
 
 [source]
 ----
@@ -112,6 +144,11 @@ In other words, we always want to limit imported classes to a relevant subset,
 and then evaluate some condition to see that all those classes satisfy it.
 ArchUnit's API allows you to do just that, by exposing the concepts of `DescribedPredicate` and `ArchCondition`.
 So the rule above is just an application of this generic API:
+
+別の言い方をしましょう。
+私たちはバイトコードからインポートするクラスを関連するクラスだけに限定し、それらのクラスが指定した条件を満たしているのか評価するようにしたいのです。
+ArchUnit は `DescribePredicate` および `ArchCondition` という API でそれを実現します。
+この汎用 API で前のセクションに登場したルールを記述すると次のようになります。
 
 [source,java,options="nowrap"]
 ----
@@ -125,6 +162,8 @@ noClasses().that(resideInAPackageService)
 Thus, if the predefined API does not allow to express some concept,
 it is possible to extend it in any custom way.
 For example:
+
+定義済みのルールで表現できない考え方があるとしても、例えば次のように拡張できます。
 
 [source,java,options="nowrap"]
 ----
@@ -157,16 +196,24 @@ classes().that(haveAFieldAnnotatedWithPayload).should(onlyBeAccessedBySecuredMet
 If the rule fails, the error message will be built from the supplied descriptions. In the
 example above, it would be
 
+ルールの評価が失敗したら、指定した説明文からエラーメッセージが構築されます。
+前のコード例では次のようなエラーメッセージになります。
+
 [source]
 ----
 classes that have a field annotated with @Payload should only be accessed by @Secured methods
 ----
 
-=== Predefined Predicates and Conditions
+[reftext="Predefined Predicates and Conditions"]
+=== 定義済みの述語式と条件式（Predefined Predicates and Conditions）
 
 Custom predicates and conditions like in the last section can often be composed from predefined elements.
 ArchUnit's basic convention for predicates is that they are defined in an inner class `Predicates` within the type they target.
 For example, one can find the predicate to check for the simple name of a `JavaClass` as
+
+1つ前のセクションのように、独自の述語式や条件式は定義済みの部品を組み合わせて実現できる場合がよくあります。
+ArchUnit の述語式は、基本的な規約として、評価対象のクラス（型）のインナークラス `Predicates` として定義するようになっています。
+例えば、`JavaClass` における「簡潔な名前」という述語式は次のように見つけられます。
 
 [source,java,options="nowrap"]
 ----
@@ -176,6 +223,9 @@ JavaClass.Predicates.simpleName(String)
 Predicates can be joined using the methods `predicate.or(other)` and `predicate.and(other)`.
 So for example a predicate testing for a class with simple name "Foo" that is serializable
 could be created the following way:
+
+述語式は `predicate.or(other)` メソッドや `predicate.and(other)` メソッドで結合できます。
+ですから、簡潔なクラス名が "Foo" なら、シリアライズ可能でなければならない、という述語式は次のように記述できます。
 
 [source,java,options="nowrap"]
 ----
@@ -192,6 +242,9 @@ consequently the predicate to check the name of a `JavaClass`
 is the same as the predicate to check the name of a `JavaMethod`,
 and resides within
 
+一部のプロパティは述語式のために定義されたインターフェイスになっているので注意してください。
+例えば、`JavaClass` と `JavaMethod` のどちらでも、名前をチェックするプロパティは `HasName` というインターフェイスになっています。
+
 [source,java,options="nowrap"]
 ----
 HasName.Predicates.name(String)
@@ -200,6 +253,9 @@ HasName.Predicates.name(String)
 This can at times lead to problems with the type system, if predicates are supposed to be joined.
 Since the `or(..)` method accepts a type of `DescribedPredicate<? super T>`,
 where `T` is the type of the first predicate. For example:
+
+これは、特に述語式を結合するとき、型システムとしての問題になる場合があります。
+`or(..)` メソッドの引数の型は `DescribePredicate<? super T>` で、`T` は先頭の述語式になるからです。
 
 [source,java,options="nowrap"]
 ----
@@ -217,9 +273,14 @@ name.and(JavaClass.Predicates.type(Serializable.class));
 This behavior is somewhat tedious, but unfortunately it is a shortcoming of the Java type system
 that cannot be circumvented in a satisfying way.
 
+この分かりにくい振る舞いは Java の型システムの欠点に起因するもので、残念ながら安全に回避する方法はありません。
+
 Just like predicates, there exist predefined conditions that can be combined in a similar way.
 Since `ArchCondition` is a less generic concept, all predefined conditions can be found within `ArchConditions`.
 Examples:
+
+述語式と同じように合成できる定義済みの条件式が、`ArchCondition` に定義されています。
+ただし、`ArchCondition` はジェネリクスの考え方が少し薄くなっています。
 
 [source,java,options="nowrap"]
 ----
@@ -231,9 +292,12 @@ ArchCondition<JavaClass> callHashCode =
 ArchCondition<JavaClass> callEqualsOrHashCode = callEquals.or(callHashCode);
 ----
 
-=== Rules with Custom Concepts
+[reftext="Rules with Custom Concepts"]
+=== 独自の考え方に基づくルール（Rules with Custom Concepts）
 
 Earlier we stated that most architectural rules take the form
+
+前のセクションでほとんどのアーキテクチャとしてのルールは次のような形式になることを説明しました。
 
 [source]
 ----
@@ -245,6 +309,12 @@ have custom language, we might talk about modules, about slices, or on the other
 detailed about fields, methods or constructors. A generic API will never be able to support
 every imaginable concept out of the box. Thus ArchUnit's rule API has at its foundation
 a more generic API that controls the types of objects that our concept targets.
+
+ところが、私たちはアーキテクチャとしての考え方を表現するとき、常にクラスについて言及しているわけではありません。
+自作の言語やモジュール、コードの断面について言及する場合もあるし、フィールドやメソッドやコンストラクタの詳細について言及する場合もあるからです。
+規定の汎用 API では、全ての想像上の概念を表現することは不可能です。
+そのため、ArchUnit のルール API は、評価対象のオブジェクトの型を操作するより汎用性の高い API で構成されています。
+
 
 [plantuml, "import-vs-lang"]
 ----
@@ -272,6 +342,11 @@ mentioned in the sections above, this is the identity transformation, passing cl
 as they are. However, one can supply any custom transformation to express a rule about a
 different type of input object. For example:
 
+あらゆるルール定義は `ClassesTransformer` に基づいています。
+これは、`JavaClasses` を適切なルールの入力へどのように変換するか定義します。
+多くの場合、前のセクションで言及したように何も変更せず、クラスそのものをルールに渡すことになります。
+しかし、異なる型を要求するルールにオブジェクトを渡せるよう、独自の変換処理を定義する場合もあります。
+
 [source,java,options="nowrap"]
 ----
 ClassesTransformer<JavaPackage> packages = new AbstractClassesTransformer<JavaPackage>("packages") {
@@ -293,6 +368,8 @@ all(packages).that(containACoreClass()).should(...);
 
 Of course these transformers can represent any custom concept desired:
 
+もちろん、そういった変換で独自の考え方を表現できます。
+
 [source,java,options="nowrap"]
 ----
 // how we map classes to business modules
@@ -307,11 +384,16 @@ ArchCondition<BusinessModule> beIndependentOfPayment = ...
 all(businessModules).that(dealWithOrders).should(beIndependentOfPayment);
 ----
 
-=== Controlling the Rule Text
+[reftext="Controlling the Rule Text"]
+=== ルールの文章を制御する（Controlling the Rule Text）
 
 If the rule is straight forward, the rule text that is created automatically should be
 sufficient in many cases. However, for rules that are not common knowledge, it is good practice
 to document the reason for this rule. This can be done in the following way:
+
+分かりやすいルールなら、自動的に生成されるルールの説明文で十分な場合が多いでしょう。
+しかし、共通知識とは言えないルールについて、根拠をドキュメント化しておくのは良いプラクティスです。
+例えば、次のように記述できます。
 
 [source,java,options="nowrap"]
 ----
@@ -324,13 +406,18 @@ Nevertheless, the generated rule text might sometimes not convey the real intent
 concisely enough, e.g. if multiple predicates or conditions are joined.
 It is possible to completely overwrite the rule description in those cases:
 
+とはいえ、自動的に生成したルールの説明文が、本来の意図を十分に簡潔に表現できていない場合もあるでしょう。
+複数の述語式や条件式を結合した場合は特にそうです。
+そういうときは、ルールの説明文を全て置き換えることができます。
+
 [source,java,options="nowrap"]
 ----
 classes().that(haveAFieldAnnotatedWithPayload).should(onlyBeAccessedBySecuredMethods)
     .as("Payload may only be accessed in a secure way");
 ----
 
-=== Ignoring Violations
+[reftext="Ignoring Violations"]
+=== 違反を無視する（Ignoring Violations）
 
 In legacy projects there might be too many violations to fix at once. Nevertheless, that code
 should be covered completely by architecture tests to ensure that no further violations will
@@ -342,8 +429,18 @@ Every line will be interpreted as a regular expression and checked against repor
 Violations with a message matching the pattern will be ignored. If no violations are left,
 the check will pass.
 
+レガシープロジェクトでは1度に直しきれないほど多数の違反が見つかるものです。
+とはいえ、既存のコードに新しい違反を持ち込むことがないよう、違反しているコードもアーキテクチャテストの対象にしなければなりません。
+既存の違反を無視する1つのやり方として、ルールの `that(..)` 節を調整する方法があります。
+より汎用的な解決方法は、単純に正規表現で一致させる方法です。
+クラスパスのルートに `archunit_ignore_patterns.txt` というテキストファイルを配置し、それぞれの行には、報告された違反にマッチする正規表現を記述します。
+違反のメッセージがいずれかの正規表現に一致するなら、その違反を無視するようになります。
+違反が1つも無くなれば、チェックは成功します。
+
 For example, suppose the class `some.pkg.LegacyService` violates a lot of different rules.
 It is possible to add
+
+例えば、`some.pkg.LegacyService` というクラスがいくつものルールに違反しているとしたら、次のような正規表現を追加すればいいでしょう。
 
 [source,bash]
 .archunit_ignore_patterns.txt
@@ -354,7 +451,12 @@ It is possible to add
 All violations mentioning `some.pkg.LegacyService` will consequently be ignored, and rules that
 are only violated by such violations will report success instead of failure.
 
-It is possible to add comments to ignore patterns by prefixing the line with a '#':
+`some.pkg.LegacyService` に言及する全ての違反が無視されるようになります。
+そうして、他の違反が見つからなければ、失敗ではなく成功と報告するようになります。
+
+It is possible to add comments to ignore patterns by prefixing the line with a '\#':
+
+行頭に `\#` を指定することで、正規表現の内容を説明するコメントを記述できます。
 
 [source,bash]
 .archunit_ignore_patterns.txt

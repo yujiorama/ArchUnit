@@ -1,9 +1,15 @@
-== JUnit Support
+[reftext="JUnit Support"]
+== JUnit 拡張機能（JUnit Support）
 
 At the moment ArchUnit offers extended support for writing tests with JUnit 4 and JUnit 5.
 This mainly tackles the problem of caching classes between test runs and to remove some boilerplate.
 
 Consider a straight forward approach to write tests:
+
+現時点の ArchUnit は、JUnit 4 と JUnit 5 でテストを書きやすくするための機能を提供しています。
+主な目的は、実行するテストの間でクラスをキャッシュする仕組みを提供し、典型的な準備コードを不要にすることです。
+
+まず、単純なテストを書く方法について検討してみましょう。
 
 [source,java,options="nowrap"]
 ----
@@ -30,16 +36,28 @@ For bigger projects, this will have a significant performance impact, since the 
 a noticeable amount of time. Also rules will always be checked against the imported classes, thus
 the explicit call of `check(importedClasses)` is bloat and error prone (i.e. it can be forgotten).
 
-=== JUnit 4 & 5 Support
+プロジェクトが大きくなってくると、このテストはクラスのインポートが完了するまでの時間がとても長くなってしまいます。
+また、ルールはインポートした全てのクラスをチェックするため、`check(importedClasses)` の呼び出しは多数のクラスをチェックすることになり、間違いを見逃しやすくなってしまいます（あるいは忘れやすくなってしまいます）。
+
+[reftext="JUnit 4 & 5 Support"]
+=== JUnit 4 および JUnit 5 への対応（JUnit 4 & 5 Support）
 
 Make sure you follow the installation instructions at <<Installation>>, in particular to include
 the correct dependency for the respective JUnit support.
 
-==== Writing tests
+<<Installation>> に記載したインストールの手順に従い、JUnit のバージョンに合わせて適切な依存ライブラリを追加してください。
+
+[reftext="Writing tests"]
+==== テストを書く（Writing tests）
 
 Tests look and behave very similar between JUnit 4 and 5. The only difference is, that with JUnit 4
 it is necessary to add a specific `Runner` to take care of caching and checking rules, while JUnit 5
 picks up the respective `TestEngine` transparently. A test typically looks the following way:
+
+JUnit 4 と JUnit 5 のテストは見た目も振る舞いも非常によく似ています。
+違いは、JUnit 4 でキャッシュやルールをチェックする仕組みを有効にするには、特定の `Runner` を指定しなければならないところです。
+JUnit 5 なら適切な `TestEngine` を透過的に選択するだけです。
+いずれにしてもテストは次のような形式になります。
 
 [source,java,options="nowrap"]
 ----
@@ -70,11 +88,24 @@ URLs will reuse the classes previously imported as well. Note that this second c
 soft references, so the classes will be dropped from memory, if the heap runs low.
 For further information see <<Controlling the Cache>>.
 
-==== Controlling the Import
+`JavaClass` のキャッシュは2種類の場面で仕事します。
+1つ目は、テストメソッドで扱っているクラスをキャッシュすることです。
+同じテストクラスにフィールドとして定義したいくつものルールで再利用できるのです。
+2つ目は、位置に対応するクラスをキャッシュすることです。
+同じURLからインポートする2つ目のテストでは、前にインポートしたクラスを再利用できるのです。
+ただし、このキャッシュはソフト参照を利用しているため、クラスがヒープメモリから追い出されると無効になってしまいます。
+より詳しく知りたければ <<Controlling the Cache>> を参照してください。
+
+[reftext="Controlling the Import"]
+==== インポートの制御（Controlling the Import）
 
 Which classes will be imported can be controlled in a declarative way through `@AnalyzeClasses`.
 If no packages or locations are provided, the whole classpath will be imported.
 You can specify packages to import as strings:
+
+インポートするクラスは `@AnalyzeClasses` により宣言的に指定できるようになっています。
+パッケージや位置を指定しなかった場合、クラスパス上の全てのクラスがインポートされることになります。
+パッケージは文字列で指定できます。
 
 [source,java,options="nowrap"]
 ----
@@ -84,12 +115,17 @@ You can specify packages to import as strings:
 To better support refactorings, packages can also be declared relative to classes, i.e. the
 packages these classes reside in will be imported:
 
+リファクタリングを楽にするため、パッケージを指定するときはクラスに対する相対的な要素として指定するといいでしょう。
+次のようにクラスを指定すると、クラスの所属するパッケージと、そのサブパッケージをインポートするようになります。
+
 [source,java,options="nowrap"]
 ----
 @AnalyzeClasses(packagesOf = {SubOneConfiguration.class, SubTwoConfiguration.class})
 ----
 
 As a third option, locations can be specified freely by implementing a `LocationProvider`:
+
+もう1つの選択肢は、`LocationProvider` を実装して位置を自由に制御することです。
 
 [source,java,options="nowrap"]
 ----
@@ -108,6 +144,9 @@ Furthermore to choose specific classes beneath those locations, `ImportOptions` 
 specified (compare <<The Core API>>). For example, to import the classpath, but only consider
 production code, and only consider code that is directly supplied and does not come from JARs:
 
+また、位置を指定しつつクラスも指定したければ `ImportOptions` が利用できます（<<The Core API>> を参照）。
+例えば、クラスパスからインポートするけど、テストに含まれない製品コードや、JARファイルに含まないけど参照可能なコードを参照したい場合は次のように記述します。
+
 [source,java,options="nowrap"]
 ----
 @AnalyzeClasses(importOptions = {DoNotIncludeTests.class, DoNotIncludeJars.class})
@@ -116,15 +155,24 @@ production code, and only consider code that is directly supplied and does not c
 As explained in <<The Core API>>, you can write your own custom implementation of `ImportOption`
 and then supply the type to `@AnalyzeClasses`.
 
-==== Controlling the Cache
+<<The Core API>> で説明したように、`@AnalyzeClasses` には、自分で実装した `ImportOption` を指定できます。
+
+[reftext="Controlling the Cache"]
+==== キャッシュの制御（Controlling the Cache）
 
 By default all classes will be cached by location. This means that between different
 test class runs imported Java classes will be reused, if the exact combination of locations has already
 been imported.
 
+初期設定では、全てのクラスがインポートした位置と共にキャッシュされます。
+つまり、複数のテストクラスで同じ位置からインポートしている場合、キャッシュを再利用できるのです。
+
 If the heap runs low, and thus the garbage collector has to do a big sweep in one run,
 this can cause a noticeable delay. On the other hand, if it is known that no other test class will
 reuse the imported Java classes, it would make sense to deactivate this cache.
+
+利用できるヒープメモリが狭すぎる場合や、GC のスイープ処理に時間がかかりすぎる場合は、無視できない遅れが発生します。
+一方、インポートしたクラスを再利用するテストクラスが他に存在しないことが分かっているなら、キャッシュを破棄できることになります。
 
 This can be achieved by configuring `CacheMode.PER_CLASS`, e.g.
 
@@ -137,9 +185,15 @@ The Java classes imported during this test run will not be cached by location an
 the same test class. After all tests of this class have been run,
 the imported Java classes will simply be dropped.
 
-==== Ignoring Tests
+このテストを実行してインポートした Java クラスは、位置に対してキャッシュしませんし、同じテストクラスの中でしか再利用しません。
+このテストクラスの全てのテストが完了したら、インポートした Java クラスは単純に捨てることができます。
+
+[reftext="Ignoring Tests"]
+==== テストの無視（Ignoring Tests）
 
 It is possible to skip tests by annotating them with `@ArchIgnore`, for example:
+
+`@ArcIgnore` アノテーションを指定するとテストをスキップできます。
 
 [source,java,options="nowrap"]
 ----
@@ -159,11 +213,19 @@ public class ArchitectureTest {
 Note for users of JUnit 5: the annotation `@Disabled` has no effect here.
 Instead, `@ArchIgnore` should be used.
 
-==== Grouping Rules
+JUnit 5 を使っている場合は `@Disabled` アノテーションが無効になるので注意してください。
+あくまでも `@ArchIgnore` を指定しなければなりません。
+
+[reftext="Grouping Rules"]
+==== ルールのグループ化（Grouping Rules）
 
 Often a project might end up with different categories of rules, for example "service rules"
 and "persistence rules". It is possible to write one class for each set of rules, and then
 refer to those sets from another test:
+
+最終的にプロジェクトのルールはさまざまな分類に落ち着くことでしょう。
+例えば、「サービスのためのルール」とか「永続化層のためのルール」とか。
+それぞれの分類に対応するルールを1つのクラスとして記述し、テストから参照できます。
 
 [source,java,options="nowrap"]
 ----
@@ -197,3 +259,6 @@ public class ArchitectureTest {
 The runner will include all `@ArchTest` annotated members within `ServiceRules` and `PersistenceRules` and evaluate
 them against the classes declared within `@AnalyzeClasses` on `ArchitectureTest`.
 This also allows an easy reuse of a rule library in different projects or modules.
+
+テストランナーは `ServiceRules` と `PersistenceRules` から `@ArchTest` アノテーションで修飾した全てのメンバーを抽出し、`ArchitectureTest` の `@AnalyzeClasses` で指定した全てのクラスに対して評価します。
+他のプロジェクトやモジュールをルールライブラリとして再利用するのも簡単でしょう。

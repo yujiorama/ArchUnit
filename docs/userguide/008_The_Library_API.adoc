@@ -1,13 +1,19 @@
-== The Library API
+[reftext="The Library API"]
+== ライブラリ API（The Library API）
 
 The Library API offers a growing collection of predefined rules, which offer a more concise API
 for more complex but common patterns, like a layered architecture or checks for cycles between
 slices (compare <<What to Check>>).
 
+ライブラリ API は発展途上の定義済みのルール集合を提供します。
+レイヤーアーキテクチャや、ソースコード断面の循環チェック（<<What to Check>>も参照）のように、複雑だけど一般的なパターンに関する簡潔な API を提供するのです。
 
-=== Architectures
+[reftext="Architectures"]
+=== アーキテクチャ（Architectures）
 
 The entrance point for checks of common architectural styles is:
+
+`Architectures` は一般的なアーキテクチャスタイルに関するチェックの入口です。
 
 [source,java,options="nowrap"]
 ----
@@ -18,16 +24,25 @@ At the moment this only provides a convenient check for a layered architecture a
 But in the future it might be extended for styles like a pipes and filters,
 separation of business logic and technical infrastructure, etc.
 
-==== Layered Architecture
+現時点では、レイヤーアーキテクチャとオニオンアーキテクチャに関する便利なチェックしか提供していません。
+将来的にはパイプ・フィルタースタイルや、「業務ロジックと技術要素の分離（separation of business logic and technical infrastructure）」スタイルにも対応する予定です。
+
+[reftext="Layered Architecture"]
+==== レイヤーアーキテクチャ（Layered Architecture）
 
 In layered architectures, we define different layers and how those interact with each other.
 An example setup for a simple 3-tier architecture can be found in <<Layer Checks>>.
 
+「レイヤーアーキテクチャ」では、いくつものレイヤーを定義し、それぞれのレイヤーのやりとりを定義できます。
+単純な3層アーキテクチャの例を <<Layer Checks>> で説明しています。
 
-==== Onion Architecture
+[reftext="Onion Architecture"]
+==== オニオンアーキテクチャ（Onion Architecture）
 
 In an "Onion Architecture" (also known as "Hexagonal Architecture" or "Ports and Adapters"),
 we can define domain packages and adapter packages as follows.
+
+「オニオンアーキテクチャ」（「ポート・アダプター」あるいは「ヘキサゴナルアーキテクチャ」として知られている）では、ドメインとアダプターのためのパッケージを次のように定義できます。
 
 [source,java]
 ----
@@ -43,17 +58,28 @@ onionArchitecture()
 The semantic follows the descriptions in https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/.
 More precisely, the following holds:
 
-* The `domain` package is the core of the application. It consists of two parts.
-    . The `domainModels` packages contain the domain entities.
-    . The packages in `domainServices` contains services that use the entities in the `domainModel` packages.
-* The `applicationServices` packages contain services and configuration to run the application and use cases.
-  It can use the items of the `domain` package but there must not be any dependency from the `domain`
-  to the `application` packages.
-* The `adapter` package contains logic to connect to external systems and/or infrastructure.
-  No adapter may depend on another adapter. Adapters can use both the items of the `domain` as well as
-  the `application` packages. Vice versa, neither the `domain` nor the `application` packages must
-  contain dependencies on any `adapter` package.
+それぞれの意味については https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/ を参照してください。
+ここでは次のような意味を表しています。
 
+// * The `domain` package is the core of the application. It consists of two parts.
+//     . The `domainModels` packages contain the domain entities.
+//     . The packages in `domainServices` contains services that use the entities in the `domainModel` packages.
+// * The `applicationServices` packages contain services and configuration to run the application and use cases.
+//   It can use the items of the `domain` package but there must not be any dependency from the `domain`
+//   to the `application` packages.
+// * The `adapter` package contains logic to connect to external systems and/or infrastructure.
+//   No adapter may depend on another adapter. Adapters can use both the items of the `domain` as well as
+//   the `application` packages. Vice versa, neither the `domain` nor the `application` packages must
+//   contain dependencies on any `adapter` package.
+
+* `domain` パッケージ - アプリケーションの中核です。次のような部品を含んでいます
+    . `domainModels` パッケージ - ドメインエンティティを配置します
+    . `domainServices` パッケージ - ドメインエンティティを使用するサービスを配置します
+* `applicationServices` パッケージ - アプリケーションとユースケースを実行するためのサービスおよび設定を配置します。
+  `domain` パッケージに配置した要素を使用しますが、`domain` パッケージに配置した要素から `application` パッケージに配置した要素は使用できません
+* `adapter` パッケージ - 外部システムやインフラへ接続するためのロジックを配置します。
+  アダプタは他のアダプタを使用できません。
+  アダプタは `domain` パッケージや `appliacation` パッケージに配置した要素を使用しますが、それぞれのパッケージに配置した要素から `adapter` パッケージに配置した要素は使用できません
 
 [plantuml, "onion-architecture-check"]
 ----
@@ -114,12 +140,15 @@ Cli --> RestController #crimson
 note right on link #crimson: one adapter must not know\nabout any other adapter
 ----
 
-
-
-=== Slices
+[reftext="Slices"]
+=== ソースコードの断面（Slices）
 
 Currently there are two "slice" rules offered by the Library API. These are basically rules
 that slice the code by packages, and contain assertions on those slices. The entrance point is:
+
+ライブラリ API は、今のところ「ソースコードの断面（slice）」について2種類の基本的なルールを提供しています。
+パッケージに基づいて断面を生成するルールと、それぞれの断面に適用できるチェックからなるルールです。
+入口は `SlicesRuleDefinition` です。
 
 [source,java,options="nowrap"]
 ----
@@ -128,6 +157,9 @@ com.tngtech.archunit.library.dependencies.SlicesRuleDefinition
 
 The API is based on the idea to sort classes into slices according to one or several package
 infixes, and then write assertions against those slices. At the moment this is for example:
+
+この API が元にしている考え方は、1つ以上のパッケージに配置したクラスをまとめて、共通するチェックを適用する、というものです。
+例えば次のように記述できます。
 
 [source,java,options="nowrap"]
 ----
@@ -147,6 +179,10 @@ If this constraint is too rigid, e.g. in legacy applications where the package s
 inconsistent, it is possible to further customize the slice creation. This can be done by specifying
 a mapping of `JavaClass` to `SliceIdentifier` where classes with the same `SliceIdentifier` will
 be sorted into the same slice. Consider this example:
+
+パッケージ構造に一貫性のないレガシーアプリケーションのように、この制約が極めて柔軟性に欠けるとしたら、断面の作成自体を詳細化できます。
+`JavaClass` に対応する `SliceIdentifier` を定義し、同じ `SliceIdentifier` を同じ断面へ格納させるのです。
+具体的には次のように記述できます。
 
 [source,java,options="nowrap"]
 ----
@@ -176,10 +212,14 @@ SliceAssignment legacyPackageStructure = new SliceAssignment() {
 SlicesRuleDefinition.slices().assignedFrom(legacyPackageStructure).should().beFreeOfCycles()
 ----
 
-==== Configurations
+[reftext="Configurations"]
+==== 循環参照の検出に関する設定（Configurations）
 
 There are two configuration parameters to adjust the behavior of the cycle detection.
 They can be configured via `archunit.properties` (compare <<Advanced Configuration>>).
+
+循環参照の検出に影響する2種類の設定パラメータがあります。
+いずれも `archunit.properties` で設定できます。（<<Advanced Configuration>> を参照）
 
 [source,options="nowrap"]
 .archunit.properties
@@ -197,45 +237,71 @@ cycles.maxNumberToDetect=50
 cycles.maxNumberOfDependenciesPerEdge=5
 ----
 
-=== General Coding Rules
+[reftext="General Coding Rules"]
+=== 一般的なコーディングルール（General Coding Rules）
 
 The Library API also offers a small set of coding rules that might be useful in various projects.
 Those can be found within
+
+ライブラリ API は様々なプロジェクトで利用できるであろうコーディングルールを少しだけ提供しています。
+`com.tngtech.archunit.library` パッケージを参照してください。
 
 [source,java,options="nowrap"]
 ----
 com.tngtech.archunit.library
 ----
 
+[reftext="GeneralCodingRules"]
 ==== GeneralCodingRules
 
 The class `GeneralCodingRules` contains a set of very general rules and conditions for coding.
 For example:
 
-* To check that classes do not access `System.out` or `System.err`, but use logging instead.
-* To check that classes do not throw generic exceptions, but use specific exceptions instead.
-* To check that classes do not use `java.util.logging`, but use other libraries like Log4j, Logback, or SLF4J instead
-* To check that classes do not use JodaTime, but use `java.time` instead.
-* To check that classes do not use field injection, but constructor injection instead.
+`GeneralCodingRules` クラスはコーディングに関する一般的なルールや条件式を含みます。
 
+// * To check that classes do not access `System.out` or `System.err`, but use logging instead.
+// * To check that classes do not throw generic exceptions, but use specific exceptions instead.
+// * To check that classes do not use `java.util.logging`, but use other libraries like Log4j, Logback, or SLF4J instead
+// * To check that classes do not use JodaTime, but use `java.time` instead.
+// * To check that classes do not use field injection, but constructor injection instead.
+
+* `System.out` や `System.err` を使わずに、ロギング API を使用していることのチェック
+* 汎用的な例外を送出せず、具体的な例外を送出していることのチェック
+* `java.util.logging` を使わずに、Log4j や Logback や SLF4J などのライブラリを使用していることのチェック
+* フィールドインジェクションを使わずに、コンストラクタインジェクションを使用していることのチェック
+
+[reftext="DependencyRules"]
 ==== DependencyRules
 
 The class `DependencyRules` contains a set of rules and conditions for checking dependencies between classes.
 For example:
 
+`DependencyRules` クラスはクラス間の依存関係に関するルールや条件式を含みます。
+
 * To check that classes do not depend on classes from upper packages.
 
+* 上位層のパッケージに配置したクラスに依存していないことのチェック
+
+[reftext="ProxyRules"]
 ==== ProxyRules
 
 The class `ProxyRules` contains a set of rules and conditions for checking the usage of proxy objects.
 For example:
 
+`ProxyRules` クラスはプロキシオブジェクトの使い方に関するルールや条件式を含みます。
+
 * To check that methods that matches a predicate are not called directly from within the same class.
 
-=== PlantUML Component Diagrams as rules
+* 述語式にマッチするメソッドを、同じクラスから直接呼び出してしないことのチェック
+
+[reftext="PlantUML Component Diagrams as rules"]
+=== PlantUML のコンポーネント図をルールとして扱う（PlantUML Component Diagrams as rules）
 
 The Library API offers a feature that supports http://plantuml.com/component-diagram[PlantUML] diagrams.
 This feature is located in
+
+ライブラリ API は http://plantuml.com/component-diagram[PlantUML] の図を扱うことができます。
+`com.tngtech.archunit.library.plantuml` パッケージを参照してください。
 
 [source,java,options="nowrap"]
 ----
@@ -244,6 +310,9 @@ com.tngtech.archunit.library.plantuml
 
 ArchUnit can derive rules straight from PlantUML diagrams and check to make sure that all imported
 `JavaClasses` abide by the dependencies of the diagram. The respective rule can be created in the following way:
+
+ArchUnit は PlantUML の図からルールを生成し、インポートした全ての `JavaClasses` が図に表現されている依存関係を満たしているかチェックできます。
+次のように記述できます。
 
 [source,java,options="nowrap"]
 ----
@@ -255,6 +324,9 @@ classes().should(adhereToPlantUmlDiagram(myDiagram, consideringAllDependencies()
 Diagrams supported have to be component diagrams and associate classes to components via stereotypes.
 The way this works is to use the respective package identifiers (compare
 `ArchConditions.onlyHaveDependenciesInAnyPackage(..)`) as stereotypes:
+
+対応している図の種類はコンポーネント図です。コンポーネントに関連するクラスはステレオタイプで表現します。
+ステレオタイプはパッケージ識別子として機能することになります（`ArchConditions.onlyHaveDependenciesInAnyPackage(..)` を参照）。
 
 [plantuml, "simple-plantuml-archrule-example"]
 ----
@@ -277,30 +349,38 @@ The way this works is to use the respective package identifiers (compare
 Consider this diagram applied as a rule via `adhereToPlantUmlDiagram(..)`, then for example
 a class `some.target.Target` accessing `some.source.Source` would be reported as a violation.
 
-==== Configurations
+この図を `adhereToPlantUmlDiagram(..)` へ適用して生成したルールは、`some.target.Target` クラスから `some.source.Source` クラスへのアクセスを発見すると、違反として報告するようになります。
+
+[reftext="Configurations"]
+==== PlantUML に関する設定（Configurations）
 
 There are different ways to deal with dependencies of imported classes not covered by the
 diagram at all. The behavior of the PlantUML API can be configured by supplying a respective
 `Configuration`:
 
+PlantUML の図に表現されていないクラスの依存関係を扱う方法はいろいろあります。
+PlantUML API の振る舞いは `Configuration` を指定して制御できます。
+
 [source,java,options="nowrap"]
 ----
 // considers all dependencies possible (including java.lang, java.util, ...)
 classes().should(adhereToPlantUmlDiagram(
-        mydiagram, consideringAllDependencies())
+        mydiagram, consideringAllDependencies()))
 
 // considers only dependencies specified in the PlantUML diagram
 // (so any unknown dependency will be ignored)
 classes().should(adhereToPlantUmlDiagram(
-        mydiagram, consideringOnlyDependenciesInDiagram())
+        mydiagram, consideringOnlyDependenciesInDiagram()))
 
 // considers only dependencies in any specified package
 // (control the set of dependencies to consider, e.g. only com.myapp..)
 classes().should(adhereToPlantUmlDiagram(
-        mydiagram, consideringOnlyDependenciesInAnyPackage("..some.package.."))
+        mydiagram, consideringOnlyDependenciesInAnyPackage("..some.package..")))
 ----
 
 It is possible to further customize which dependencies to ignore:
+
+無視する依存関係を詳しく指定できます。
 
 [source,java,options="nowrap"]
 ----
@@ -310,34 +390,58 @@ classes().should(adhereToPlantUmlDiagram(mydiagram).ignoreDependencies(predicate
 
 A PlantUML diagram used with ArchUnit must abide by a certain set of rules:
 
-1. Components must be declared in the bracket notation (i.e. `[Some Component]`)
-2. Components must have at least one (possible multiple) stereotype(s). Each stereotype in the diagram
-must be unique and represent a valid package identifier (e.g. `\<<..example..>>` where `..` represents
-an arbitrary number of packages; compare the core API)
-3. Components may have an optional alias (e.g. `[Some Component] \<<..example..>> as myalias`). The alias must be alphanumeric and must not be quoted.
-4. Components may have an optional color (e.g. `[Some Component] \<<..example..>> #OrangeRed`)
-5. Dependencies must use arrows only consisting of dashes (e.g. `-\->`)
-6. Dependencies may go from left to right `-\->` or right to left `\<--`
-7. Dependencies may consist of any number of dashes (e.g `\->` or `----\->`)
-8. Dependencies may contain direction hints (e.g. `-up\->`) or color directives (e.g. `-[#green]\->`)
+ArchUnit から使用する PlantUML の図は、次のようなルールに従わなければなりません。
+
+// 1. Components must be declared in the bracket notation (i.e. `[Some Component]`)
+// 2. Components must have at least one (possible multiple) stereotype(s). Each stereotype in the diagram
+// must be unique and represent a valid package identifier (e.g. `\<<..example..>>` where `..` represents
+// an arbitrary number of packages; compare the core API)
+// 3. Components may have an optional alias (e.g. `[Some Component] \<<..example..>> as myalias`). The alias must be alphanumeric and must not be quoted.
+// 4. Components may have an optional color (e.g. `[Some Component] \<<..example..>> \#OrangeRed`)
+// 5. Dependencies must use arrows only consisting of dashes (e.g. `-\->`)
+// 6. Dependencies may go from left to right `-\->` or right to left `\<--`
+// 7. Dependencies may consist of any number of dashes (e.g `\->` or `----\->`)
+// 8. Dependencies may contain direction hints (e.g. `-up\->`) or color directives (e.g. `-[\#green]\->`)
+
+1. コンポーネントは角括弧形式で表記しなければなりません（`[Some Component]`）
+2. コンポーネントには1つ以上（複数も可）のステレオタイプが必要です。図中のステレオタイプ名は一意で、適切なパッケージ識別子でなければなりません（例えば `\<<..example..>>`。`..` は任意のパッケージ階層を表す。詳しくは <<The Core API>> を参照）
+3. コンポーネントには別名を指定できます（`[Some Component] \<<..example..>> as myalias`）。別名に使用できるのは英数字のみで、クォートで囲んではいけません
+4. コンポーネントには色を指定できます（`[Some Component] \<<..example..>> \#OrangeRed`）
+5. 依存関係を表す線分に使えるのは矢印付きの破線だけです（`-\->`）
+6. 依存関係を表す線分の方向は左から右（`-\->`）、あるいは、右から左のみです（`\<--`）
+7. 依存関係を表す線分には任意の数の破線を使えます（`\->` や `----\->`）
+8. 依存関係を表す線分には方向を示すヒントを指定したり（`-up\->`）、色を指定できます（`-[\#green]\->`）
 
 You can compare this
 https://github.com/TNG/ArchUnit-Examples/blob/main/example-plain/src/test/resources/com/tngtech/archunit/exampletest/shopping_example.puml[diagram of ArchUnit-Examples].
 
+https://github.com/TNG/ArchUnit-Examples/blob/main/example-plain/src/test/resources/com/tngtech/archunit/exampletest/shopping_example.puml[diagram of ArchUnit-Examples] の図を参照してみてください。
 
-=== Freezing Arch Rules
+[reftext="Freezing Arch Rules"]
+=== アーキテクチャルール違反の永続化（Freezing Arch Rules）
 
 When rules are introduced in grown projects, there are often hundreds or even thousands of violations,
 way too many to fix immediately. The only way to tackle such extensive violations is to establish an
 iterative approach, which prevents the code base from further deterioration.
 
+発展中のプロジェクトにルールを導入すると、数百どころか数千の違反を検出してしまい、とてもすぐに修正できない状態になる場合があります。
+大量に違反が発生している状況を解決するには、さらに悪化するのを防ぐため反復的なアプローチを確立するしかありません。
+
 `FreezingArchRule` can help in these scenarios by recording all existing violations to a `ViolationStore`.
 Consecutive runs will then only report new violations and ignore known violations.
 If violations are fixed, `FreezingArchRule` will automatically reduce the known stored violations to prevent any regression.
 
-==== Usage
+そういう場合に役立つのが `FreezingArchRule` です。
+`FreezingArchRule` は検出済みの全ての違反を `ViolationStore` へ記録します。
+そうすると、一度記録した違反は無視して、新たに検出した違反だけを報告するようになります。
+記録済みの違反を修正すると、`FreezingArchRule` はリグレッションを防ぐため自動的に記録済みの違反を削除します。
+
+[reftext="Usage"]
+==== 使い方（Usage）
 
 To freeze an arbitrary `ArchRule` just wrap it into a `FreezingArchRule`:
+
+使い方は、永続化したい任意の `ArchRule` を `FreezingArchRule` で包み込むだけです。
 
 [source,java,options="nowrap"]
 ----
@@ -349,11 +453,21 @@ new violations will be reported. By default `FreezingArchRule` will ignore line 
 violation is just shifted to a different line, it will still count as previously recorded
 and will not be reported.
 
-==== Configuration
+導入してから始めて実行したテストで検出した違反は、最新の状態として記録されます。
+その後は、新しく検出した違反だけを報告するようになります。
+初期設定では `FreezingArchRule` は行番号を無視します。
+つまり、違反した箇所が数行移動しただけでも、最初に記録した違反と同じ違反として認識し、報告しないということです。
+
+[reftext="Configuration"]
+==== 設定（Configuration）
 
 By default `FreezingArchRule` will use a simple `ViolationStore` based on plain text files.
 This is sufficient to add these files to any version control system to continuously track the progress.
 You can configure the location of the violation store within `archunit.properties` (compare <<Advanced Configuration>>):
+
+初期設定の `FreezingArchRule` は平文テキストファイルを使用する単純な `ViolationStore` を使うようになっています。
+継続的に状況を追跡するなら、テキストファイルをバージョン管理システムへ登録するだけで十分でしょう。
+違反記録ファイルの場所は `archunit.properties` で指定できます（<<Advanced Configuration>> を参照）。
 
 [source,options="nowrap"]
 .archunit.properties
@@ -362,6 +476,8 @@ freeze.store.default.path=/some/path/in/a/vcs/repo
 ----
 
 Furthermore, it is possible to configure
+
+他にも次のような設定項目があります。
 
 [source,options="nowrap"]
 .archunit.properties
@@ -379,8 +495,14 @@ This can help in CI environments to prevent misconfiguration:
 For example, a CI build should probably never create a new the violation store, but operate on
 an existing one.
 
+これらの設定項目は CI 環境で実行するときの設定誤りを予防するために役立ちます。
+具体的には、CI環境で実行するビルドは新しい違反記録ファイルを作るべきではないし、既存のファイルがあるならそれを参照するべきなのです。
+
 As mentioned in <<Overriding configuration>>, these properties can be passed as system properties as needed.
 For example to allow the creation of the violation store in a specific environment, it is possible to pass the system property via
+
+<<Overriding configuration>> で説明したように、これらの設定項目は必要ならシステムプロパティとして指定できるようになっています。
+例えば、任意の環境で違反記録ファイルを作成させたいときは、次のようなシステムプロパティを指定すればいいでしょう。
 
 [source,options="nowrap"]
 ----
@@ -394,7 +516,15 @@ This can e.g. make sense, because current violations are consciously accepted an
 or because the format of some violations has changed. The respective property to allow refreezing
 all current violations is `freeze.refreeze=true`, where the default is `false`.
 
-==== Extension
+全ての違反を「再凍結（refrozen）」させることも可能です。
+そうすると、違反記録ファイルを最新の状態へ更新し、実行結果は成功として終了します。
+実質的に全てのルールを永続化していないときの振る舞いと同じになります。
+これに意味があるのは、今の違反状況を認識し、受け入れており、違反記録ファイルへ追加してもよいと考えている場合だけです。
+前から存在していた違反の形式が変化しているのかもしれません。
+今の違反状態を再凍結させるにはシステムプロパティ `freez.refreeze=true` を指定します。初期値は `false` です。
+
+[reftext="Extension"]
+==== 拡張可能な部分について（Extension）
 
 `FreezingArchRule` provides two extension points to adjust the behavior to custom needs.
 The first one is the `ViolationStore`, i.e. the store violations will be recorded to. The second one
@@ -402,12 +532,23 @@ is the `ViolationLineMatcher`, i.e. how `FreezingArchRule` will associate lines 
 with lines of actual violations. As mentioned, by default this is a line matcher that ignores the
 line numbers of violations within the same class.
 
-===== Violation Store
+`FreezingArchRule` には拡張可能な部分が2か所あり、振る舞いを調整するのに使用できます。
+1つ目は `ViolationStore` で、違反の情報をどこに記録するのか制御します。
+2つ目は `ViolationLineMatcher` で、`FreezingArchRule` が違反を記録するとき、行番号を含めるかどうかを制御します。
+前述したとおり、初期設定では行番号を記録しないようになっています。
+
+[reftext="Violation Store"]
+===== 違反記録ストア（Violation Store）
 
 As mentioned in <<Configuration>>, the default `ViolationStore` is a simple text based store.
 It can be exchanged though, for example to store violations in a database.
 To provide your own implementation, implement `com.tngtech.archunit.library.freeze.ViolationStore` and
 configure `FreezingArchRule` to use it. This can either be done programmatically:
+
+<<Configuration>> で説明したとおり、初期設定の `ViolationStore` は単純に平文テキストファイルへ記録するようになっています。
+ファイルではなく、データベースへ記録させることができるということです。
+自分で実装するなら、`com.thgtech.archunit.library.freeze.ViolationStore` インターフェイスを実装したクラスを `FreezingArchRule` に指定すればいいでしょう。
+次のようにプログラムで記述できます。
 
 [source,java,options="nowrap"]
 ----
@@ -415,6 +556,8 @@ FreezingArchRule.freeze(rule).persistIn(customViolationStore);
 ----
 
 Alternatively it can be configured via `archunit.properties` (compare <<Advanced Configuration>>):
+
+あるいは、次のように `archunit.properties` の設定項目にも記述できます（<<Advanced Configuration>> を参照）。
 
 [source,options="nowrap"]
 ----
@@ -424,6 +567,8 @@ freeze.store=fully.qualified.name.of.MyCustomViolationStore
 You can supply properties to initialize the store by using the namespace `freeze.store`.
 For properties
 
+名前空間 `freeze.store` に、違反記録ストアを初期化するためのプロパティを指定できます。
+
 [source,options="nowrap"]
 ----
 freeze.store.propOne=valueOne
@@ -432,18 +577,25 @@ freeze.store.propTwo=valueTwo
 
 the method `ViolationStore.initialize(props)` will be called with the properties
 
+これらのプロパティは `VilationStore.initialize(props)` の引数に指定されます。
+
 [source,options="nowrap"]
 ----
 propOne=valueOne
 propTwo=valueTwo
 ----
 
-===== Violation Line Matcher
+[reftext="Violation Line Matcher"]
+===== 違反行マッチャー（Violation Line Matcher）
 
 The `ViolationLineMatcher` compares lines from occurred violations with lines from the store.
 The default implementation ignores line numbers and numbers of anonymous classes or lambda expressions,
 and counts lines as equivalent when all other details match.
 A custom `ViolationLineMatcher` can again either be defined programmatically:
+
+`VilationLineMatcher` は違反と、違反の発生した行番号を、違反記録ストアと照合します。
+既定の実装では、行番号と、無名クラスやラムダ式の数を無視して、全体の行数が一致すればそれ以外の全ての詳細も一致したものと見做すようになっています。
+独自の `ViolationLineMatcher` があるときは、次のようにプログラムで記述できます。
 
 [source,java,options="nowrap"]
 ----
@@ -452,12 +604,15 @@ FreezingArchRule.freeze(rule).associateViolationLinesVia(customLineMatcher);
 
 or via `archunit.properties`:
 
+あるいは、次のように `archunit.properties` の設定項目にも記述できます（<<Advanced Configuration>> を参照）。
+
 [source,options="nowrap"]
 ----
 freeze.lineMatcher=fully.qualified.name.of.MyCustomLineMatcher
 ----
 
-=== Software Architecture Metrics
+[reftext="Software Architecture Metrics"]
+=== ソフトウェアアーキテクチャのメトリクス（Software Architecture Metrics）
 
 Similar to code quality metrics, like cyclomatic complexity or method length,
 software architecture metrics strive to measure the structure and design of software.
@@ -470,16 +625,31 @@ Cumulative Dependency Metrics by John Lakos, we also need to know the dependenci
 between those components, which are naturally derived from the dependencies between
 the elements (e.g. classes) within these components.
 
+ソースコード品質のメトリクスにおけるサイクロマティック複雑度やメソッド長のように、ソフトウェアアーキテクチャのメトリクスとして、ソフトウェアの設計や構造を計測する試みが続けられています。
+ArchUnit は既知のソフトウェアアーキテクチャメトリクスの一部を算出できるようになっています。
+メトリクスの根拠になるのは、基本的になんらかの形でコンポーネント化に貢献する要素です。
+例えば、私たちは Java アプリケーションをクラス、メソッド、フィールドなどの単位に分割し、それぞれの単位がどれだけあるのか計測します。
+ArchUnit ではこの考え方を `com.tngtech.archunit.library.metrics.MetricsCOmponent` として表現しています。
+ジョン・レイコスの提案した「累積依存性メトリクス（Cumulative Dependency Metrics）」のように、一部のメトリクスでは、コンポーネント間の依存関係に関する情報が必要になります。
+これは、コンポーネントに含まれる全ての要素（クラスなど）に関する依存関係から導出できます。
+
 A very simple concrete example would be to consider some Java packages as
 components and the classes within these packages as the contained elements. From
 the dependencies between the classes we can derive which package depends on which
 other package.
 
+簡単な具体例を考えると、Java パッケージをコンポーネントとした場合、コンポーネントの構成要素はクラスになります。
+従って、全てのクラスの依存関係が分かれば、そのパッケージが他のパッケージにどれだけ依存しているのか導出できるのです。
+
 The following will give a quick overview of the metrics that ArchUnit can calculate.
 However, for further background information it is recommended to rely on
 some dedicated literature that explains these metrics in full detail.
 
-==== Cumulative Dependency Metrics by John Lakos
+ArchUnit で計算できるメトリクスの例は次のとおりです。
+それぞれのメトリクスに関する正確な説明が必要なときは、出典の文献を参照してください。
+
+[reftext="Cumulative Dependency Metrics by John Lakos"]
+==== ジョン・レイコスの提案した「累積依存性メトリクス」（Cumulative Dependency Metrics by John Lakos）
 
 These are software architecture metrics as defined by John Lakos in his book
 "Large-Scale C++ Software Design". The basic idea is to calculate the `DependsOn`
@@ -488,16 +658,32 @@ transitively reached from some component including the component itself.
 
 From these values we can derive
 
-* Cumulative Component Dependency (*CCD*):
-The sum of all `DependsOn` values of all components
-* Average Component Dependency (*ACD*):
-The `CCD` divided by the number of all components
-* Relative Average Component Dependency (*RACD*):
-The `ACD` divided by the number of all components
-* Normalized Cumulative Component Dependency (*NCCD*):
-The `CCD` of the system divided by the `CCD` of a balanced binary tree with the same number of components
+これは、ジョン・レイコスが「Large-Scale C++ Software Design」でソフトウェアアーキテクチャのメトリクスです。
+それぞれのコンポーネントについて `DependsOn` を集計するのが基本的な考え方です。
+末端のコンポーネントそれ自体を含むコンポーネントの一部から、推移的に到達可能なコンポーネントの依存関係の総和を、全てのコンポーネントの依存関係の総和と見做す考え方です。
 
-===== Example
+次のような指標を導出できます。
+
+// * Cumulative Component Dependency (*CCD*):
+// The sum of all `DependsOn` values of all components
+// * Average Component Dependency (*ACD*):
+// The `CCD` divided by the number of all components
+// * Relative Average Component Dependency (*RACD*):
+// The `ACD` divided by the number of all components
+// * Normalized Cumulative Component Dependency (*NCCD*):
+// The `CCD` of the system divided by the `CCD` of a balanced binary tree with the same number of components
+
+* *CCD* - 累積コンポーネント依存性:
+全てのコンポーネントに関する `DependsOn` の総和。
+* *ACD* - 平均コンポーネント依存性:
+`CCD` を全てのコンポーネント数で除算した値。
+* *RACD* - 相対平均コンポーネント依存性:
+`ACD` を全てのコンポーネント数で除算した値。
+* *NACD* - 正規化平均コンポーネント依存性:
+システムの `CCD` を、同じ数のコンポーネントからなる平衡二分木の `CCD` で除算した値。
+
+[reftext="Example"]
+===== 具体例（Example）
 
 [plantuml,"lakos-example"]
 ----
@@ -536,9 +722,16 @@ Thus these metrics provide some insights into the complexity of the dependency g
 Note that in a cycle all elements have the same `DependsOn` value which will lead to an increased
 CCD. In fact for any non-trivial (`n >= 5`) acyclic graph of components the RACD is bound by `0.6`.
 
-===== How to use the API
+これらのメトリクスは、システムの依存関係グラフの複雑さに関する洞察をもたらします。
+巡回グラフの全ての要素の `DependsOn` が同じ値になると、CCD は増加するので注意が必要です。
+実際には、任意の自明でない非巡回グラフ（`n >= 5`）では、RACD の上限値は `0.6` になります。
+
+[reftext="How to use the API"]
+===== API の使い方（How to use the API）
 
 The values described for these metrics can be calculated in the following way:
+
+それぞれのメトリクスは次のように算出できます。
 
 [source,java,options="nowrap"]
 ----
@@ -559,23 +752,37 @@ System.out.println("RACD: " + metrics.getRelativeAverageComponentDependency());
 System.out.println("NCCD: " + metrics.getNormalizedCumulativeComponentDependency());
 ----
 
-==== Component Dependency Metrics by Robert C. Martin
+[reftext="Component Dependency Metrics by Robert C. Martin"]
+==== ロバート・C・マーチンの提案したコンポーネント依存性メトリクス（Component Dependency Metrics by Robert C. Martin）
 
 These software architecture metrics were defined by Robert C. Martin in various sources,
 for example in his book "Clean architecture : a craftsman's guide to software structure and design".
+
+ロバート・C・マーチンはさまざまなソフトウェアアーキテクチャのメトリクスをいろんなところで紹介しています。
+例えば「Clean archtecture : a craftsman's guide to software structure and design」など。
 
 The foundation are again components, that must in this case contain classes as their elements
 (i.e. these are purely object-oriented metrics that need a concept of abstract classes).
 
 The metrics are based on the following definitions:
 
-* Efferent Coupling (*Ce*): The number of outgoing dependencies to any other component
-* Afferent Coupling (*Ca*): The number of incoming dependencies from any other component
-* Instability (*I*): `Ce / (Ca + Ce)`, i.e. the relationship of outgoing dependencies
-to all dependencies
-* Abstractness (*A*): `num(abstract_classes) / num(all_classes)` in the component
-* Distance from Main Sequence (*D*): `| A + I - 1 |`, i.e. the normalized distance from
-the ideal line between `(A=1, I=0)` and `(A=0, I=1)`
+対象はやはりコンポーネントで、構成要素としてクラスを持っていることになっています（ここで紹介するメトリクスは、抽象クラスの考え方が必須の純粋なオブジェクト指向ソフトウェアのメトリクスです）。
+
+それぞれのメトリクスは次のような定義に基づいています。
+
+// * Efferent Coupling (*Ce*): The number of outgoing dependencies to any other component
+// * Afferent Coupling (*Ca*): The number of incoming dependencies from any other component
+// * Instability (*I*): `Ce / (Ca + Ce)`, i.e. the relationship of outgoing dependencies
+// to all dependencies
+// * Abstractness (*A*): `num(abstract_classes) / num(all_classes)` in the component
+// * Distance from Main Sequence (*D*): `| A + I - 1 |`, i.e. the normalized distance from
+// the ideal line between `(A=1, I=0)` and `(A=0, I=1)`
+
+* 外向きの結合（Efferent Coupling）（*Ce*）: 他のコンポーネントへ向かう外向きの依存関係の総数
+* 内向きの結合（Afferent Coupling）（*Ca*）: 他のコンポーネントから向かってくる内向きの依存関係の総数
+* 不安定性（Instability）（*I*）: `Ce / (Ca + Ce)` 全ての依存関係に対する外向きの依存関係の割合
+* 抽象度（Abstractness）（*A*）: `num(抽象クラス) / num(全てのクラス)` コンポーネント中の全てのクラスに対する抽象クラスの割合
+* 主系列からの距離（Distance from Main Sequence）（*D*）: `| A + I - 1 |` 理想直線 `(A=1, I=0)` と `(A=0, I=1)` からの正規化した距離
 
 Note that ArchUnit slightly differs from the original definition. In ArchUnit
 the Abstractness value is only based on public classes, i.e.
@@ -584,10 +791,17 @@ are metrics with respect to coupling of components. But only classes that are vi
 to the outside can affect coupling between components,
 so it makes sense to only consider those classes to calculate the *A* value.
 
-===== Example
+ArchUnit の実装は本来の定義とはやや異なる内容になっているので注意してください。
+ArchUnit では、抽象度を算出するのに、public クラス（つまり外部から参照できるクラス）だけを集計しています。
+抽象度以外の全てのメトリクスはコンポーネント間の結合に関するメトリクスなので、コンポーネント間の結合に寄与するクラスだけを対象にするほうが適切だと考えたからです。
+
+[reftext="Example"]
+===== 具体例（Example）
 
 The following provides some example where the `A` values assume some random factor
 of abstract classes within the respective component.
+
+次の例では、コンポーネント中にランダムな数の抽象クラスが存在するものとして、抽象度 `A` を算出しています。
 
 [plantuml,"martin-example"]
 ----
@@ -615,9 +829,12 @@ two --> six
 five --> six
 ----
 
-===== How to use the API
+[reftext="How to use the API"]
+===== API の使い方（How to use the API）
 
 The values described for these metrics can be calculated in the following way:
+
+それぞれのメトリクスは次のように算出できます。
 
 [source,java,options="nowrap"]
 ----
@@ -639,7 +856,8 @@ System.out.println("A: " + metrics.getAbstractness("com.example.component"));
 System.out.println("D: " + metrics.getNormalizedDistanceFromMainSequence("com.example.component"));
 ----
 
-==== Visibility Metrics by Herbert Dowalil
+[reftext="Visibility Metrics by Herbert Dowalil"]
+==== ハーバート・ドワリルの提案した可視性メトリクス（Visibility Metrics by Herbert Dowalil）
 
 These software architecture metrics were defined by Herbert Dowalil in his book
 "Modulare Softwarearchitektur: Nachhaltiger Entwurf durch Microservices, Modulithen und SOA 2.0".
@@ -648,11 +866,21 @@ elements within a component.
 
 The metrics are composed from the following definitions:
 
-* Relative Visibility (*RV*): `num(visible_elements) / num(all_elements)` for each component
-* Average Relative Visibility (*ARV*): The average of all `RV` values
-* Global Relative Visibility (*GRV*): `num(visible_elements) / num(all_elements)` over all components
+これらのソフトウェアアーキテクチャのメトリクスは、ハーバート・ドワリルが「Modulare Softwarearchitektur: Nachhaltiger Entwurf durch Microservices, Modulithen und SOA 2.0」で提案したものです。
+情報隠蔽の原則に基づく指標として、コンポーネント中の可視要素から不可視要素への関連などを提供します。
 
-===== Example
+それぞれのメトリクスは次のような定義に基づいています。
+
+// * Relative Visibility (*RV*): `num(visible_elements) / num(all_elements)` for each component
+// * Average Relative Visibility (*ARV*): The average of all `RV` values
+// * Global Relative Visibility (*GRV*): `num(visible_elements) / num(all_elements)` over all components
+
+* 相対可視性（*RV*）: `num(可視要素) / num(全ての要素)` それぞれのコンポーネントについて計算します
+* 平均相対可視性（*ARV*）: 全てのコンポーネントに関する *RV* の平均値
+* 全体相対可視性（*GRV*）: `num(可視要素) / num(全ての要素)` 全てのコンポーネントについて計算します
+
+[reftext="Example"]
+===== 具体例（Example）
 
 [plantuml,"dowalil-example"]
 ----
@@ -684,9 +912,12 @@ legend
 endlegend
 ----
 
-===== How to use the API
+[reftext="How to use the API"]
+===== API の使い方（How to use the API）
 
 The values described for these metrics can be calculated in the following way:
+
+それぞれのメトリクスは次のように算出できます。
 
 [source,java,options="nowrap"]
 ----

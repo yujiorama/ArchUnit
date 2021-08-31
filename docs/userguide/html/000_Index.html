@@ -449,88 +449,88 @@ h4 {
 <div id="header">
 <h1>ArchUnit User Guide</h1>
 <div class="details">
-<span id="revnumber">version 0.21.0</span>
+<span id="revnumber">version v0.21.0</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_introduction">1. Introduction</a>
+<li><a href="#_前書きintroduction">1. 前書き（Introduction）</a>
 <ul class="sectlevel2">
-<li><a href="#_module_overview">1.1. Module Overview</a></li>
+<li><a href="#_モジュールの概要module_overview">1.1. モジュールの概要（Module Overview）</a></li>
 </ul>
 </li>
-<li><a href="#_installation">2. Installation</a>
+<li><a href="#_インストールinstallation">2. インストール（Installation）</a>
 <ul class="sectlevel2">
 <li><a href="#_junit_4">2.1. JUnit 4</a></li>
 <li><a href="#_junit_5">2.2. JUnit 5</a></li>
-<li><a href="#_other_test_frameworks">2.3. Other Test Frameworks</a></li>
-<li><a href="#_maven_plugin">2.4. Maven Plugin</a></li>
+<li><a href="#_その他のテストフレームワークについてother_test_frameworks">2.3. その他のテストフレームワークについて（Other Test Frameworks）</a></li>
+<li><a href="#_maven_プラグインmaven_plugin">2.4. Maven プラグイン（Maven Plugin）</a></li>
 </ul>
 </li>
-<li><a href="#_getting_started">3. Getting Started</a>
+<li><a href="#_archunit_入門getting_started">3. ArchUnit 入門（Getting Started）</a>
 <ul class="sectlevel2">
-<li><a href="#_importing_classes">3.1. Importing Classes</a></li>
-<li><a href="#_asserting_architectural_constraints">3.2. Asserting (Architectural) Constraints</a></li>
-<li><a href="#_using_junit_4_or_junit_5">3.3. Using JUnit 4 or JUnit 5</a></li>
-<li><a href="#_using_junit_support_with_kotlin">3.4. Using JUnit support with Kotlin</a></li>
+<li><a href="#_クラスのインポートimporting_classes">3.1. クラスのインポート（Importing Classes）</a></li>
+<li><a href="#_アーキテクチャにおける制約のアサーションasserting_architectural_constraints">3.2. （アーキテクチャにおける）制約のアサーション（Asserting (Architectural) Constraints）</a></li>
+<li><a href="#_junit_4_と_junit_5_のどちらかを使いましょうusing_junit_4_or_junit_5">3.3. JUnit 4 と JUnit 5 のどちらかを使いましょう（Using JUnit 4 or JUnit 5）</a></li>
+<li><a href="#_kotlin_で_junit_を使うusing_junit_support_with_kotlin">3.4. Kotlin で JUnit を使う（Using JUnit support with Kotlin）</a></li>
 </ul>
 </li>
-<li><a href="#_what_to_check">4. What to Check</a>
+<li><a href="#_チェックの対象what_to_check">4. チェックの対象（What to Check）</a>
 <ul class="sectlevel2">
-<li><a href="#_package_dependency_checks">4.1. Package Dependency Checks</a></li>
-<li><a href="#_class_dependency_checks">4.2. Class Dependency Checks</a></li>
-<li><a href="#_class_and_package_containment_checks">4.3. Class and Package Containment Checks</a></li>
-<li><a href="#_inheritance_checks">4.4. Inheritance Checks</a></li>
-<li><a href="#_annotation_checks">4.5. Annotation Checks</a></li>
-<li><a href="#_layer_checks">4.6. Layer Checks</a></li>
-<li><a href="#_cycle_checks">4.7. Cycle Checks</a></li>
+<li><a href="#_パッケージの依存性チェックpackage_dependency_checks">4.1. パッケージの依存性チェック（Package Dependency Checks）</a></li>
+<li><a href="#_クラスの依存性チェックclass_dependency_checks">4.2. クラスの依存性チェック（Class Dependency Checks）</a></li>
+<li><a href="#_クラスおよびパッケージの閉じ込め状況チェックclass_and_package_containment_checks">4.3. クラスおよびパッケージの閉じ込め状況チェック（Class and Package Containment Checks）</a></li>
+<li><a href="#_継承関係のチェックinheritance_checks">4.4. 継承関係のチェック（Inheritance Checks）</a></li>
+<li><a href="#_アノテーションのチェックannotation_checks">4.5. アノテーションのチェック（Annotation Checks）</a></li>
+<li><a href="#_レイヤーのチェックlayer_checks">4.6. レイヤーのチェック（Layer Checks）</a></li>
+<li><a href="#_循環のチェックcycle_checks">4.7. 循環のチェック（Cycle Checks）</a></li>
 </ul>
 </li>
-<li><a href="#_ideas_and_concepts">5. Ideas and Concepts</a>
+<li><a href="#_考え方と概念ideas_and_concepts">5. 考え方と概念（Ideas and Concepts）</a>
 <ul class="sectlevel2">
-<li><a href="#_core">5.1. Core</a></li>
-<li><a href="#_lang">5.2. Lang</a></li>
-<li><a href="#_library">5.3. Library</a></li>
+<li><a href="#_コアレイヤーcore">5.1. コアレイヤー（Core）</a></li>
+<li><a href="#_言語レイヤーlang">5.2. 言語レイヤー（Lang）</a></li>
+<li><a href="#_ライブラリレイヤーlibrary">5.3. ライブラリレイヤー（Library）</a></li>
 </ul>
 </li>
-<li><a href="#_the_core_api">6. The Core API</a>
+<li><a href="#_コア_apithe_core_api">6. コア API（The Core API）</a>
 <ul class="sectlevel2">
-<li><a href="#_import">6.1. Import</a></li>
-<li><a href="#_domain">6.2. Domain</a></li>
+<li><a href="#_インポートimport">6.1. インポート（Import）</a></li>
+<li><a href="#_ドメインdomain">6.2. ドメイン（Domain）</a></li>
 </ul>
 </li>
-<li><a href="#_the_lang_api">7. The Lang API</a>
+<li><a href="#_言語_apithe_lang_api">7. 言語 API（The Lang API）</a>
 <ul class="sectlevel2">
-<li><a href="#_composing_class_rules">7.1. Composing Class Rules</a></li>
-<li><a href="#_composing_member_rules">7.2. Composing Member Rules</a></li>
-<li><a href="#_creating_custom_rules">7.3. Creating Custom Rules</a></li>
-<li><a href="#_predefined_predicates_and_conditions">7.4. Predefined Predicates and Conditions</a></li>
-<li><a href="#_rules_with_custom_concepts">7.5. Rules with Custom Concepts</a></li>
-<li><a href="#_controlling_the_rule_text">7.6. Controlling the Rule Text</a></li>
-<li><a href="#_ignoring_violations">7.7. Ignoring Violations</a></li>
+<li><a href="#_クラスルールの合成composing_class_rules">7.1. クラスルールの合成（Composing Class Rules）</a></li>
+<li><a href="#_メンバールールの合成composing_member_rules">7.2. メンバールールの合成（Composing Member Rules）</a></li>
+<li><a href="#_独自ルールの作成creating_custom_rules">7.3. 独自ルールの作成（Creating Custom Rules）</a></li>
+<li><a href="#_定義済みの述語式と条件式predefined_predicates_and_conditions">7.4. 定義済みの述語式と条件式（Predefined Predicates and Conditions）</a></li>
+<li><a href="#_独自の考え方に基づくルールrules_with_custom_concepts">7.5. 独自の考え方に基づくルール（Rules with Custom Concepts）</a></li>
+<li><a href="#_ルールの文章を制御するcontrolling_the_rule_text">7.6. ルールの文章を制御する（Controlling the Rule Text）</a></li>
+<li><a href="#_違反を無視するignoring_violations">7.7. 違反を無視する（Ignoring Violations）</a></li>
 </ul>
 </li>
-<li><a href="#_the_library_api">8. The Library API</a>
+<li><a href="#_ライブラリ_apithe_library_api">8. ライブラリ API（The Library API）</a>
 <ul class="sectlevel2">
-<li><a href="#_architectures">8.1. Architectures</a></li>
-<li><a href="#_slices">8.2. Slices</a></li>
-<li><a href="#_general_coding_rules">8.3. General Coding Rules</a></li>
-<li><a href="#_plantuml_component_diagrams_as_rules">8.4. PlantUML Component Diagrams as rules</a></li>
-<li><a href="#_freezing_arch_rules">8.5. Freezing Arch Rules</a></li>
-<li><a href="#_software_architecture_metrics">8.6. Software Architecture Metrics</a></li>
+<li><a href="#_アーキテクチャarchitectures">8.1. アーキテクチャ（Architectures）</a></li>
+<li><a href="#_ソースコードの断面slices">8.2. ソースコードの断面（Slices）</a></li>
+<li><a href="#_一般的なコーディングルールgeneral_coding_rules">8.3. 一般的なコーディングルール（General Coding Rules）</a></li>
+<li><a href="#_plantuml_のコンポーネント図をルールとして扱うplantuml_component_diagrams_as_rules">8.4. PlantUML のコンポーネント図をルールとして扱う（PlantUML Component Diagrams as rules）</a></li>
+<li><a href="#_アーキテクチャルール違反の永続化freezing_arch_rules">8.5. アーキテクチャルール違反の永続化（Freezing Arch Rules）</a></li>
+<li><a href="#_ソフトウェアアーキテクチャのメトリクスsoftware_architecture_metrics">8.6. ソフトウェアアーキテクチャのメトリクス（Software Architecture Metrics）</a></li>
 </ul>
 </li>
-<li><a href="#_junit_support">9. JUnit Support</a>
+<li><a href="#_junit_拡張機能junit_support">9. JUnit 拡張機能（JUnit Support）</a>
 <ul class="sectlevel2">
-<li><a href="#_junit_4_5_support">9.1. JUnit 4 &amp; 5 Support</a></li>
+<li><a href="#_junit_4_および_junit_5_への対応junit_4_5_support">9.1. JUnit 4 および JUnit 5 への対応（JUnit 4 &amp; 5 Support）</a></li>
 </ul>
 </li>
-<li><a href="#_advanced_configuration">10. Advanced Configuration</a>
+<li><a href="#_高度な設定advanced_configuration">10. 高度な設定（Advanced Configuration）</a>
 <ul class="sectlevel2">
-<li><a href="#_overriding_configuration">10.1. Overriding configuration</a></li>
-<li><a href="#_configuring_the_resolution_behavior">10.2. Configuring the Resolution Behavior</a></li>
-<li><a href="#_md5_sums_of_classes">10.3. MD5 Sums of Classes</a></li>
-<li><a href="#_custom_error_messages">10.4. Custom Error Messages</a></li>
+<li><a href="#_設定の上書きoverriding_configuration">10.1. 設定の上書き（Overriding configuration）</a></li>
+<li><a href="#_解決のための振る舞いの構成configuring_the_resolution_behavior">10.2. 解決のための振る舞いの構成（Configuring the Resolution Behavior）</a></li>
+<li><a href="#_クラスの_md5_チェックサムmd5_sums_of_classes">10.3. クラスの MD5 チェックサム（MD5 Sums of Classes）</a></li>
+<li><a href="#_エラーメッセージのカスタマイズcustom_error_messages">10.4. エラーメッセージのカスタマイズ（Custom Error Messages）</a></li>
 </ul>
 </li>
 </ul>
@@ -538,7 +538,7 @@ h4 {
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_introduction"><a class="anchor" href="#_introduction"></a>1. Introduction</h2>
+<h2 id="_前書きintroduction"><a class="anchor" href="#_前書きintroduction"></a>1. 前書き（Introduction）</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><a href="https://archunit.org">ArchUnit</a> is a free, simple and extensible library for checking the
@@ -549,30 +549,48 @@ importing all classes into a Java code structure.
 ArchUnit&#8217;s main focus is to automatically test architecture and coding rules,
 using any plain Java unit testing framework.</p>
 </div>
+<div class="paragraph">
+<p><a href="https://archunit.org">ArchUnit</a>はJavaソースコードのアーキテクチャをチェックする、簡潔性と拡張性に優れたフリーなライブラリです。
+ArchUnitはパッケージやクラス間の依存関係に加えて、レイヤーやスライス間の依存関係をチェックできます。それ以外に、循環する依存関係もチェックできます。
+依存関係のチェックは、Javaソースコードに登場する全てのクラスをインポートしたバイトコードについて行います。
+ArchUnitの主な目的は、一般的なユニットテストフレームワークで、アーキテクチャやコーディングルールを自動的にテストすることです。</p>
+</div>
 <div class="sect2">
-<h3 id="_module_overview"><a class="anchor" href="#_module_overview"></a>1.1. Module Overview</h3>
+<h3 id="_モジュールの概要module_overview"><a class="anchor" href="#_モジュールの概要module_overview"></a>1.1. モジュールの概要（Module Overview）</h3>
 <div class="paragraph">
 <p>ArchUnit consists of the following production modules: <code>archunit</code>, <code>archunit-junit4</code> as well
 as <code>archunit-junit5-api</code>, <code>archunit-junit5-engine</code> and <code>archunit-junit5-engine-api</code>.
 Also relevant for end users is the <code>archunit-example</code> module.</p>
 </div>
+<div class="paragraph">
+<p>ArchUnitの公開モジュールは <code>archunit</code> と、<code>archunit-junit4</code> あるいは <code>archunit-junit5-api</code>、<code>archunit-junit5-engine</code>、<code>archunit-junit5-engine-api</code> です。
+エンドユーザとしては <code>archunit-example</code> モジュールも参考になるでしょう。</p>
+</div>
 <div class="sect3">
-<h4 id="_module_archunit"><a class="anchor" href="#_module_archunit"></a>1.1.1. Module archunit</h4>
+<h4 id="_archunit_モジュールmodule_archunit"><a class="anchor" href="#_archunit_モジュールmodule_archunit"></a>1.1.1. archunit モジュール（Module archunit）</h4>
 <div class="paragraph">
 <p>This module contains the actual ArchUnit core infrastructure required to write architecture
 tests: The <code>ClassFileImporter</code>,
 the domain objects, as well as the rule syntax infrastructure.</p>
 </div>
+<div class="paragraph">
+<p>このモジュールはアーキテクチャテストを記述するために必要な ArchUnit の基本部品を含んでいます。
+例えば <code>ClassFileImporter</code> というドメインオブジェクトや、ルールの文法を定義する部品を含んでいます。</p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="_module_archunit_junit4"><a class="anchor" href="#_module_archunit_junit4"></a>1.1.2. Module archunit-junit4</h4>
+<h4 id="_archunit_junit4_モジュールmodule_archunit_junit4"><a class="anchor" href="#_archunit_junit4_モジュールmodule_archunit_junit4"></a>1.1.2. archunit-junit4 モジュール（Module archunit-junit4）</h4>
 <div class="paragraph">
 <p>This module contains the infrastructure to integrate with JUnit 4, in particular
 the <code>ArchUnitRunner</code> to cache imported classes.</p>
 </div>
+<div class="paragraph">
+<p>このモジュールは ArchUnit を JUnit 4 へ統合するための部品を含んでいます。
+特に <code>ArchUnitRunner</code> はインポートしたクラス（のバイトコード）をキャッシュするようになっています。</p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="_modules_archunit_junit5"><a class="anchor" href="#_modules_archunit_junit5"></a>1.1.3. Modules archunit-junit5-*</h4>
+<h4 id="_archunit_junit5_モジュールmodules_archunit_junit5"><a class="anchor" href="#_archunit_junit5_モジュールmodules_archunit_junit5"></a>1.1.3. archunit-junit5-* モジュール（Modules archunit-junit5-*）</h4>
 <div class="paragraph">
 <p>These modules contain the infrastructure to integrate with JUnit 5 and contain the respective
 infrastructure to cache imported classes between test runs.
@@ -580,22 +598,36 @@ infrastructure to cache imported classes between test runs.
 <code>archunit-junit5-engine</code> contains the runtime engine to run those tests.
 <code>archunit-junit5-engine-api</code> contains API code for tools that want more detailed control
 over running ArchUnit JUnit 5 tests, in particular a <code>FieldSelector</code> which can be used to
-instruct the <code>ArchUnitTestEngine</code> to run a specific rule field (compare <a href="#_junit_4_5_support">JUnit 4 &amp; 5 Support</a>).</p>
+instruct the <code>ArchUnitTestEngine</code> to run a specific rule field (compare <a href="#_junit_4_および_junit_5_への対応junit_4_5_support">JUnit 4 &amp; 5 Support</a>).</p>
+</div>
+<div class="paragraph">
+<p>これらのモジュールは ArchUnit を JUnit 5 へ統合するための部品を含んでいます。
+また、それぞれのテストケースについてインポートしたクラス（のバイトコード）をキャッシュするための部品も含んでいます。
+<code>archunit-junit5-api</code> は JUnit 5 で ArchUnit のテストを記述するためのユーザ向けAPIを含んでいます。
+<code>archunit-junit5-engine</code> はテストを実行するランタイムエンジンを含んでいます。
+<code>archunit-junit5-engine-api</code> はテストツールがより適切に JUnit 5 の ArchUnit テストを制御するためのAPIコードを含んでいます。
+例えば、<code>FieldSelector</code> は <code>ArchUnitTestEngine</code> に特定のルールフィールドだけを実行させることができます。
+（ <a href="#_junit_4_および_junit_5_への対応junit_4_5_support">JUnit 4 &amp; 5 Support</a> とも読み比べてみてください）</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_module_archunit_example"><a class="anchor" href="#_module_archunit_example"></a>1.1.4. Module archunit-example</h4>
+<h4 id="_archunit_example_モジュールmodule_archunit_example"><a class="anchor" href="#_archunit_example_モジュールmodule_archunit_example"></a>1.1.4. archunit-example モジュール（Module archunit-example）</h4>
 <div class="paragraph">
 <p>This module contains example architecture rules and sample code that violates these rules.
 Look here to get inspiration on how to set up rules for your project, or at
 <a href="https://github.com/TNG/ArchUnit-Examples">ArchUnit-Examples</a> for the last released version.</p>
+</div>
+<div class="paragraph">
+<p>このモジュールはアーキテクチャルールの具体例や、ルール違反しているサンプルコードを含んでいます。
+このモジュールを見れば、あなたのプロジェクトで整備するルールについてひらめきを得ることができるでしょう。
+最新バージョンは <a href="https://github.com/TNG/ArchUnit-Examples">ArchUnit-Examples</a> で参照できます。</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_installation"><a class="anchor" href="#_installation"></a>2. Installation</h2>
+<h2 id="_インストールinstallation"><a class="anchor" href="#_インストールinstallation"></a>2. インストール（Installation）</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>To use ArchUnit, it is sufficient to include the respective JAR files in the classpath.
@@ -604,11 +636,19 @@ which is illustrated for Maven and Gradle below. Alternatively you
 can obtain the necessary JAR files directly from
 <a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.tngtech.archunit%22">Maven Central</a>.</p>
 </div>
+<div class="paragraph">
+<p>ArchUnitを使うには、必要なJarファイルをクラスパスに配置します。
+普通ならMavenやGradleなどの依存性管理ツールへ依存ライブラリを追加することになるでしょう。
+<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.tngtech.archunit%22">Maven Central</a>から必要なJarファイルを直接ダウンロードすることも可能です。</p>
+</div>
 <div class="sect2">
 <h3 id="_junit_4"><a class="anchor" href="#_junit_4"></a>2.1. JUnit 4</h3>
 <div class="paragraph">
 <p>To use ArchUnit in combination with JUnit 4, include the following dependency from
 Maven Central:</p>
+</div>
+<div class="paragraph">
+<p>ArchUnit を JUnit 4 と組み合わせて使用するには、Maven Central から次のような依存ライブラリを追加します。</p>
 </div>
 <div class="listingblock">
 <div class="title">pom.xml</div>
@@ -616,7 +656,7 @@ Maven Central:</p>
 <pre class="highlightjs highlight nowrap"><code data-lang="xml" class="language-xml hljs">&lt;dependency&gt;
     &lt;groupId&gt;com.tngtech.archunit&lt;/groupId&gt;
     &lt;artifactId&gt;archunit-junit4&lt;/artifactId&gt;
-    &lt;version&gt;0.21.0&lt;/version&gt;
+    &lt;version&gt;v0.21.0&lt;/version&gt;
     &lt;scope&gt;test&lt;/scope&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
@@ -625,7 +665,7 @@ Maven Central:</p>
 <div class="title">build.gradle</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">dependencies {
-    testImplementation 'com.tngtech.archunit:archunit-junit4:0.21.0'
+    testImplementation 'com.tngtech.archunit:archunit-junit4:v0.21.0'
 }</code></pre>
 </div>
 </div>
@@ -640,13 +680,20 @@ artifact transitively including both API and engine with the correct scope, whic
 as a test compile dependency. Thus to include ArchUnit&#8217;s JUnit 5 support, simply add the following dependency
 from Maven Central:</p>
 </div>
+<div class="paragraph">
+<p>ArchUnit の JUnit 5 向けアーティファクトは、JUnit Jupiter と同じ構成になっています。
+1つはテストを記述するためのAPIを含む、コンパイル依存関係のアーティファクトです。
+もう1つは実際にテストを実行する <code>TestEngine</code> を含むアーティファクトです。
+JUnit Jupiter のように、API とエンジン両方のアーティファクトへ適切なスコープで依存するアーティファクトがあるので、テストコンパイル依存関係として追加すれば推移的依存関係として解決されるので便利です。
+ですから、ArchUnit を JUnit 5 と組み合わせて使用するには、Maven Central から次のような依存ライブラリを追加するだけです。</p>
+</div>
 <div class="listingblock">
 <div class="title">pom.xml</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="xml" class="language-xml hljs">&lt;dependency&gt;
     &lt;groupId&gt;com.tngtech.archunit&lt;/groupId&gt;
     &lt;artifactId&gt;archunit-junit5&lt;/artifactId&gt;
-    &lt;version&gt;0.21.0&lt;/version&gt;
+    &lt;version&gt;v0.21.0&lt;/version&gt;
     &lt;scope&gt;test&lt;/scope&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
@@ -655,16 +702,20 @@ from Maven Central:</p>
 <div class="title">build.gradle</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">dependencies {
-    testImplementation 'com.tngtech.archunit:archunit-junit5:0.21.0'
+    testImplementation 'com.tngtech.archunit:archunit-junit5:v0.21.0'
 }</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_other_test_frameworks"><a class="anchor" href="#_other_test_frameworks"></a>2.3. Other Test Frameworks</h3>
+<h3 id="_その他のテストフレームワークについてother_test_frameworks"><a class="anchor" href="#_その他のテストフレームワークについてother_test_frameworks"></a>2.3. その他のテストフレームワークについて（Other Test Frameworks）</h3>
 <div class="paragraph">
 <p>ArchUnit works with any test framework that executes Java code. To use ArchUnit in such a
 context, include the core ArchUnit dependency from Maven Central:</p>
+</div>
+<div class="paragraph">
+<p>ArchUnit は Java に対応するあらゆるテストフレームワークから使用できます。
+その場合、Maven Central から取得したコアモジュールを依存ライブラリとして追加します。</p>
 </div>
 <div class="listingblock">
 <div class="title">pom.xml</div>
@@ -672,7 +723,7 @@ context, include the core ArchUnit dependency from Maven Central:</p>
 <pre class="highlightjs highlight nowrap"><code data-lang="xml" class="language-xml hljs">&lt;dependency&gt;
     &lt;groupId&gt;com.tngtech.archunit&lt;/groupId&gt;
     &lt;artifactId&gt;archunit&lt;/artifactId&gt;
-    &lt;version&gt;0.21.0&lt;/version&gt;
+    &lt;version&gt;v0.21.0&lt;/version&gt;
     &lt;scope&gt;test&lt;/scope&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
@@ -681,33 +732,45 @@ context, include the core ArchUnit dependency from Maven Central:</p>
 <div class="title">build.gradle</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">dependencies {
-   testImplementation 'com.tngtech.archunit:archunit:0.21.0'
+   testImplementation 'com.tngtech.archunit:archunit:v0.21.0'
 }</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_maven_plugin"><a class="anchor" href="#_maven_plugin"></a>2.4. Maven Plugin</h3>
+<h3 id="_maven_プラグインmaven_plugin"><a class="anchor" href="#_maven_プラグインmaven_plugin"></a>2.4. Maven プラグイン（Maven Plugin）</h3>
 <div class="paragraph">
 <p>There exists a Maven plugin by Société Générale to run ArchUnit rules straight from Maven. For
 more information visit their GitHub repo: <a href="https://github.com/societe-generale/arch-unit-maven-plugin" class="bare">https://github.com/societe-generale/arch-unit-maven-plugin</a></p>
+</div>
+<div class="paragraph">
+<p>Société Générale さんが Maven から直接 ArchUnit を実行できるプラグインを公開してくれています。
+詳しくは GitHub のリポジトリ <a href="https://github.com/societe-generale/arch-unit-maven-plugin" class="bare">https://github.com/societe-generale/arch-unit-maven-plugin</a> を参照してください。</p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_getting_started"><a class="anchor" href="#_getting_started"></a>3. Getting Started</h2>
+<h2 id="_archunit_入門getting_started"><a class="anchor" href="#_archunit_入門getting_started"></a>3. ArchUnit 入門（Getting Started）</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>ArchUnit tests are written the same way as any Java unit test and can be written with any
 Java unit testing framework. To really understand the ideas behind ArchUnit, one should consult
-<a href="#_ideas_and_concepts">Ideas and Concepts</a>. The following will outline a "technical" getting started.</p>
+<a href="#_考え方と概念ideas_and_concepts">Ideas and Concepts</a>. The following will outline a "technical" getting started.</p>
+</div>
+<div class="paragraph">
+<p>ArchUnit のテストはユニットテストと同じやり方で、そしてあらゆるユニットテストフレームワークを使用して記述できます。
+ArchUnit の背景となる考え方を正確に理解したければ、<a href="#_考え方と概念ideas_and_concepts">Ideas and Concepts</a>を読んでみてください。
+以降の説明は「技術的な」入門です。</p>
 </div>
 <div class="sect2">
-<h3 id="_importing_classes"><a class="anchor" href="#_importing_classes"></a>3.1. Importing Classes</h3>
+<h3 id="_クラスのインポートimporting_classes"><a class="anchor" href="#_クラスのインポートimporting_classes"></a>3.1. クラスのインポート（Importing Classes）</h3>
 <div class="paragraph">
 <p>At its core ArchUnit provides infrastructure to import Java bytecode into Java code structures.
 This can be done using the <code>ClassFileImporter</code></p>
+</div>
+<div class="paragraph">
+<p>ArchUnitの基本部品は、Javaバイトコードをソースコード構造へインポートする <code>ClassFileImporter</code> です。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -719,6 +782,10 @@ This can be done using the <code>ClassFileImporter</code></p>
 the current project&#8217;s classpath, like <code>importPackages(..)</code>. However there are other ways
 that do not, for example:</p>
 </div>
+<div class="paragraph">
+<p><code>ClassFileImpoter</code> はクラスをインポートするためのさまざまな方法を提供します。
+<code>importPackages(..)</code> のようにプロジェクトのクラスパスへ依存する方法もありますが、次のようにそうでない方法もあります。</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="java" class="language-java hljs">JavaClasses classes = new ClassFileImporter().importPath("/some/path");</code></pre>
@@ -729,6 +796,11 @@ that do not, for example:</p>
 <code>JavaClass</code>, where <code>JavaClass</code> in turn represents a single imported class file. You can
 in fact access most properties of the imported class via the public API:</p>
 </div>
+<div class="paragraph">
+<p>返り値の <code>JavaClasses</code> 型のオブジェクトは、<code>JavaClass</code> 型のオブジェクトの集合です。
+<code>JavaClass</code> はインポートしたいずれかのクラスファイルに対応しています。
+public APIにより、インポートしたクラスのほとんどのプロパティを参照できます。</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="java" class="language-java hljs">JavaClass clazz = classes.get(Object.class);
@@ -737,11 +809,15 @@ System.out.print(clazz.getSimpleName()); // returns 'Object'</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_asserting_architectural_constraints"><a class="anchor" href="#_asserting_architectural_constraints"></a>3.2. Asserting (Architectural) Constraints</h3>
+<h3 id="_アーキテクチャにおける制約のアサーションasserting_architectural_constraints"><a class="anchor" href="#_アーキテクチャにおける制約のアサーションasserting_architectural_constraints"></a>3.2. （アーキテクチャにおける）制約のアサーション（Asserting (Architectural) Constraints）</h3>
 <div class="paragraph">
 <p>To express architectural rules, like 'Services should only be accessed by Controllers',
 ArchUnit offers an abstract DSL-like fluent API, which can in turn be evaluated against
 imported classes. To specify a rule, use the class <code>ArchRuleDefinition</code> as entry point:</p>
+</div>
+<div class="paragraph">
+<p>例えば「サービスにアクセスできるのはコントローラーだけでなければならない」というアーキテクチャルールを ArchUnit で表現するには、フルーエントAPIを抽象的なDSLとして、インポートしたクラスを評価できます。
+実際にルールを定義するときは、<code>ArchRuleDefinition</code> クラスを起点にします。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -758,6 +834,10 @@ ArchRule myRule = classes()
 <p>The two dots represent any number of packages (compare AspectJ Pointcuts). The returned
 object of type <code>ArchRule</code> can now be evaluated against a set of imported classes:</p>
 </div>
+<div class="paragraph">
+<p>パッケージ名を指定する文字列に含まれる連続する2つのドットは、任意の数のパッケージ階層を表しています（AspectJ のポイントカットを記述する場合と同様です）。
+返り値の <code>ArchRule</code> 型のオブジェクトを使うと、インポートしたクラスの集合を評価できます。</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="java" class="language-java hljs">myRule.check(importedClasses);</code></pre>
@@ -765,6 +845,9 @@ object of type <code>ArchRule</code> can now be evaluated against a set of impor
 </div>
 <div class="paragraph">
 <p>Thus the complete example could look like</p>
+</div>
+<div class="paragraph">
+<p>全てを組み合わせた完全な具体例は次のとおりです。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -782,15 +865,24 @@ public void Services_should_only_be_accessed_by_Controllers() {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_using_junit_4_or_junit_5"><a class="anchor" href="#_using_junit_4_or_junit_5"></a>3.3. Using JUnit 4 or JUnit 5</h3>
+<h3 id="_junit_4_と_junit_5_のどちらかを使いましょうusing_junit_4_or_junit_5"><a class="anchor" href="#_junit_4_と_junit_5_のどちらかを使いましょうusing_junit_4_or_junit_5"></a>3.3. JUnit 4 と JUnit 5 のどちらかを使いましょう（Using JUnit 4 or JUnit 5）</h3>
 <div class="paragraph">
 <p>While ArchUnit can be used with any unit testing framework, it provides extended support
 for writing tests with JUnit 4 and JUnit 5. The main advantage is automatic caching of imported
 classes between tests (of the same imported classes), as well as reduction of boilerplate code.</p>
 </div>
 <div class="paragraph">
+<p>ArchUnit はどのようなユニットテストフレームワークでも使用できますが、JUnit4 あるいは JUnit 5 を使ってテストを書くための拡張機能が備わっています。
+主な利点はインポートしたクラスのキャッシュをテストケース間で再利用できることです。
+そうすると、ボイラープレートコードの記述を減らすことができます。</p>
+</div>
+<div class="paragraph">
 <p>To use the JUnit support, declare ArchUnit&#8217;s <code>ArchUnitRunner</code> (only JUnit 4), declare the classes
 to import via <code>@AnalyzeClasses</code> and add the respective rules as fields:</p>
+</div>
+<div class="paragraph">
+<p>JUnit 用の拡張機能を使うには、<code>ArchUnitRunner</code> を宣言し（JUnit 4 の場合のみ）、インポートするクラスを <code>@AnalyzeClasses</code> で指定します。
+そして、ルールをテストクラスのフィールドとして定義します。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -811,13 +903,23 @@ public class MyArchitectureTest {
 evaluate any rule annotated with <code>@ArchTest</code> against those classes.</p>
 </div>
 <div class="paragraph">
-<p>For further information on how to use the JUnit support refer to <a href="#_junit_support">JUnit Support</a>.</p>
+<p>JUnit 用の拡張機能は、指定したクラスを自動的にインポートし、再利用するようになります。
+また、<code>@ArchTest</code> で修飾されたあらゆるルールを評価するようになります。</p>
+</div>
+<div class="paragraph">
+<p>For further information on how to use the JUnit support refer to <a href="#_junit_拡張機能junit_support">JUnit Support</a>.</p>
+</div>
+<div class="paragraph">
+<p>より詳しい使い方は <a href="#_junit_拡張機能junit_support">JUnit Support</a> を参照してください。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_using_junit_support_with_kotlin"><a class="anchor" href="#_using_junit_support_with_kotlin"></a>3.4. Using JUnit support with Kotlin</h3>
+<h3 id="_kotlin_で_junit_を使うusing_junit_support_with_kotlin"><a class="anchor" href="#_kotlin_で_junit_を使うusing_junit_support_with_kotlin"></a>3.4. Kotlin で JUnit を使う（Using JUnit support with Kotlin）</h3>
 <div class="paragraph">
 <p>Using the JUnit support with Kotlin is quite similar to Java:</p>
+</div>
+<div class="paragraph">
+<p>JUnit 用の拡張機能を Kotlin から使う方法は Java の場合とほとんど変わりません。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -839,16 +941,19 @@ class MyArchitectureTest {
 </div>
 </div>
 <div class="sect1">
-<h2 id="_what_to_check"><a class="anchor" href="#_what_to_check"></a>4. What to Check</h2>
+<h2 id="_チェックの対象what_to_check"><a class="anchor" href="#_チェックの対象what_to_check"></a>4. チェックの対象（What to Check）</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The following section illustrates some typical checks you could do with ArchUnit.</p>
 </div>
+<div class="paragraph">
+<p>このセクションでは、ArchUnit の典型的なチェック内容を説明します。</p>
+</div>
 <div class="sect2">
-<h3 id="_package_dependency_checks"><a class="anchor" href="#_package_dependency_checks"></a>4.1. Package Dependency Checks</h3>
+<h3 id="_パッケージの依存性チェックpackage_dependency_checks"><a class="anchor" href="#_パッケージの依存性チェックpackage_dependency_checks"></a>4.1. パッケージの依存性チェック（Package Dependency Checks）</h3>
 <div class="imageblock">
 <div class="content">
-<img src="package-deps-no-access.png" alt="package deps no access" width="464" height="79">
+<img src="package-deps-no-access.png" alt="package deps no access" width="441" height="80">
 </div>
 </div>
 <div class="listingblock">
@@ -859,7 +964,7 @@ class MyArchitectureTest {
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="package-deps-only-access.png" alt="package deps only access" width="491" height="335">
+<img src="package-deps-only-access.png" alt="package deps only access" width="463" height="339">
 </div>
 </div>
 <div class="listingblock">
@@ -870,10 +975,10 @@ class MyArchitectureTest {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_class_dependency_checks"><a class="anchor" href="#_class_dependency_checks"></a>4.2. Class Dependency Checks</h3>
+<h3 id="_クラスの依存性チェックclass_dependency_checks"><a class="anchor" href="#_クラスの依存性チェックclass_dependency_checks"></a>4.2. クラスの依存性チェック（Class Dependency Checks）</h3>
 <div class="imageblock">
 <div class="content">
-<img src="class-naming-deps.png" alt="class naming deps" width="320" height="215">
+<img src="class-naming-deps.png" alt="class naming deps" width="302" height="216">
 </div>
 </div>
 <div class="listingblock">
@@ -884,10 +989,10 @@ class MyArchitectureTest {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_class_and_package_containment_checks"><a class="anchor" href="#_class_and_package_containment_checks"></a>4.3. Class and Package Containment Checks</h3>
+<h3 id="_クラスおよびパッケージの閉じ込め状況チェックclass_and_package_containment_checks"><a class="anchor" href="#_クラスおよびパッケージの閉じ込め状況チェックclass_and_package_containment_checks"></a>4.3. クラスおよびパッケージの閉じ込め状況チェック（Class and Package Containment Checks）</h3>
 <div class="imageblock">
 <div class="content">
-<img src="class-package-contain.png" alt="class package contain" width="343" height="180">
+<img src="class-package-contain.png" alt="class package contain" width="326" height="182">
 </div>
 </div>
 <div class="listingblock">
@@ -898,10 +1003,10 @@ class MyArchitectureTest {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_inheritance_checks"><a class="anchor" href="#_inheritance_checks"></a>4.4. Inheritance Checks</h3>
+<h3 id="_継承関係のチェックinheritance_checks"><a class="anchor" href="#_継承関係のチェックinheritance_checks"></a>4.4. 継承関係のチェック（Inheritance Checks）</h3>
 <div class="imageblock">
 <div class="content">
-<img src="inheritance-naming-check.png" alt="inheritance naming check" width="464" height="226">
+<img src="inheritance-naming-check.png" alt="inheritance naming check" width="432" height="232">
 </div>
 </div>
 <div class="listingblock">
@@ -912,7 +1017,7 @@ class MyArchitectureTest {
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="inheritance-access-check.png" alt="inheritance access check" width="558" height="251">
+<img src="inheritance-access-check.png" alt="inheritance access check" width="516" height="253">
 </div>
 </div>
 <div class="listingblock">
@@ -923,10 +1028,10 @@ class MyArchitectureTest {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_annotation_checks"><a class="anchor" href="#_annotation_checks"></a>4.5. Annotation Checks</h3>
+<h3 id="_アノテーションのチェックannotation_checks"><a class="anchor" href="#_アノテーションのチェックannotation_checks"></a>4.5. アノテーションのチェック（Annotation Checks）</h3>
 <div class="imageblock">
 <div class="content">
-<img src="inheritance-annotation-check.png" alt="inheritance annotation check" width="583" height="221">
+<img src="inheritance-annotation-check.png" alt="inheritance annotation check" width="541" height="224">
 </div>
 </div>
 <div class="listingblock">
@@ -937,10 +1042,10 @@ class MyArchitectureTest {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_layer_checks"><a class="anchor" href="#_layer_checks"></a>4.6. Layer Checks</h3>
+<h3 id="_レイヤーのチェックlayer_checks"><a class="anchor" href="#_レイヤーのチェックlayer_checks"></a>4.6. レイヤーのチェック（Layer Checks）</h3>
 <div class="imageblock">
 <div class="content">
-<img src="layer-check.png" alt="layer check" width="632" height="575">
+<img src="layer-check.png" alt="layer check" width="608" height="580">
 </div>
 </div>
 <div class="listingblock">
@@ -957,10 +1062,10 @@ class MyArchitectureTest {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_cycle_checks"><a class="anchor" href="#_cycle_checks"></a>4.7. Cycle Checks</h3>
+<h3 id="_循環のチェックcycle_checks"><a class="anchor" href="#_循環のチェックcycle_checks"></a>4.7. 循環のチェック（Cycle Checks）</h3>
 <div class="imageblock">
 <div class="content">
-<img src="cycle-check.png" alt="cycle check" width="738" height="375">
+<img src="cycle-check.png" alt="cycle check" width="700" height="378">
 </div>
 </div>
 <div class="listingblock">
@@ -972,7 +1077,7 @@ class MyArchitectureTest {
 </div>
 </div>
 <div class="sect1">
-<h2 id="_ideas_and_concepts"><a class="anchor" href="#_ideas_and_concepts"></a>5. Ideas and Concepts</h2>
+<h2 id="_考え方と概念ideas_and_concepts"><a class="anchor" href="#_考え方と概念ideas_and_concepts"></a>5. 考え方と概念（Ideas and Concepts）</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>ArchUnit is divided into different layers, where the most important ones are the "Core" layer,
@@ -982,8 +1087,16 @@ rule syntax to specify architecture rules in a succinct way. The Library layer c
 more complex predefined rules, like a layered architecture with several layers. The following
 section will explain these layers in more detail.</p>
 </div>
+<div class="paragraph">
+<p>ArchUnit は複数のレイヤーに分かれています。
+最も重要なレイヤーは「コアレイヤー」「言語レイヤー」「ライブラリレイヤー」です。
+「コアレイヤー」はバイトコードを Java オブジェクトにインポートする等の基本的な部品を含みます。
+「言語レイヤー」はアーキテクチャルールを簡潔に表現するルール構文を含みます。
+「ライブラリレイヤー」はいくつものレイヤーで構成されるレイヤーアーキテクチャのように、より複雑な定義済みルールを含みます。
+このセクションではそれぞれのレイヤーについてより詳しく説明します。</p>
+</div>
 <div class="sect2">
-<h3 id="_core"><a class="anchor" href="#_core"></a>5.1. Core</h3>
+<h3 id="_コアレイヤーcore"><a class="anchor" href="#_コアレイヤーcore"></a>5.1. コアレイヤー（Core）</h3>
 <div class="paragraph">
 <p>Much of ArchUnit&#8217;s core API resembles the Java Reflection API.
 There are classes like <code>JavaMethod</code>, <code>JavaField</code>, and more,
@@ -995,8 +1108,18 @@ For example, it is possible to programmatically iterate over <code>javaClass.get
 and react to the imported accesses between this Java class and other Java classes.</p>
 </div>
 <div class="paragraph">
+<p>ArchUnit のコア API の大部分は Java のリフレクション API とよく似た形式になっています。
+<code>JavaMethod</code> や <code>JavaField</code> などのクラスがありますし、<code>getName()</code> や <code>getMethods()</code>、<code>getRawType()</code> や <code>getRawParameterTypes()</code> 等のパブリック API （メソッド）があります。
+ArchUnit は、コード間の依存関係を表現するために必要な <code>JavaMethodCall</code> や <code>JavaConstructorCall</code> や <code>JavaFieldAccess</code> 等、これらの API の考え方を拡張しています。
+例えば、<code>javaClass.getAccessesFromSelf()</code> のように記述すれば、<code>javaClass</code> そのものと他のクラスの間に存在する内向きのアクセスを処理できるのです。</p>
+</div>
+<div class="paragraph">
 <p>To import compiled Java class files, ArchUnit provides the <code>ClassFileImporter</code>, which can
 for example be used to import packages from the classpath:</p>
+</div>
+<div class="paragraph">
+<p>コンパイルされた Java のクラスファイルをインポートするため、ArchUnit は <code>ClassFileImporter</code> を提供しています。
+このクラスは、クラスパスに存在するパッケージに所属するクラスをインポートできます。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1004,15 +1127,22 @@ for example be used to import packages from the classpath:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>For more information refer to <a href="#_the_core_api">The Core API</a>.</p>
+<p>For more information refer to <a href="#_コア_apithe_core_api">The Core API</a>.</p>
+</div>
+<div class="paragraph">
+<p>より詳しい内容は <a href="#_コア_apithe_core_api">The Core API</a> を参照してください。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_lang"><a class="anchor" href="#_lang"></a>5.2. Lang</h3>
+<h3 id="_言語レイヤーlang"><a class="anchor" href="#_言語レイヤーlang"></a>5.2. 言語レイヤー（Lang）</h3>
 <div class="paragraph">
 <p>The Core API is quite powerful and offers a lot of information about the static structure
 of a Java program. However, tests directly using the Core API lack expressiveness,
 in particular with respect to architectural rules.</p>
+</div>
+<div class="paragraph">
+<p>コア API は、Java プログラムの静的な構造に関するさまざまな情報を取得するための強力な機能を提供します。
+しかし、テストコードから直接コア API を使うようにすると、特にアーキテクチャルールについて（意図の）表現力が損なわれてしまいます。</p>
 </div>
 <div class="paragraph">
 <p>For this reason ArchUnit provides the Lang API, which offers a powerful syntax to express rules
@@ -1020,7 +1150,15 @@ in an abstract way. Most parts of the Lang API are composed as fluent APIs, i.e.
 provide valuable suggestions on the possibilities the syntax offers.</p>
 </div>
 <div class="paragraph">
+<p>ArchUnit はこの問題を解決するため、より抽象的な形式でルールを表現する強力な構文を、言語 API として提供しています。
+言語 API の大部分はフルーエント API として組み合わせるものになります。
+そうすると、IDE は利用可能な構文の候補を提供できるのです。</p>
+</div>
+<div class="paragraph">
 <p>An example for a specified architecture rule would be:</p>
+</div>
+<div class="paragraph">
+<p>次の例は、具体的なアーキテクチャルールの1つです。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1032,6 +1170,9 @@ provide valuable suggestions on the possibilities the syntax offers.</p>
 <div class="paragraph">
 <p>Once a rule is composed, imported Java classes can be checked against it:</p>
 </div>
+<div class="paragraph">
+<p>定義したルールは、インポートした Java クラスをチェックできます。</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="java" class="language-java hljs">JavaClasses importedClasses = new ClassFileImporter().importPackage("com.myapp");
@@ -1041,33 +1182,52 @@ rule.check(importedClasses);</code></pre>
 </div>
 <div class="paragraph">
 <p>The syntax ArchUnit provides is fully extensible and can thus be adjusted to almost any
-specific need. For further information, please refer to <a href="#_the_lang_api">The Lang API</a>.</p>
+specific need. For further information, please refer to <a href="#_言語_apithe_lang_api">The Lang API</a>.</p>
+</div>
+<div class="paragraph">
+<p>ArchUnit の提供する構文は全て拡張可能なので、あらゆる場面で必要に応じて調整できます。
+より詳しい内容は <a href="#_言語_apithe_lang_api">The Lang API</a> を参照してください。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_library"><a class="anchor" href="#_library"></a>5.3. Library</h3>
+<h3 id="_ライブラリレイヤーlibrary"><a class="anchor" href="#_ライブラリレイヤーlibrary"></a>5.3. ライブラリレイヤー（Library）</h3>
 <div class="paragraph">
 <p>The Library API offers predefined complex rules for typical architectural goals. For example
 a succinct definition of a layered architecture via package definitions. Or rules to slice
 the code base in a certain way, for example in different areas of the domain, and enforce these
 slices to be acyclic or independent of each other. More detailed information is provided in
-<a href="#_the_library_api">The Library API</a>.</p>
+<a href="#_ライブラリ_apithe_library_api">The Library API</a>.</p>
+</div>
+<div class="paragraph">
+<p>ライブラリ API は典型的なアーキテクチャを対象とする複雑な定義済みのルールを提供します。
+例えば、パッケージ定義に基づく簡潔なレイヤーアーキテクチャのルールが挙げられます。
+他にも、特定の断面でコードベースを横断するルールも定義されています。
+例えば、さまざまな分野を反映したドメインや、それぞれの断面が循環しないように強制したり、それぞれの断面の独立性を高めたりするようなルールがあります。
+より詳しい内容は <a href="#_ライブラリ_apithe_library_api">The Library API</a> を参照してください。</p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_the_core_api"><a class="anchor" href="#_the_core_api"></a>6. The Core API</h2>
+<h2 id="_コア_apithe_core_api"><a class="anchor" href="#_コア_apithe_core_api"></a>6. コア API（The Core API）</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The Core API is itself divided into the domain objects and the actual import.</p>
 </div>
-<div class="sect2">
-<h3 id="_import"><a class="anchor" href="#_import"></a>6.1. Import</h3>
 <div class="paragraph">
-<p>As mentioned in <a href="#_ideas_and_concepts">Ideas and Concepts</a> the backbone of the infrastructure is the <code>ClassFileImporter</code>,
+<p>コア API はドメインオブジェクトとインポートに関連する部分へ分かれています。</p>
+</div>
+<div class="sect2">
+<h3 id="_インポートimport"><a class="anchor" href="#_インポートimport"></a>6.1. インポート（Import）</h3>
+<div class="paragraph">
+<p>As mentioned in <a href="#_考え方と概念ideas_and_concepts">Ideas and Concepts</a> the backbone of the infrastructure is the <code>ClassFileImporter</code>,
 which provides various ways to import Java classes. One way is to import packages from
 the classpath, or the complete classpath via</p>
+</div>
+<div class="paragraph">
+<p><a href="#_考え方と概念ideas_and_concepts">Ideas and Concepts</a>でも説明したように、基本部品は <code>ClassFileImporter</code> クラスです。
+このクラスは Java クラスファイルをインポートするためのさまざまな方法を提供します。
+クラスパスに存在するパッケージを指定する方法や、完全なクラスパスを指定する方法があります。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1077,6 +1237,9 @@ the classpath, or the complete classpath via</p>
 <div class="paragraph">
 <p>However, the import process is completely independent of the classpath, so it would be well possible
 to import any path from the file system:</p>
+</div>
+<div class="paragraph">
+<p>ただし、インポート処理自体はクラスパスと完全に独立しているため、ファイルシステム上の任意のパスを指定できるようになっています。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1088,9 +1251,18 @@ to import any path from the file system:</p>
 specified as URLs or as JAR files.</p>
 </div>
 <div class="paragraph">
+<p><code>ClassFileImporter</code> クラスは、クラスをインポートするためのさまざまな方法を提供しています。
+例えば、URL や JAR ファイルでインポートする位置を指定できるようになっています。</p>
+</div>
+<div class="paragraph">
 <p>Furthermore specific locations can be filtered out, if they are contained in the source of classes,
 but should not be imported. A typical use case would be to ignore test classes, when the classpath
 is imported. This can be achieved by specifying <code>ImportOptions</code>:</p>
+</div>
+<div class="paragraph">
+<p>指定した位置の中から一部を除外できるようにもなっているため、インポートするべきではないクラスを無視できます。
+テストクラスを除外するのはよくある使い方の1つです。
+具体的には <code>ImportOptions</code> を指定します。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1107,6 +1279,10 @@ JavaClasses classes = new ClassFileImporter().withImportOption(ignoreTests).impo
 <div class="paragraph">
 <p>A <code>Location</code> is principally an URI, i.e. ArchUnit considers sources as File or JAR URIs</p>
 </div>
+<div class="paragraph">
+<p>基本的に <code>Location</code> は URI として扱います。
+ArchUnit は指定された <code>Location</code> を <code>File</code> あるいは <code>JAR</code> を指す <code>URI</code> として扱うということです。</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -1122,6 +1298,9 @@ JavaClasses classes = new ClassFileImporter().withImportOption(ignoreTests).impo
 (for typical setups, like a Maven or Gradle build),
 there already exist predefined <code>ImportOptions</code>:</p>
 </div>
+<div class="paragraph">
+<p>Maven や Gradle のプロジェクトで一般的な2種類のケース、つまり、JARファイルやテストクラスをインポート対象から除外するケースは <code>ImportOptions</code> に定義済みです。</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="java" class="language-java hljs">new ClassFileImporter()
@@ -1131,7 +1310,7 @@ there already exist predefined <code>ImportOptions</code>:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_dealing_with_missing_classes"><a class="anchor" href="#_dealing_with_missing_classes"></a>6.1.1. Dealing with Missing Classes</h4>
+<h4 id="_存在しないクラスの扱いdealing_with_missing_classes"><a class="anchor" href="#_存在しないクラスの扱いdealing_with_missing_classes"></a>6.1.1. 存在しないクラスの扱い（Dealing with Missing Classes）</h4>
 <div class="paragraph">
 <p>While importing the requested classes (e.g. <code>target/classes</code> or <code>target/test-classes</code>)
 it can happen that a class within the scope of the import has a reference to a class outside of the
@@ -1139,10 +1318,19 @@ scope of the import. This will naturally happen, if the classes of the JDK are n
 since then for example any dependency on <code>Object.class</code> will be unresolved within the import.</p>
 </div>
 <div class="paragraph">
+<p><code>target/classes</code> や <code>target/test-classes</code> などを指定してインポートしたクラスが、指定した場所に存在しないクラスを参照している場合があります。
+自然に発生する状況ですが、例えば JDK に含まれるクラスをインポートしていなければ、 <code>Object.class</code> に対する全ての依存関係は未解決になってしまいます。</p>
+</div>
+<div class="paragraph">
 <p>At this point ArchUnit needs to decide how to treat these classes that are missing from the
 import. By default, ArchUnit searches within the classpath for missing classes and if found
 imports them. This obviously has the advantage that information about those classes
 (which interfaces they implement, how they are annotated) is present during rule evaluation.</p>
+</div>
+<div class="paragraph">
+<p>ArchUnit はインポートしたクラスに存在しないクラスを発見したときにどうするか決めておかなければなりません。
+初期設定では存在しないクラスを発見したら、クラスパスを探索するようになっています。
+ルールを評価するとき、実装しているインターフェイスやアノテーションなどの情報を利用できるのは大きな利点になります。</p>
 </div>
 <div class="paragraph">
 <p>On the downside this additional lookup from the classpath will cost some performance and in some
@@ -1155,20 +1343,37 @@ be determined without importing the bytecode of this class. This behavior will a
 if ArchUnit fails to determine the location of a missing class from the classpath.</p>
 </div>
 <div class="paragraph">
-<p>To find out, how to configure the default behavior, refer to <a href="#_configuring_the_resolution_behavior">Configuring the Resolution Behavior</a>.</p>
+<p>クラスパスを探索することの欠点は、時間が長くなってしまうことと無意味な結果しか得られない場合があることです。
+例えば、インポートできたクラスに存在しないクラスの情報が、ルールの評価に不要なことが分かっている場合が挙げられます。
+そういう場合について、ArchUnit ではスタブを生成できるようになっています。
+具体的には <code>JavaClass</code> クラスは完全修飾名やメソッド呼び出しなど必要な全ての情報を持っています。
+しかし、本質的にスタブには不足している情報があります。
+基底クラスやアノテーション等、クラスファイル（バイトコード）をインポートしなければ決定できない情報のことです。
+これは、ArchUnit がクラスパスを探索してもクラスを発見できなかった場合の振る舞いでもあります。</p>
+</div>
+<div class="paragraph">
+<p>To find out, how to configure the default behavior, refer to <a href="#_解決のための振る舞いの構成configuring_the_resolution_behavior">Configuring the Resolution Behavior</a>.</p>
+</div>
+<div class="paragraph">
+<p>振る舞いを変更する方法について知りたければ <a href="#_解決のための振る舞いの構成configuring_the_resolution_behavior">Configuring the Resolution Behavior</a> を参照してください。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_domain"><a class="anchor" href="#_domain"></a>6.2. Domain</h3>
+<h3 id="_ドメインdomain"><a class="anchor" href="#_ドメインdomain"></a>6.2. ドメイン（Domain）</h3>
 <div class="paragraph">
 <p>The domain objects represent Java code, thus the naming should be pretty straight forward. Most
 commonly, the <code>ClassFileImporter</code> imports instances of type <code>JavaClass</code>. A rough overview looks
 like this:</p>
 </div>
+<div class="paragraph">
+<p>ドメインオブジェクトは Java のソースコードを直接的な名前で表現します。
+ほとんどの場合 <code>ClassFileImporter</code> は <code>JavaClass</code> 型のインスタンスをインポートします。
+基本的な構造は次のとおりです。</p>
+</div>
 <div class="imageblock">
 <div class="content">
-<img src="domain-overview.png" alt="domain overview" width="988" height="693">
+<img src="domain-overview.png" alt="domain overview" width="935" height="698">
 </div>
 </div>
 <div class="paragraph">
@@ -1181,10 +1386,20 @@ or a static initializer of a class (e.g. a <code>static { &#8230;&#8203; }</code
 etc.).</p>
 </div>
 <div class="paragraph">
+<p>ほとんどのオブジェクトは、継承関係も含めて Java のリフレクション API とよく似た形式になっています。
+<code>JavaClass</code> は <code>JavaMembers</code> を持っているし、<code>JavaMembers</code> は <code>JavaField</code> や <code>JavaMethod</code> や <code>JavaConstructor</code> （あるいは <code>JavaStaticInitializer</code>）のいずれかになります。
+リフレクション API には存在しませんが、他のコードへアクセスする表現はあると便利です。
+ArchUnit では「コードユニット（code unit）」と呼んでいる要素で、メソッドやコンストラクタ、クラスイニシャライザ、静的イニシャライザ（<code>static { &#8230;&#8203; }</code> ブロックやクラスフィールドの初期化など）に対応します。</p>
+</div>
+<div class="paragraph">
 <p>Furthermore one of the most interesting features of ArchUnit that exceeds the Java Reflection API,
 is the concept of accesses to another class. On the lowest level accesses can only take place
 from a code unit (as mentioned, any block of executable code) to either a field (<code>JavaFieldAccess</code>),
 a method (<code>JavaMethodCall</code>) or constructor (<code>JavaConstructorCall</code>).</p>
+</div>
+<div class="paragraph">
+<p>ArchUnit が Java リフレクション API を拡張している中で最も面白い機能は他のクラスへのアクセス、という考え方です。
+最も抽象度が低いのは、コードユニットからフィールド（<code>JavaFieldAccess</code>）やメソッド（<code>JavaMethodCall</code>）やコンストラクタ（<code>JavaConstructorCall</code>）に対するアクセスです。</p>
 </div>
 <div class="paragraph">
 <p>ArchUnit imports the whole graph of classes and their relationship to each other. While checking
@@ -1195,9 +1410,17 @@ For example, every <code>JavaField</code> allows to call <code>JavaField#getAcce
 code units within the graph that access this specific field. The resolution process through
 inheritance is not completely straight forward. Consider for example</p>
 </div>
+<div class="paragraph">
+<p>ArchUnit は全てのクラスの呼び出しグラフとクラス間の関係性を別々にインポートします。
+<strong>アクセス元</strong> のクラスに対するチェックは完全に独立しています（全ての情報はバイトコードから取得します）が、 <strong>アクセス先</strong> のクラスをチェックするには最初に構築したグラフ情報が必要です。
+どちらからアクセスしているのか区別するため、それぞれのメソッドは <strong>fromSelf</strong> と <strong>toSelf</strong> の状態を持つようになっています。
+例えば、全ての <code>JavaField</code> は <code>JavaField#getAccessesToSelf()</code> でそのフィールドへアクセスするグラフ中の全てのコードユニットを取得できるようになっています。
+継承関係のあるクラスにおける呼び出し元の解決処理は極めて複雑です。
+次のような例を考えてみてください。</p>
+</div>
 <div class="imageblock">
 <div class="content">
-<img src="resolution-example.png" alt="resolution example" width="379" height="189">
+<img src="resolution-example.png" alt="resolution example" width="358" height="190">
 </div>
 </div>
 <div class="paragraph">
@@ -1210,13 +1433,27 @@ member within another class. If a member is queried for <code>accessesToSelf()</
 will resolve the necessary targets and determine, which member is represented by which target.
 The situation looks roughly like</p>
 </div>
+<div class="paragraph">
+<p>バイトコードには <code>ClassAccessing.accessField()</code> から <code>ClassBeingAccessed.accessedField</code> へアクセスしていることが記録されているでしょう。
+しかし、実際にはそんなフィールドは存在しません。
+基底クラスで定義されているからです。
+<code>JavaFieldAccess</code> の対象に1つも <code>JavaField</code> が含まれておらず、<code>FieldAccessTarget</code> が存在するのはそのせいです。
+別の言い方をすると、ArchUnit はバイトコードから得られた状況をモデル化していると言えます。
+アクセスしている対象自体はそのクラスのメンバーではないのです。
+メンバーを <code>accessToSelf()</code> で問い合わせれば、ArchUnit は必要な対象を発見、特定できます。
+対象自体がメンバーを表現しているからです。
+例えば次のような状況です。</p>
+</div>
 <div class="imageblock">
 <div class="content">
-<img src="resolution-overview.png" alt="resolution overview" width="547" height="318">
+<img src="resolution-overview.png" alt="resolution overview" width="506" height="320">
 </div>
 </div>
 <div class="paragraph">
 <p>Two things might seem strange at the first look.</p>
+</div>
+<div class="paragraph">
+<p>一見すると奇妙なところが2点見つけられます。</p>
 </div>
 <div class="paragraph">
 <p>First, why can a target resolve to zero matching members? The reason is that the set of classes
@@ -1226,13 +1463,24 @@ have no way of knowing where the actual targeted field resides. Thus in this cas
 resolution would return zero elements.</p>
 </div>
 <div class="paragraph">
+<p>1点目は、対象を解決した結果となるメンバー数が0になる場合があることです。
+原因は、インポートしたクラスに、この解決処理に関係する全てのクラスが必要だとは限らないからです。
+前の例では <code>SuperclassBeingAccessed</code> がインポートされていますが、ArchUnit には実際にどのようなフィールドが存在するのか知る手段がありません。
+だから、解決結果の要素数が0になる場合があるのです。</p>
+</div>
+<div class="paragraph">
 <p>Second, why can there be more than one resolved methods for method calls?
 The reason for this is that a call target might indeed match several methods in those
 cases, for example:</p>
 </div>
+<div class="paragraph">
+<p>2点目は、メソッド呼び出しを解決した結果が1以上になる場合があることです。
+原因は、実際に対象のメソッドが複数回呼び出されている場合があることです。
+例えば次のような場合があります。</p>
+</div>
 <div class="imageblock">
 <div class="content">
-<img src="diamond-example.png" alt="diamond example" width="517" height="224">
+<img src="diamond-example.png" alt="diamond example" width="463" height="229">
 </div>
 </div>
 <div class="paragraph">
@@ -1243,8 +1491,14 @@ resolve to two <code>JavaMethods</code>, namely <code>A.targetMethod()</code> an
 of either <code>A.targetMethod.getCallsToSelf()</code> or <code>B.targetMethod.getCallsToSelf()</code> would return
 the same call from <code>D.callTargetMethod()</code> to <code>C.targetMethod()</code>.</p>
 </div>
+<div class="paragraph">
+<p>実際のプログラムなら常に特別な方法で解決するような状況ですが、ArchUnit には解決できません。
+代わりに、具体的なアクセス対象にマッチする全ての候補を報告します。
+前の例では呼び出し対象の <code>C.targetMethod()</code> について、<code>A.targetMethod()</code> および <code>B.targetMethod()</code> という2つの <code>JavaMethods</code> を報告します。
+同様に、<code>A.targetMethod.getCallsToSelf()</code> や <code>B.targetMethod.getCallsToSelf()</code> のどちらも、<code>D.callTargetMethod()</code> から <code>C.targetMethod()</code> と同じ呼び出し対象を返すことになります。</p>
+</div>
 <div class="sect3">
-<h4 id="_domain_objects_reflection_and_the_classpath"><a class="anchor" href="#_domain_objects_reflection_and_the_classpath"></a>6.2.1. Domain Objects, Reflection and the Classpath</h4>
+<h4 id="_ドメインオブジェクトリフレクションクラスパスdomain_objects_reflection_and_the_classpath"><a class="anchor" href="#_ドメインオブジェクトリフレクションクラスパスdomain_objects_reflection_and_the_classpath"></a>6.2.1. ドメインオブジェクト、リフレクション、クラスパス（Domain Objects, Reflection and the Classpath）</h4>
 <div class="paragraph">
 <p>ArchUnit tries to offer a lot of information from the bytecode. For example, a <code>JavaClass</code>
 provides details like if it is an enum or an interface, modifiers like <code>public</code> or <code>abstract</code>,
@@ -1253,6 +1507,14 @@ section). However, if information is missing, and the classpath is correct, Arch
 some convenience to rely on the reflection API for extended details. For this reason, most
 <code>Java*</code> objects offer a method <code>reflect()</code>, which will in fact try to resolve the respective
 object from the Reflection API. For example:</p>
+</div>
+<div class="paragraph">
+<p>ArchUnit はバイトコードから取得した多くの情報をできるだけ提供できるように試みます。
+例えば、<code>JavaClass</code> ならそれが enum なのか interface なのか教えてくれるし、<code>public</code> 修飾子や <code>abstract</code> 修飾子についても教えてくれます。
+また、どこからインポートしたクラスなのかも教えてくれます（前のセクションで説明した URI のことです）。
+そして、正しいクラスパスが与えられているのに情報が欠落している場合、ArchUnit はリフレクション API を駆使して更なる詳細の提供を試みます。
+ほとんどの <code>Java*</code> オブジェクトには <code>reflect()</code> メソッドが存在するのはそのためです。
+このメソッドはリフレクション API でオブジェクトの情報を解決しようとします。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1274,8 +1536,15 @@ Method lengthMethod = javaMethod.reflect();</code></pre>
 (e.g. because they were just imported from some file path).</p>
 </div>
 <div class="paragraph">
+<p>ただし、対応するクラスがクラスパス上に存在しない場合（ファイルパスからインポートした場合等）、このメソッドは <code>Exception</code> を送出します。</p>
+</div>
+<div class="paragraph">
 <p>This restriction also applies to handling annotations in a more convenient way.
 Consider the following annotation:</p>
+</div>
+<div class="paragraph">
+<p>この制限は、アノテーションをより便利に扱う方法を提供します。
+例えば、次のようなアノテーションがあるとします。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1286,6 +1555,9 @@ Consider the following annotation:</p>
 </div>
 <div class="paragraph">
 <p>If you need to access this annotation without it being on the classpath, you must rely on</p>
+</div>
+<div class="paragraph">
+<p>このアノテーションがクラスパス上に存在しなくてもアクセスしなければならないときは次のようにするしかありません。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1298,6 +1570,10 @@ Object value = annotation.get("value");</code></pre>
 <p>So there is neither type safety nor automatic refactoring support. If this annotation is on the classpath, however,
 this can be written way more naturally:</p>
 </div>
+<div class="paragraph">
+<p>この場合型安全性は保証されませんし、自動的なリファクタリング支援も得られません。
+アノテーションがクラスパス上に存在するなら、次のようにより自然に記述できます。</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="java" class="language-java hljs">CustomAnnotation annotation = javaClass.getAnnotationOfType(CustomAnnotation.class);
@@ -1305,24 +1581,33 @@ String value = annotation.value();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>ArchUnit&#8217;s own rule APIs (compare <a href="#_the_lang_api">The Lang API</a>) never rely on the
+<p>ArchUnit&#8217;s own rule APIs (compare <a href="#_言語_apithe_lang_api">The Lang API</a>) never rely on the
 classpath though. Thus the evaluation of default rules and syntax combinations, described in the
 next section, does not depend on whether the classes were imported from the classpath or
 some JAR / folder.</p>
+</div>
+<div class="paragraph">
+<p>ArchUnit 自身のルール API （<a href="#_言語_apithe_lang_api">The Lang API</a> を参照）はクラスパスに依存していません。
+つまり、次のセクションで説明する、基本ルールやルール構文の組み合わせを評価するときは、クラスパスやJARあるいはフォルダのどこからクラスをインポートしても関係ないのです。</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_the_lang_api"><a class="anchor" href="#_the_lang_api"></a>7. The Lang API</h2>
+<h2 id="_言語_apithe_lang_api"><a class="anchor" href="#_言語_apithe_lang_api"></a>7. 言語 API（The Lang API）</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_composing_class_rules"><a class="anchor" href="#_composing_class_rules"></a>7.1. Composing Class Rules</h3>
+<h3 id="_クラスルールの合成composing_class_rules"><a class="anchor" href="#_クラスルールの合成composing_class_rules"></a>7.1. クラスルールの合成（Composing Class Rules）</h3>
 <div class="paragraph">
-<p><a href="#_the_core_api">The Core API</a> is pretty powerful with regard to all the details from the bytecode
+<p><a href="#_コア_apithe_core_api">The Core API</a> is pretty powerful with regard to all the details from the bytecode
 that it provides to tests. However, tests written this way lack conciseness and fail to convey the
 architectural concept that they should assert. Consider:</p>
+</div>
+<div class="paragraph">
+<p><a href="#_コア_apithe_core_api">The Core API</a> はテストするためにインポートしたバイトコードに関するあらゆる情報を扱えるため、とても強力です。
+しかし、コア API で記述したテストは簡潔とは言い難く、検証するべきアーキテクチャとしての考え方を上手く伝えられない場合があります。
+次のソースコードを検討してみましょう。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1356,9 +1641,18 @@ that code and distill that information. And the same process has to be done ever
 needs to understand the semantics of this rule.</p>
 </div>
 <div class="paragraph">
+<p>表現したいのは <em>「パッケージ名に 'service' を含むクラスはパッケージ名に 'controller' を含むクラスへアクセスしてはならない」</em> というルールです。
+しかし、このソースコードからそのような意図を読み取るのは困難です。
+それに、このルールの意味を理解しなければならない人は全員が同じ困難なプロセスを体験しなければなりません。</p>
+</div>
+<div class="paragraph">
 <p>To solve this shortcoming, ArchUnit offers a high level API to express architectural concepts
 in a concise way. In fact, we can write code that is almost equivalent to the prose rule text
 mentioned before:</p>
+</div>
+<div class="paragraph">
+<p>この問題を解決するため、ArchUnit はアーキテクチャとしての考え方を分かりやすく表現するための高水準 API を提供しています。
+この API を使用すると、前に説明した文章のようにルールを記述できるのです。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1375,6 +1669,12 @@ which refers to any number of packages. Thus "..service.." just expresses
 <em>"any package that contains some sub-package 'service'"</em>, e.g. <code>com.myapp.service.any</code>.
 If this test fails, it will report an <code>AssertionError</code> with the following message:</p>
 </div>
+<div class="paragraph">
+<p>話し言葉との違いはパッケージ記法に含まれる ".." で、これは任意のパッケージを表しています。
+つまり "..service.." は <em>「サブパッケージ 'service' を含む任意のパッケージ」</em> という意味になるのです。
+例えば <code>com.myapp.service.any</code> などが挙げられます。
+このテストが失敗するときは、次のようなメッセージを含む <code>AssertionError</code> を報告するでしょう。</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="bash" class="language-bash hljs">java.lang.AssertionError: Architecture Violation [Priority: MEDIUM] -
@@ -1390,6 +1690,10 @@ in (SomeService.java:14)</code></pre>
 all violations including the exact class and line number. The rule API also allows to combine
 predicates and conditions:</p>
 </div>
+<div class="paragraph">
+<p>表明エラーは、定義済みのルールに関する完全な文章を含んでおり、正確なクラス名と行番号を含む全ての違反を報告します。
+ルール API は述語式と条件式を組み合わせることができるようになっています。</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="java" class="language-java hljs">noClasses()
@@ -1403,12 +1707,18 @@ rule.check(importedClasses);</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_composing_member_rules"><a class="anchor" href="#_composing_member_rules"></a>7.2. Composing Member Rules</h3>
+<h3 id="_メンバールールの合成composing_member_rules"><a class="anchor" href="#_メンバールールの合成composing_member_rules"></a>7.2. メンバールールの合成（Composing Member Rules）</h3>
 <div class="paragraph">
 <p>In addition to a predefined API to write rules about Java classes and their relations, there is
 an extended API to define rules for members of Java classes. This might be relevant, for example,
 if methods in a certain context need to be annotated with a specific annotation, or return
 types implementing a certain interface. The entry point is again <code>ArchRuleDefinition</code>, e.g.</p>
+</div>
+<div class="paragraph">
+<p>Java クラスとクラス間の関係を説明するルールを記述する定義済みの API に加えて、Java クラスのメンバーに関するルールを定義するための拡張 API があります。
+それぞれの API は関連性があります。
+例えば、あるメソッドは特定のコンテキストにおいて何らかのアノテーションで修飾しなければならないとか、メソッドの返り値の型は特定のインターフェイスを実装したクラスでなければならないとかです。
+ルールの入口はやはり <code>ArchRuleDefinition</code> です。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1424,11 +1734,17 @@ rule.check(importedClasses);</code></pre>
 <p>Besides <code>methods()</code>, <code>ArchRuleDefinition</code> offers the methods <code>members()</code>, <code>fields()</code>, <code>codeUnits()</code>, <code>constructors()</code>
 – and the corresponding negations <code>noMembers()</code>, <code>noFields()</code>, <code>noMethods()</code>, etc.</p>
 </div>
+<div class="paragraph">
+<p><code>ArchRuleDefinition</code> は、<code>methods()</code> に続けて <code>members()</code> <code>fields()</code> <code>codeUnits()</code> <code>constructors()</code> のようなメソッドと、それらの反対を意味する <code>noMembers()</code> <code>noFields()</code> <code>noMethods()</code> のようなメソッドを提供しています。</p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_creating_custom_rules"><a class="anchor" href="#_creating_custom_rules"></a>7.3. Creating Custom Rules</h3>
+<h3 id="_独自ルールの作成creating_custom_rules"><a class="anchor" href="#_独自ルールの作成creating_custom_rules"></a>7.3. 独自ルールの作成（Creating Custom Rules）</h3>
 <div class="paragraph">
 <p>In fact, most architectural rules take the form</p>
+</div>
+<div class="paragraph">
+<p>ほとんどのアーキテクチャとしてのルールは次のような形式になります。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1440,6 +1756,12 @@ rule.check(importedClasses);</code></pre>
 and then evaluate some condition to see that all those classes satisfy it.
 ArchUnit&#8217;s API allows you to do just that, by exposing the concepts of <code>DescribedPredicate</code> and <code>ArchCondition</code>.
 So the rule above is just an application of this generic API:</p>
+</div>
+<div class="paragraph">
+<p>別の言い方をしましょう。
+私たちはバイトコードからインポートするクラスを関連するクラスだけに限定し、それらのクラスが指定した条件を満たしているのか評価するようにしたいのです。
+ArchUnit は <code>DescribePredicate</code> および <code>ArchCondition</code> という API でそれを実現します。
+この汎用 API で前のセクションに登場したルールを記述すると次のようになります。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1454,6 +1776,9 @@ noClasses().that(resideInAPackageService)
 <p>Thus, if the predefined API does not allow to express some concept,
 it is possible to extend it in any custom way.
 For example:</p>
+</div>
+<div class="paragraph">
+<p>定義済みのルールで表現できない考え方があるとしても、例えば次のように拡張できます。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1487,6 +1812,10 @@ classes().that(haveAFieldAnnotatedWithPayload).should(onlyBeAccessedBySecuredMet
 <p>If the rule fails, the error message will be built from the supplied descriptions. In the
 example above, it would be</p>
 </div>
+<div class="paragraph">
+<p>ルールの評価が失敗したら、指定した説明文からエラーメッセージが構築されます。
+前のコード例では次のようなエラーメッセージになります。</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">classes that have a field annotated with @Payload should only be accessed by @Secured methods</code></pre>
@@ -1494,11 +1823,16 @@ example above, it would be</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_predefined_predicates_and_conditions"><a class="anchor" href="#_predefined_predicates_and_conditions"></a>7.4. Predefined Predicates and Conditions</h3>
+<h3 id="_定義済みの述語式と条件式predefined_predicates_and_conditions"><a class="anchor" href="#_定義済みの述語式と条件式predefined_predicates_and_conditions"></a>7.4. 定義済みの述語式と条件式（Predefined Predicates and Conditions）</h3>
 <div class="paragraph">
 <p>Custom predicates and conditions like in the last section can often be composed from predefined elements.
 ArchUnit&#8217;s basic convention for predicates is that they are defined in an inner class <code>Predicates</code> within the type they target.
 For example, one can find the predicate to check for the simple name of a <code>JavaClass</code> as</p>
+</div>
+<div class="paragraph">
+<p>1つ前のセクションのように、独自の述語式や条件式は定義済みの部品を組み合わせて実現できる場合がよくあります。
+ArchUnit の述語式は、基本的な規約として、評価対象のクラス（型）のインナークラス <code>Predicates</code> として定義するようになっています。
+例えば、<code>JavaClass</code> における「簡潔な名前」という述語式は次のように見つけられます。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1509,6 +1843,10 @@ For example, one can find the predicate to check for the simple name of a <code>
 <p>Predicates can be joined using the methods <code>predicate.or(other)</code> and <code>predicate.and(other)</code>.
 So for example a predicate testing for a class with simple name "Foo" that is serializable
 could be created the following way:</p>
+</div>
+<div class="paragraph">
+<p>述語式は <code>predicate.or(other)</code> メソッドや <code>predicate.and(other)</code> メソッドで結合できます。
+ですから、簡潔なクラス名が "Foo" なら、シリアライズ可能でなければならない、という述語式は次のように記述できます。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1526,6 +1864,10 @@ consequently the predicate to check the name of a <code>JavaClass</code>
 is the same as the predicate to check the name of a <code>JavaMethod</code>,
 and resides within</p>
 </div>
+<div class="paragraph">
+<p>一部のプロパティは述語式のために定義されたインターフェイスになっているので注意してください。
+例えば、<code>JavaClass</code> と <code>JavaMethod</code> のどちらでも、名前をチェックするプロパティは <code>HasName</code> というインターフェイスになっています。</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="java" class="language-java hljs">HasName.Predicates.name(String)</code></pre>
@@ -1535,6 +1877,10 @@ and resides within</p>
 <p>This can at times lead to problems with the type system, if predicates are supposed to be joined.
 Since the <code>or(..)</code> method accepts a type of <code>DescribedPredicate&lt;? super T&gt;</code>,
 where <code>T</code> is the type of the first predicate. For example:</p>
+</div>
+<div class="paragraph">
+<p>これは、特に述語式を結合するとき、型システムとしての問題になる場合があります。
+<code>or(..)</code> メソッドの引数の型は <code>DescribePredicate&lt;? super T&gt;</code> で、<code>T</code> は先頭の述語式になるからです。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1554,9 +1900,16 @@ name.and(JavaClass.Predicates.type(Serializable.class));</code></pre>
 that cannot be circumvented in a satisfying way.</p>
 </div>
 <div class="paragraph">
+<p>この分かりにくい振る舞いは Java の型システムの欠点に起因するもので、残念ながら安全に回避する方法はありません。</p>
+</div>
+<div class="paragraph">
 <p>Just like predicates, there exist predefined conditions that can be combined in a similar way.
 Since <code>ArchCondition</code> is a less generic concept, all predefined conditions can be found within <code>ArchConditions</code>.
 Examples:</p>
+</div>
+<div class="paragraph">
+<p>述語式と同じように合成できる定義済みの条件式が、<code>ArchCondition</code> に定義されています。
+ただし、<code>ArchCondition</code> はジェネリクスの考え方が少し薄くなっています。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1570,9 +1923,12 @@ ArchCondition&lt;JavaClass&gt; callEqualsOrHashCode = callEquals.or(callHashCode
 </div>
 </div>
 <div class="sect2">
-<h3 id="_rules_with_custom_concepts"><a class="anchor" href="#_rules_with_custom_concepts"></a>7.5. Rules with Custom Concepts</h3>
+<h3 id="_独自の考え方に基づくルールrules_with_custom_concepts"><a class="anchor" href="#_独自の考え方に基づくルールrules_with_custom_concepts"></a>7.5. 独自の考え方に基づくルール（Rules with Custom Concepts）</h3>
 <div class="paragraph">
 <p>Earlier we stated that most architectural rules take the form</p>
+</div>
+<div class="paragraph">
+<p>前のセクションでほとんどのアーキテクチャとしてのルールは次のような形式になることを説明しました。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1586,9 +1942,15 @@ detailed about fields, methods or constructors. A generic API will never be able
 every imaginable concept out of the box. Thus ArchUnit&#8217;s rule API has at its foundation
 a more generic API that controls the types of objects that our concept targets.</p>
 </div>
+<div class="paragraph">
+<p>ところが、私たちはアーキテクチャとしての考え方を表現するとき、常にクラスについて言及しているわけではありません。
+自作の言語やモジュール、コードの断面について言及する場合もあるし、フィールドやメソッドやコンストラクタの詳細について言及する場合もあるからです。
+規定の汎用 API では、全ての想像上の概念を表現することは不可能です。
+そのため、ArchUnit のルール API は、評価対象のオブジェクトの型を操作するより汎用性の高い API で構成されています。</p>
+</div>
 <div class="imageblock">
 <div class="content">
-<img src="import-vs-lang.png" alt="import vs lang" width="714" height="81">
+<img src="import-vs-lang.png" alt="import vs lang" width="653" height="85">
 </div>
 </div>
 <div class="paragraph">
@@ -1597,6 +1959,12 @@ a more generic API that controls the types of objects that our concept targets.<
 mentioned in the sections above, this is the identity transformation, passing classes on to the rule
 as they are. However, one can supply any custom transformation to express a rule about a
 different type of input object. For example:</p>
+</div>
+<div class="paragraph">
+<p>あらゆるルール定義は <code>ClassesTransformer</code> に基づいています。
+これは、<code>JavaClasses</code> を適切なルールの入力へどのように変換するか定義します。
+多くの場合、前のセクションで言及したように何も変更せず、クラスそのものをルールに渡すことになります。
+しかし、異なる型を要求するルールにオブジェクトを渡せるよう、独自の変換処理を定義する場合もあります。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1620,6 +1988,9 @@ all(packages).that(containACoreClass()).should(...);</code></pre>
 <div class="paragraph">
 <p>Of course these transformers can represent any custom concept desired:</p>
 </div>
+<div class="paragraph">
+<p>もちろん、そういった変換で独自の考え方を表現できます。</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="java" class="language-java hljs">// how we map classes to business modules
@@ -1636,11 +2007,16 @@ all(businessModules).that(dealWithOrders).should(beIndependentOfPayment);</code>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_controlling_the_rule_text"><a class="anchor" href="#_controlling_the_rule_text"></a>7.6. Controlling the Rule Text</h3>
+<h3 id="_ルールの文章を制御するcontrolling_the_rule_text"><a class="anchor" href="#_ルールの文章を制御するcontrolling_the_rule_text"></a>7.6. ルールの文章を制御する（Controlling the Rule Text）</h3>
 <div class="paragraph">
 <p>If the rule is straight forward, the rule text that is created automatically should be
 sufficient in many cases. However, for rules that are not common knowledge, it is good practice
 to document the reason for this rule. This can be done in the following way:</p>
+</div>
+<div class="paragraph">
+<p>分かりやすいルールなら、自動的に生成されるルールの説明文で十分な場合が多いでしょう。
+しかし、共通知識とは言えないルールについて、根拠をドキュメント化しておくのは良いプラクティスです。
+例えば、次のように記述できます。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1654,6 +2030,11 @@ to document the reason for this rule. This can be done in the following way:</p>
 concisely enough, e.g. if multiple predicates or conditions are joined.
 It is possible to completely overwrite the rule description in those cases:</p>
 </div>
+<div class="paragraph">
+<p>とはいえ、自動的に生成したルールの説明文が、本来の意図を十分に簡潔に表現できていない場合もあるでしょう。
+複数の述語式や条件式を結合した場合は特にそうです。
+そういうときは、ルールの説明文を全て置き換えることができます。</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="java" class="language-java hljs">classes().that(haveAFieldAnnotatedWithPayload).should(onlyBeAccessedBySecuredMethods)
@@ -1662,7 +2043,7 @@ It is possible to completely overwrite the rule description in those cases:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ignoring_violations"><a class="anchor" href="#_ignoring_violations"></a>7.7. Ignoring Violations</h3>
+<h3 id="_違反を無視するignoring_violations"><a class="anchor" href="#_違反を無視するignoring_violations"></a>7.7. 違反を無視する（Ignoring Violations）</h3>
 <div class="paragraph">
 <p>In legacy projects there might be too many violations to fix at once. Nevertheless, that code
 should be covered completely by architecture tests to ensure that no further violations will
@@ -1675,8 +2056,20 @@ Violations with a message matching the pattern will be ignored. If no violations
 the check will pass.</p>
 </div>
 <div class="paragraph">
+<p>レガシープロジェクトでは1度に直しきれないほど多数の違反が見つかるものです。
+とはいえ、既存のコードに新しい違反を持ち込むことがないよう、違反しているコードもアーキテクチャテストの対象にしなければなりません。
+既存の違反を無視する1つのやり方として、ルールの <code>that(..)</code> 節を調整する方法があります。
+より汎用的な解決方法は、単純に正規表現で一致させる方法です。
+クラスパスのルートに <code>archunit_ignore_patterns.txt</code> というテキストファイルを配置し、それぞれの行には、報告された違反にマッチする正規表現を記述します。
+違反のメッセージがいずれかの正規表現に一致するなら、その違反を無視するようになります。
+違反が1つも無くなれば、チェックは成功します。</p>
+</div>
+<div class="paragraph">
 <p>For example, suppose the class <code>some.pkg.LegacyService</code> violates a lot of different rules.
 It is possible to add</p>
+</div>
+<div class="paragraph">
+<p>例えば、<code>some.pkg.LegacyService</code> というクラスがいくつものルールに違反しているとしたら、次のような正規表現を追加すればいいでしょう。</p>
 </div>
 <div class="listingblock">
 <div class="title">archunit_ignore_patterns.txt</div>
@@ -1689,7 +2082,14 @@ It is possible to add</p>
 are only violated by such violations will report success instead of failure.</p>
 </div>
 <div class="paragraph">
-<p>It is possible to add comments to ignore patterns by prefixing the line with a '#':</p>
+<p><code>some.pkg.LegacyService</code> に言及する全ての違反が無視されるようになります。
+そうして、他の違反が見つからなければ、失敗ではなく成功と報告するようになります。</p>
+</div>
+<div class="paragraph">
+<p>It is possible to add comments to ignore patterns by prefixing the line with a '\#':</p>
+</div>
+<div class="paragraph">
+<p>行頭に <code>\#</code> を指定することで、正規表現の内容を説明するコメントを記述できます。</p>
 </div>
 <div class="listingblock">
 <div class="title">archunit_ignore_patterns.txt</div>
@@ -1702,17 +2102,24 @@ are only violated by such violations will report success instead of failure.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_the_library_api"><a class="anchor" href="#_the_library_api"></a>8. The Library API</h2>
+<h2 id="_ライブラリ_apithe_library_api"><a class="anchor" href="#_ライブラリ_apithe_library_api"></a>8. ライブラリ API（The Library API）</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The Library API offers a growing collection of predefined rules, which offer a more concise API
 for more complex but common patterns, like a layered architecture or checks for cycles between
-slices (compare <a href="#_what_to_check">What to Check</a>).</p>
+slices (compare <a href="#_チェックの対象what_to_check">What to Check</a>).</p>
+</div>
+<div class="paragraph">
+<p>ライブラリ API は発展途上の定義済みのルール集合を提供します。
+レイヤーアーキテクチャや、ソースコード断面の循環チェック（<a href="#_チェックの対象what_to_check">What to Check</a>も参照）のように、複雑だけど一般的なパターンに関する簡潔な API を提供するのです。</p>
 </div>
 <div class="sect2">
-<h3 id="_architectures"><a class="anchor" href="#_architectures"></a>8.1. Architectures</h3>
+<h3 id="_アーキテクチャarchitectures"><a class="anchor" href="#_アーキテクチャarchitectures"></a>8.1. アーキテクチャ（Architectures）</h3>
 <div class="paragraph">
 <p>The entrance point for checks of common architectural styles is:</p>
+</div>
+<div class="paragraph">
+<p><code>Architectures</code> は一般的なアーキテクチャスタイルに関するチェックの入口です。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1724,18 +2131,29 @@ slices (compare <a href="#_what_to_check">What to Check</a>).</p>
 But in the future it might be extended for styles like a pipes and filters,
 separation of business logic and technical infrastructure, etc.</p>
 </div>
+<div class="paragraph">
+<p>現時点では、レイヤーアーキテクチャとオニオンアーキテクチャに関する便利なチェックしか提供していません。
+将来的にはパイプ・フィルタースタイルや、「業務ロジックと技術要素の分離（separation of business logic and technical infrastructure）」スタイルにも対応する予定です。</p>
+</div>
 <div class="sect3">
-<h4 id="_layered_architecture"><a class="anchor" href="#_layered_architecture"></a>8.1.1. Layered Architecture</h4>
+<h4 id="_レイヤーアーキテクチャlayered_architecture"><a class="anchor" href="#_レイヤーアーキテクチャlayered_architecture"></a>8.1.1. レイヤーアーキテクチャ（Layered Architecture）</h4>
 <div class="paragraph">
 <p>In layered architectures, we define different layers and how those interact with each other.
-An example setup for a simple 3-tier architecture can be found in <a href="#_layer_checks">Layer Checks</a>.</p>
+An example setup for a simple 3-tier architecture can be found in <a href="#_レイヤーのチェックlayer_checks">Layer Checks</a>.</p>
+</div>
+<div class="paragraph">
+<p>「レイヤーアーキテクチャ」では、いくつものレイヤーを定義し、それぞれのレイヤーのやりとりを定義できます。
+単純な3層アーキテクチャの例を <a href="#_レイヤーのチェックlayer_checks">Layer Checks</a> で説明しています。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_onion_architecture"><a class="anchor" href="#_onion_architecture"></a>8.1.2. Onion Architecture</h4>
+<h4 id="_オニオンアーキテクチャonion_architecture"><a class="anchor" href="#_オニオンアーキテクチャonion_architecture"></a>8.1.2. オニオンアーキテクチャ（Onion Architecture）</h4>
 <div class="paragraph">
 <p>In an "Onion Architecture" (also known as "Hexagonal Architecture" or "Ports and Adapters"),
 we can define domain packages and adapter packages as follows.</p>
+</div>
+<div class="paragraph">
+<p>「オニオンアーキテクチャ」（「ポート・アダプター」あるいは「ヘキサゴナルアーキテクチャ」として知られている）では、ドメインとアダプターのためのパッケージを次のように定義できます。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1752,46 +2170,53 @@ we can define domain packages and adapter packages as follows.</p>
 <p>The semantic follows the descriptions in <a href="https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/" class="bare">https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/</a>.
 More precisely, the following holds:</p>
 </div>
+<div class="paragraph">
+<p>それぞれの意味については <a href="https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/" class="bare">https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/</a> を参照してください。
+ここでは次のような意味を表しています。</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>The <code>domain</code> package is the core of the application. It consists of two parts.</p>
+<p><code>domain</code> パッケージ - アプリケーションの中核です。次のような部品を含んでいます</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>The <code>domainModels</code> packages contain the domain entities.</p>
+<p><code>domainModels</code> パッケージ - ドメインエンティティを配置します</p>
 </li>
 <li>
-<p>The packages in <code>domainServices</code> contains services that use the entities in the <code>domainModel</code> packages.</p>
+<p><code>domainServices</code> パッケージ - ドメインエンティティを使用するサービスを配置します</p>
 </li>
 </ol>
 </div>
 </li>
 <li>
-<p>The <code>applicationServices</code> packages contain services and configuration to run the application and use cases.
-It can use the items of the <code>domain</code> package but there must not be any dependency from the <code>domain</code>
-to the <code>application</code> packages.</p>
+<p><code>applicationServices</code> パッケージ - アプリケーションとユースケースを実行するためのサービスおよび設定を配置します。
+<code>domain</code> パッケージに配置した要素を使用しますが、<code>domain</code> パッケージに配置した要素から <code>application</code> パッケージに配置した要素は使用できません</p>
 </li>
 <li>
-<p>The <code>adapter</code> package contains logic to connect to external systems and/or infrastructure.
-No adapter may depend on another adapter. Adapters can use both the items of the <code>domain</code> as well as
-the <code>application</code> packages. Vice versa, neither the <code>domain</code> nor the <code>application</code> packages must
-contain dependencies on any <code>adapter</code> package.</p>
+<p><code>adapter</code> パッケージ - 外部システムやインフラへ接続するためのロジックを配置します。
+アダプタは他のアダプタを使用できません。
+アダプタは <code>domain</code> パッケージや <code>appliacation</code> パッケージに配置した要素を使用しますが、それぞれのパッケージに配置した要素から <code>adapter</code> パッケージに配置した要素は使用できません</p>
 </li>
 </ul>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="onion-architecture-check.png" alt="onion architecture check" width="1180" height="748">
+<img src="onion-architecture-check.png" alt="onion architecture check" width="1108" height="762">
 </div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_slices"><a class="anchor" href="#_slices"></a>8.2. Slices</h3>
+<h3 id="_ソースコードの断面slices"><a class="anchor" href="#_ソースコードの断面slices"></a>8.2. ソースコードの断面（Slices）</h3>
 <div class="paragraph">
 <p>Currently there are two "slice" rules offered by the Library API. These are basically rules
 that slice the code by packages, and contain assertions on those slices. The entrance point is:</p>
+</div>
+<div class="paragraph">
+<p>ライブラリ API は、今のところ「ソースコードの断面（slice）」について2種類の基本的なルールを提供しています。
+パッケージに基づいて断面を生成するルールと、それぞれの断面に適用できるチェックからなるルールです。
+入口は <code>SlicesRuleDefinition</code> です。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1801,6 +2226,10 @@ that slice the code by packages, and contain assertions on those slices. The ent
 <div class="paragraph">
 <p>The API is based on the idea to sort classes into slices according to one or several package
 infixes, and then write assertions against those slices. At the moment this is for example:</p>
+</div>
+<div class="paragraph">
+<p>この API が元にしている考え方は、1つ以上のパッケージに配置したクラスをまとめて、共通するチェックを適用する、というものです。
+例えば次のように記述できます。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1821,6 +2250,11 @@ SlicesRuleDefinition.slices().matching("..myapp.(**).service..").should().notDep
 inconsistent, it is possible to further customize the slice creation. This can be done by specifying
 a mapping of <code>JavaClass</code> to <code>SliceIdentifier</code> where classes with the same <code>SliceIdentifier</code> will
 be sorted into the same slice. Consider this example:</p>
+</div>
+<div class="paragraph">
+<p>パッケージ構造に一貫性のないレガシーアプリケーションのように、この制約が極めて柔軟性に欠けるとしたら、断面の作成自体を詳細化できます。
+<code>JavaClass</code> に対応する <code>SliceIdentifier</code> を定義し、同じ <code>SliceIdentifier</code> を同じ断面へ格納させるのです。
+具体的には次のように記述できます。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1851,10 +2285,14 @@ SlicesRuleDefinition.slices().assignedFrom(legacyPackageStructure).should().beFr
 </div>
 </div>
 <div class="sect3">
-<h4 id="_configurations"><a class="anchor" href="#_configurations"></a>8.2.1. Configurations</h4>
+<h4 id="_循環参照の検出に関する設定configurations"><a class="anchor" href="#_循環参照の検出に関する設定configurations"></a>8.2.1. 循環参照の検出に関する設定（Configurations）</h4>
 <div class="paragraph">
 <p>There are two configuration parameters to adjust the behavior of the cycle detection.
-They can be configured via <code>archunit.properties</code> (compare <a href="#_advanced_configuration">Advanced Configuration</a>).</p>
+They can be configured via <code>archunit.properties</code> (compare <a href="#_高度な設定advanced_configuration">Advanced Configuration</a>).</p>
+</div>
+<div class="paragraph">
+<p>循環参照の検出に影響する2種類の設定パラメータがあります。
+いずれも <code>archunit.properties</code> で設定できます。（<a href="#_高度な設定advanced_configuration">Advanced Configuration</a> を参照）</p>
 </div>
 <div class="listingblock">
 <div class="title">archunit.properties</div>
@@ -1875,10 +2313,14 @@ cycles.maxNumberOfDependenciesPerEdge=5</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_general_coding_rules"><a class="anchor" href="#_general_coding_rules"></a>8.3. General Coding Rules</h3>
+<h3 id="_一般的なコーディングルールgeneral_coding_rules"><a class="anchor" href="#_一般的なコーディングルールgeneral_coding_rules"></a>8.3. 一般的なコーディングルール（General Coding Rules）</h3>
 <div class="paragraph">
 <p>The Library API also offers a small set of coding rules that might be useful in various projects.
 Those can be found within</p>
+</div>
+<div class="paragraph">
+<p>ライブラリ API は様々なプロジェクトで利用できるであろうコーディングルールを少しだけ提供しています。
+<code>com.tngtech.archunit.library</code> パッケージを参照してください。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1891,22 +2333,22 @@ Those can be found within</p>
 <p>The class <code>GeneralCodingRules</code> contains a set of very general rules and conditions for coding.
 For example:</p>
 </div>
+<div class="paragraph">
+<p><code>GeneralCodingRules</code> クラスはコーディングに関する一般的なルールや条件式を含みます。</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>To check that classes do not access <code>System.out</code> or <code>System.err</code>, but use logging instead.</p>
+<p><code>System.out</code> や <code>System.err</code> を使わずに、ロギング API を使用していることのチェック</p>
 </li>
 <li>
-<p>To check that classes do not throw generic exceptions, but use specific exceptions instead.</p>
+<p>汎用的な例外を送出せず、具体的な例外を送出していることのチェック</p>
 </li>
 <li>
-<p>To check that classes do not use <code>java.util.logging</code>, but use other libraries like Log4j, Logback, or SLF4J instead</p>
+<p><code>java.util.logging</code> を使わずに、Log4j や Logback や SLF4J などのライブラリを使用していることのチェック</p>
 </li>
 <li>
-<p>To check that classes do not use JodaTime, but use <code>java.time</code> instead.</p>
-</li>
-<li>
-<p>To check that classes do not use field injection, but constructor injection instead.</p>
+<p>フィールドインジェクションを使わずに、コンストラクタインジェクションを使用していることのチェック</p>
 </li>
 </ul>
 </div>
@@ -1917,10 +2359,16 @@ For example:</p>
 <p>The class <code>DependencyRules</code> contains a set of rules and conditions for checking dependencies between classes.
 For example:</p>
 </div>
+<div class="paragraph">
+<p><code>DependencyRules</code> クラスはクラス間の依存関係に関するルールや条件式を含みます。</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
 <p>To check that classes do not depend on classes from upper packages.</p>
+</li>
+<li>
+<p>上位層のパッケージに配置したクラスに依存していないことのチェック</p>
 </li>
 </ul>
 </div>
@@ -1931,20 +2379,30 @@ For example:</p>
 <p>The class <code>ProxyRules</code> contains a set of rules and conditions for checking the usage of proxy objects.
 For example:</p>
 </div>
+<div class="paragraph">
+<p><code>ProxyRules</code> クラスはプロキシオブジェクトの使い方に関するルールや条件式を含みます。</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
 <p>To check that methods that matches a predicate are not called directly from within the same class.</p>
+</li>
+<li>
+<p>述語式にマッチするメソッドを、同じクラスから直接呼び出してしないことのチェック</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_plantuml_component_diagrams_as_rules"><a class="anchor" href="#_plantuml_component_diagrams_as_rules"></a>8.4. PlantUML Component Diagrams as rules</h3>
+<h3 id="_plantuml_のコンポーネント図をルールとして扱うplantuml_component_diagrams_as_rules"><a class="anchor" href="#_plantuml_のコンポーネント図をルールとして扱うplantuml_component_diagrams_as_rules"></a>8.4. PlantUML のコンポーネント図をルールとして扱う（PlantUML Component Diagrams as rules）</h3>
 <div class="paragraph">
 <p>The Library API offers a feature that supports <a href="http://plantuml.com/component-diagram">PlantUML</a> diagrams.
 This feature is located in</p>
+</div>
+<div class="paragraph">
+<p>ライブラリ API は <a href="http://plantuml.com/component-diagram">PlantUML</a> の図を扱うことができます。
+<code>com.tngtech.archunit.library.plantuml</code> パッケージを参照してください。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1954,6 +2412,10 @@ This feature is located in</p>
 <div class="paragraph">
 <p>ArchUnit can derive rules straight from PlantUML diagrams and check to make sure that all imported
 <code>JavaClasses</code> abide by the dependencies of the diagram. The respective rule can be created in the following way:</p>
+</div>
+<div class="paragraph">
+<p>ArchUnit は PlantUML の図からルールを生成し、インポートした全ての <code>JavaClasses</code> が図に表現されている依存関係を満たしているかチェックできます。
+次のように記述できます。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1967,9 +2429,13 @@ classes().should(adhereToPlantUmlDiagram(myDiagram, consideringAllDependencies()
 The way this works is to use the respective package identifiers (compare
 <code>ArchConditions.onlyHaveDependenciesInAnyPackage(..)</code>) as stereotypes:</p>
 </div>
+<div class="paragraph">
+<p>対応している図の種類はコンポーネント図です。コンポーネントに関連するクラスはステレオタイプで表現します。
+ステレオタイプはパッケージ識別子として機能することになります（<code>ArchConditions.onlyHaveDependenciesInAnyPackage(..)</code> を参照）。</p>
+</div>
 <div class="imageblock">
 <div class="content">
-<img src="simple-plantuml-archrule-example.png" alt="simple plantuml archrule example" width="183" height="205">
+<img src="simple-plantuml-archrule-example.png" alt="simple plantuml archrule example" width="173" height="210">
 </div>
 </div>
 <div class="listingblock">
@@ -1986,32 +2452,42 @@ The way this works is to use the respective package identifiers (compare
 <p>Consider this diagram applied as a rule via <code>adhereToPlantUmlDiagram(..)</code>, then for example
 a class <code>some.target.Target</code> accessing <code>some.source.Source</code> would be reported as a violation.</p>
 </div>
+<div class="paragraph">
+<p>この図を <code>adhereToPlantUmlDiagram(..)</code> へ適用して生成したルールは、<code>some.target.Target</code> クラスから <code>some.source.Source</code> クラスへのアクセスを発見すると、違反として報告するようになります。</p>
+</div>
 <div class="sect3">
-<h4 id="_configurations_2"><a class="anchor" href="#_configurations_2"></a>8.4.1. Configurations</h4>
+<h4 id="_plantuml_に関する設定configurations"><a class="anchor" href="#_plantuml_に関する設定configurations"></a>8.4.1. PlantUML に関する設定（Configurations）</h4>
 <div class="paragraph">
 <p>There are different ways to deal with dependencies of imported classes not covered by the
 diagram at all. The behavior of the PlantUML API can be configured by supplying a respective
 <code>Configuration</code>:</p>
 </div>
+<div class="paragraph">
+<p>PlantUML の図に表現されていないクラスの依存関係を扱う方法はいろいろあります。
+PlantUML API の振る舞いは <code>Configuration</code> を指定して制御できます。</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="java" class="language-java hljs">// considers all dependencies possible (including java.lang, java.util, ...)
 classes().should(adhereToPlantUmlDiagram(
-        mydiagram, consideringAllDependencies())
+        mydiagram, consideringAllDependencies()))
 
 // considers only dependencies specified in the PlantUML diagram
 // (so any unknown dependency will be ignored)
 classes().should(adhereToPlantUmlDiagram(
-        mydiagram, consideringOnlyDependenciesInDiagram())
+        mydiagram, consideringOnlyDependenciesInDiagram()))
 
 // considers only dependencies in any specified package
 // (control the set of dependencies to consider, e.g. only com.myapp..)
 classes().should(adhereToPlantUmlDiagram(
-        mydiagram, consideringOnlyDependenciesInAnyPackage("..some.package.."))</code></pre>
+        mydiagram, consideringOnlyDependenciesInAnyPackage("..some.package..")))</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>It is possible to further customize which dependencies to ignore:</p>
+</div>
+<div class="paragraph">
+<p>無視する依存関係を詳しく指定できます。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2022,33 +2498,34 @@ classes().should(adhereToPlantUmlDiagram(mydiagram).ignoreDependencies(predicate
 <div class="paragraph">
 <p>A PlantUML diagram used with ArchUnit must abide by a certain set of rules:</p>
 </div>
+<div class="paragraph">
+<p>ArchUnit から使用する PlantUML の図は、次のようなルールに従わなければなりません。</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Components must be declared in the bracket notation (i.e. <code>[Some Component]</code>)</p>
+<p>コンポーネントは角括弧形式で表記しなければなりません（<code>[Some Component]</code>）</p>
 </li>
 <li>
-<p>Components must have at least one (possible multiple) stereotype(s). Each stereotype in the diagram
-must be unique and represent a valid package identifier (e.g. <code>&lt;&lt;..example..&gt;&gt;</code> where <code>..</code> represents
-an arbitrary number of packages; compare the core API)</p>
+<p>コンポーネントには1つ以上（複数も可）のステレオタイプが必要です。図中のステレオタイプ名は一意で、適切なパッケージ識別子でなければなりません（例えば <code>&lt;&lt;..example..&gt;&gt;</code>。<code>..</code> は任意のパッケージ階層を表す。詳しくは <a href="#_コア_apithe_core_api">The Core API</a> を参照）</p>
 </li>
 <li>
-<p>Components may have an optional alias (e.g. <code>[Some Component] &lt;&lt;..example..&gt;&gt; as myalias</code>). The alias must be alphanumeric and must not be quoted.</p>
+<p>コンポーネントには別名を指定できます（<code>[Some Component] &lt;&lt;..example..&gt;&gt; as myalias</code>）。別名に使用できるのは英数字のみで、クォートで囲んではいけません</p>
 </li>
 <li>
-<p>Components may have an optional color (e.g. <code>[Some Component] &lt;&lt;..example..&gt;&gt; #OrangeRed</code>)</p>
+<p>コンポーネントには色を指定できます（<code>[Some Component] &lt;&lt;..example..&gt;&gt; \#OrangeRed</code>）</p>
 </li>
 <li>
-<p>Dependencies must use arrows only consisting of dashes (e.g. <code>--&gt;</code>)</p>
+<p>依存関係を表す線分に使えるのは矢印付きの破線だけです（<code>--&gt;</code>）</p>
 </li>
 <li>
-<p>Dependencies may go from left to right <code>--&gt;</code> or right to left <code>&lt;--</code></p>
+<p>依存関係を表す線分の方向は左から右（<code>--&gt;</code>）、あるいは、右から左のみです（<code>&lt;--</code>）</p>
 </li>
 <li>
-<p>Dependencies may consist of any number of dashes (e.g <code>-&gt;</code> or <code>-----&gt;</code>)</p>
+<p>依存関係を表す線分には任意の数の破線を使えます（<code>-&gt;</code> や <code>-----&gt;</code>）</p>
 </li>
 <li>
-<p>Dependencies may contain direction hints (e.g. <code>-up-&gt;</code>) or color directives (e.g. <code>-[#green]-&gt;</code>)</p>
+<p>依存関係を表す線分には方向を示すヒントを指定したり（<code>-up-&gt;</code>）、色を指定できます（<code>-[\#green]-&gt;</code>）</p>
 </li>
 </ol>
 </div>
@@ -2056,24 +2533,40 @@ an arbitrary number of packages; compare the core API)</p>
 <p>You can compare this
 <a href="https://github.com/TNG/ArchUnit-Examples/blob/main/example-plain/src/test/resources/com/tngtech/archunit/exampletest/shopping_example.puml">diagram of ArchUnit-Examples</a>.</p>
 </div>
+<div class="paragraph">
+<p><a href="https://github.com/TNG/ArchUnit-Examples/blob/main/example-plain/src/test/resources/com/tngtech/archunit/exampletest/shopping_example.puml">diagram of ArchUnit-Examples</a> の図を参照してみてください。</p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_freezing_arch_rules"><a class="anchor" href="#_freezing_arch_rules"></a>8.5. Freezing Arch Rules</h3>
+<h3 id="_アーキテクチャルール違反の永続化freezing_arch_rules"><a class="anchor" href="#_アーキテクチャルール違反の永続化freezing_arch_rules"></a>8.5. アーキテクチャルール違反の永続化（Freezing Arch Rules）</h3>
 <div class="paragraph">
 <p>When rules are introduced in grown projects, there are often hundreds or even thousands of violations,
 way too many to fix immediately. The only way to tackle such extensive violations is to establish an
 iterative approach, which prevents the code base from further deterioration.</p>
 </div>
 <div class="paragraph">
+<p>発展中のプロジェクトにルールを導入すると、数百どころか数千の違反を検出してしまい、とてもすぐに修正できない状態になる場合があります。
+大量に違反が発生している状況を解決するには、さらに悪化するのを防ぐため反復的なアプローチを確立するしかありません。</p>
+</div>
+<div class="paragraph">
 <p><code>FreezingArchRule</code> can help in these scenarios by recording all existing violations to a <code>ViolationStore</code>.
 Consecutive runs will then only report new violations and ignore known violations.
 If violations are fixed, <code>FreezingArchRule</code> will automatically reduce the known stored violations to prevent any regression.</p>
 </div>
+<div class="paragraph">
+<p>そういう場合に役立つのが <code>FreezingArchRule</code> です。
+<code>FreezingArchRule</code> は検出済みの全ての違反を <code>ViolationStore</code> へ記録します。
+そうすると、一度記録した違反は無視して、新たに検出した違反だけを報告するようになります。
+記録済みの違反を修正すると、<code>FreezingArchRule</code> はリグレッションを防ぐため自動的に記録済みの違反を削除します。</p>
+</div>
 <div class="sect3">
-<h4 id="_usage"><a class="anchor" href="#_usage"></a>8.5.1. Usage</h4>
+<h4 id="_使い方usage"><a class="anchor" href="#_使い方usage"></a>8.5.1. 使い方（Usage）</h4>
 <div class="paragraph">
 <p>To freeze an arbitrary <code>ArchRule</code> just wrap it into a <code>FreezingArchRule</code>:</p>
+</div>
+<div class="paragraph">
+<p>使い方は、永続化したい任意の <code>ArchRule</code> を <code>FreezingArchRule</code> で包み込むだけです。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2086,13 +2579,24 @@ new violations will be reported. By default <code>FreezingArchRule</code> will i
 violation is just shifted to a different line, it will still count as previously recorded
 and will not be reported.</p>
 </div>
+<div class="paragraph">
+<p>導入してから始めて実行したテストで検出した違反は、最新の状態として記録されます。
+その後は、新しく検出した違反だけを報告するようになります。
+初期設定では <code>FreezingArchRule</code> は行番号を無視します。
+つまり、違反した箇所が数行移動しただけでも、最初に記録した違反と同じ違反として認識し、報告しないということです。</p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="_configuration"><a class="anchor" href="#_configuration"></a>8.5.2. Configuration</h4>
+<h4 id="_設定configuration"><a class="anchor" href="#_設定configuration"></a>8.5.2. 設定（Configuration）</h4>
 <div class="paragraph">
 <p>By default <code>FreezingArchRule</code> will use a simple <code>ViolationStore</code> based on plain text files.
 This is sufficient to add these files to any version control system to continuously track the progress.
-You can configure the location of the violation store within <code>archunit.properties</code> (compare <a href="#_advanced_configuration">Advanced Configuration</a>):</p>
+You can configure the location of the violation store within <code>archunit.properties</code> (compare <a href="#_高度な設定advanced_configuration">Advanced Configuration</a>):</p>
+</div>
+<div class="paragraph">
+<p>初期設定の <code>FreezingArchRule</code> は平文テキストファイルを使用する単純な <code>ViolationStore</code> を使うようになっています。
+継続的に状況を追跡するなら、テキストファイルをバージョン管理システムへ登録するだけで十分でしょう。
+違反記録ファイルの場所は <code>archunit.properties</code> で指定できます（<a href="#_高度な設定advanced_configuration">Advanced Configuration</a> を参照）。</p>
 </div>
 <div class="listingblock">
 <div class="title">archunit.properties</div>
@@ -2102,6 +2606,9 @@ You can configure the location of the violation store within <code>archunit.prop
 </div>
 <div class="paragraph">
 <p>Furthermore, it is possible to configure</p>
+</div>
+<div class="paragraph">
+<p>他にも次のような設定項目があります。</p>
 </div>
 <div class="listingblock">
 <div class="title">archunit.properties</div>
@@ -2121,8 +2628,16 @@ For example, a CI build should probably never create a new the violation store, 
 an existing one.</p>
 </div>
 <div class="paragraph">
-<p>As mentioned in <a href="#_overriding_configuration">Overriding configuration</a>, these properties can be passed as system properties as needed.
+<p>これらの設定項目は CI 環境で実行するときの設定誤りを予防するために役立ちます。
+具体的には、CI環境で実行するビルドは新しい違反記録ファイルを作るべきではないし、既存のファイルがあるならそれを参照するべきなのです。</p>
+</div>
+<div class="paragraph">
+<p>As mentioned in <a href="#_設定の上書きoverriding_configuration">Overriding configuration</a>, these properties can be passed as system properties as needed.
 For example to allow the creation of the violation store in a specific environment, it is possible to pass the system property via</p>
+</div>
+<div class="paragraph">
+<p><a href="#_設定の上書きoverriding_configuration">Overriding configuration</a> で説明したように、これらの設定項目は必要ならシステムプロパティとして指定できるようになっています。
+例えば、任意の環境で違反記録ファイルを作成させたいときは、次のようなシステムプロパティを指定すればいいでしょう。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2137,9 +2652,17 @@ This can e.g. make sense, because current violations are consciously accepted an
 or because the format of some violations has changed. The respective property to allow refreezing
 all current violations is <code>freeze.refreeze=true</code>, where the default is <code>false</code>.</p>
 </div>
+<div class="paragraph">
+<p>全ての違反を「再凍結（refrozen）」させることも可能です。
+そうすると、違反記録ファイルを最新の状態へ更新し、実行結果は成功として終了します。
+実質的に全てのルールを永続化していないときの振る舞いと同じになります。
+これに意味があるのは、今の違反状況を認識し、受け入れており、違反記録ファイルへ追加してもよいと考えている場合だけです。
+前から存在していた違反の形式が変化しているのかもしれません。
+今の違反状態を再凍結させるにはシステムプロパティ <code>freez.refreeze=true</code> を指定します。初期値は <code>false</code> です。</p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="_extension"><a class="anchor" href="#_extension"></a>8.5.3. Extension</h4>
+<h4 id="_拡張可能な部分についてextension"><a class="anchor" href="#_拡張可能な部分についてextension"></a>8.5.3. 拡張可能な部分について（Extension）</h4>
 <div class="paragraph">
 <p><code>FreezingArchRule</code> provides two extension points to adjust the behavior to custom needs.
 The first one is the <code>ViolationStore</code>, i.e. the store violations will be recorded to. The second one
@@ -2147,13 +2670,25 @@ is the <code>ViolationLineMatcher</code>, i.e. how <code>FreezingArchRule</code>
 with lines of actual violations. As mentioned, by default this is a line matcher that ignores the
 line numbers of violations within the same class.</p>
 </div>
-<div class="sect4">
-<h5 id="_violation_store"><a class="anchor" href="#_violation_store"></a>Violation Store</h5>
 <div class="paragraph">
-<p>As mentioned in <a href="#_configuration">Configuration</a>, the default <code>ViolationStore</code> is a simple text based store.
+<p><code>FreezingArchRule</code> には拡張可能な部分が2か所あり、振る舞いを調整するのに使用できます。
+1つ目は <code>ViolationStore</code> で、違反の情報をどこに記録するのか制御します。
+2つ目は <code>ViolationLineMatcher</code> で、<code>FreezingArchRule</code> が違反を記録するとき、行番号を含めるかどうかを制御します。
+前述したとおり、初期設定では行番号を記録しないようになっています。</p>
+</div>
+<div class="sect4">
+<h5 id="_違反記録ストアviolation_store"><a class="anchor" href="#_違反記録ストアviolation_store"></a>違反記録ストア（Violation Store）</h5>
+<div class="paragraph">
+<p>As mentioned in <a href="#_設定configuration">Configuration</a>, the default <code>ViolationStore</code> is a simple text based store.
 It can be exchanged though, for example to store violations in a database.
 To provide your own implementation, implement <code>com.tngtech.archunit.library.freeze.ViolationStore</code> and
 configure <code>FreezingArchRule</code> to use it. This can either be done programmatically:</p>
+</div>
+<div class="paragraph">
+<p><a href="#_設定configuration">Configuration</a> で説明したとおり、初期設定の <code>ViolationStore</code> は単純に平文テキストファイルへ記録するようになっています。
+ファイルではなく、データベースへ記録させることができるということです。
+自分で実装するなら、<code>com.thgtech.archunit.library.freeze.ViolationStore</code> インターフェイスを実装したクラスを <code>FreezingArchRule</code> に指定すればいいでしょう。
+次のようにプログラムで記述できます。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2161,7 +2696,10 @@ configure <code>FreezingArchRule</code> to use it. This can either be done progr
 </div>
 </div>
 <div class="paragraph">
-<p>Alternatively it can be configured via <code>archunit.properties</code> (compare <a href="#_advanced_configuration">Advanced Configuration</a>):</p>
+<p>Alternatively it can be configured via <code>archunit.properties</code> (compare <a href="#_高度な設定advanced_configuration">Advanced Configuration</a>):</p>
+</div>
+<div class="paragraph">
+<p>あるいは、次のように <code>archunit.properties</code> の設定項目にも記述できます（<a href="#_高度な設定advanced_configuration">Advanced Configuration</a> を参照）。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2172,6 +2710,9 @@ configure <code>FreezingArchRule</code> to use it. This can either be done progr
 <p>You can supply properties to initialize the store by using the namespace <code>freeze.store</code>.
 For properties</p>
 </div>
+<div class="paragraph">
+<p>名前空間 <code>freeze.store</code> に、違反記録ストアを初期化するためのプロパティを指定できます。</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">freeze.store.propOne=valueOne
@@ -2181,6 +2722,9 @@ freeze.store.propTwo=valueTwo</code></pre>
 <div class="paragraph">
 <p>the method <code>ViolationStore.initialize(props)</code> will be called with the properties</p>
 </div>
+<div class="paragraph">
+<p>これらのプロパティは <code>VilationStore.initialize(props)</code> の引数に指定されます。</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">propOne=valueOne
@@ -2189,12 +2733,17 @@ propTwo=valueTwo</code></pre>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_violation_line_matcher"><a class="anchor" href="#_violation_line_matcher"></a>Violation Line Matcher</h5>
+<h5 id="_違反行マッチャーviolation_line_matcher"><a class="anchor" href="#_違反行マッチャーviolation_line_matcher"></a>違反行マッチャー（Violation Line Matcher）</h5>
 <div class="paragraph">
 <p>The <code>ViolationLineMatcher</code> compares lines from occurred violations with lines from the store.
 The default implementation ignores line numbers and numbers of anonymous classes or lambda expressions,
 and counts lines as equivalent when all other details match.
 A custom <code>ViolationLineMatcher</code> can again either be defined programmatically:</p>
+</div>
+<div class="paragraph">
+<p><code>VilationLineMatcher</code> は違反と、違反の発生した行番号を、違反記録ストアと照合します。
+既定の実装では、行番号と、無名クラスやラムダ式の数を無視して、全体の行数が一致すればそれ以外の全ての詳細も一致したものと見做すようになっています。
+独自の <code>ViolationLineMatcher</code> があるときは、次のようにプログラムで記述できます。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2203,6 +2752,9 @@ A custom <code>ViolationLineMatcher</code> can again either be defined programma
 </div>
 <div class="paragraph">
 <p>or via <code>archunit.properties</code>:</p>
+</div>
+<div class="paragraph">
+<p>あるいは、次のように <code>archunit.properties</code> の設定項目にも記述できます（<a href="#_高度な設定advanced_configuration">Advanced Configuration</a> を参照）。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2213,7 +2765,7 @@ A custom <code>ViolationLineMatcher</code> can again either be defined programma
 </div>
 </div>
 <div class="sect2">
-<h3 id="_software_architecture_metrics"><a class="anchor" href="#_software_architecture_metrics"></a>8.6. Software Architecture Metrics</h3>
+<h3 id="_ソフトウェアアーキテクチャのメトリクスsoftware_architecture_metrics"><a class="anchor" href="#_ソフトウェアアーキテクチャのメトリクスsoftware_architecture_metrics"></a>8.6. ソフトウェアアーキテクチャのメトリクス（Software Architecture Metrics）</h3>
 <div class="paragraph">
 <p>Similar to code quality metrics, like cyclomatic complexity or method length,
 software architecture metrics strive to measure the structure and design of software.
@@ -2227,18 +2779,35 @@ between those components, which are naturally derived from the dependencies betw
 the elements (e.g. classes) within these components.</p>
 </div>
 <div class="paragraph">
+<p>ソースコード品質のメトリクスにおけるサイクロマティック複雑度やメソッド長のように、ソフトウェアアーキテクチャのメトリクスとして、ソフトウェアの設計や構造を計測する試みが続けられています。
+ArchUnit は既知のソフトウェアアーキテクチャメトリクスの一部を算出できるようになっています。
+メトリクスの根拠になるのは、基本的になんらかの形でコンポーネント化に貢献する要素です。
+例えば、私たちは Java アプリケーションをクラス、メソッド、フィールドなどの単位に分割し、それぞれの単位がどれだけあるのか計測します。
+ArchUnit ではこの考え方を <code>com.tngtech.archunit.library.metrics.MetricsCOmponent</code> として表現しています。
+ジョン・レイコスの提案した「累積依存性メトリクス（Cumulative Dependency Metrics）」のように、一部のメトリクスでは、コンポーネント間の依存関係に関する情報が必要になります。
+これは、コンポーネントに含まれる全ての要素（クラスなど）に関する依存関係から導出できます。</p>
+</div>
+<div class="paragraph">
 <p>A very simple concrete example would be to consider some Java packages as
 components and the classes within these packages as the contained elements. From
 the dependencies between the classes we can derive which package depends on which
 other package.</p>
 </div>
 <div class="paragraph">
+<p>簡単な具体例を考えると、Java パッケージをコンポーネントとした場合、コンポーネントの構成要素はクラスになります。
+従って、全てのクラスの依存関係が分かれば、そのパッケージが他のパッケージにどれだけ依存しているのか導出できるのです。</p>
+</div>
+<div class="paragraph">
 <p>The following will give a quick overview of the metrics that ArchUnit can calculate.
 However, for further background information it is recommended to rely on
 some dedicated literature that explains these metrics in full detail.</p>
 </div>
+<div class="paragraph">
+<p>ArchUnit で計算できるメトリクスの例は次のとおりです。
+それぞれのメトリクスに関する正確な説明が必要なときは、出典の文献を参照してください。</p>
+</div>
 <div class="sect3">
-<h4 id="_cumulative_dependency_metrics_by_john_lakos"><a class="anchor" href="#_cumulative_dependency_metrics_by_john_lakos"></a>8.6.1. Cumulative Dependency Metrics by John Lakos</h4>
+<h4 id="_ジョンレイコスの提案した累積依存性メトリクスcumulative_dependency_metrics_by_john_lakos"><a class="anchor" href="#_ジョンレイコスの提案した累積依存性メトリクスcumulative_dependency_metrics_by_john_lakos"></a>8.6.1. ジョン・レイコスの提案した「累積依存性メトリクス」（Cumulative Dependency Metrics by John Lakos）</h4>
 <div class="paragraph">
 <p>These are software architecture metrics as defined by John Lakos in his book
 "Large-Scale C++ Software Design". The basic idea is to calculate the <code>DependsOn</code>
@@ -2248,31 +2817,39 @@ transitively reached from some component including the component itself.</p>
 <div class="paragraph">
 <p>From these values we can derive</p>
 </div>
+<div class="paragraph">
+<p>これは、ジョン・レイコスが「Large-Scale C++ Software Design」でソフトウェアアーキテクチャのメトリクスです。
+それぞれのコンポーネントについて <code>DependsOn</code> を集計するのが基本的な考え方です。
+末端のコンポーネントそれ自体を含むコンポーネントの一部から、推移的に到達可能なコンポーネントの依存関係の総和を、全てのコンポーネントの依存関係の総和と見做す考え方です。</p>
+</div>
+<div class="paragraph">
+<p>次のような指標を導出できます。</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Cumulative Component Dependency (<strong>CCD</strong>):
-The sum of all <code>DependsOn</code> values of all components</p>
+<p><strong>CCD</strong> - 累積コンポーネント依存性:
+全てのコンポーネントに関する <code>DependsOn</code> の総和。</p>
 </li>
 <li>
-<p>Average Component Dependency (<strong>ACD</strong>):
-The <code>CCD</code> divided by the number of all components</p>
+<p><strong>ACD</strong> - 平均コンポーネント依存性:
+<code>CCD</code> を全てのコンポーネント数で除算した値。</p>
 </li>
 <li>
-<p>Relative Average Component Dependency (<strong>RACD</strong>):
-The <code>ACD</code> divided by the number of all components</p>
+<p><strong>RACD</strong> - 相対平均コンポーネント依存性:
+<code>ACD</code> を全てのコンポーネント数で除算した値。</p>
 </li>
 <li>
-<p>Normalized Cumulative Component Dependency (<strong>NCCD</strong>):
-The <code>CCD</code> of the system divided by the <code>CCD</code> of a balanced binary tree with the same number of components</p>
+<p><strong>NACD</strong> - 正規化平均コンポーネント依存性:
+システムの <code>CCD</code> を、同じ数のコンポーネントからなる平衡二分木の <code>CCD</code> で除算した値。</p>
 </li>
 </ul>
 </div>
 <div class="sect4">
-<h5 id="_example"><a class="anchor" href="#_example"></a>Example</h5>
+<h5 id="_具体例example"><a class="anchor" href="#_具体例example"></a>具体例（Example）</h5>
 <div class="imageblock">
 <div class="content">
-<img src="lakos-example.png" alt="lakos example" width="470" height="553">
+<img src="lakos-example.png" alt="lakos example" width="445" height="567">
 </div>
 </div>
 <div class="paragraph">
@@ -2280,11 +2857,19 @@ The <code>CCD</code> of the system divided by the <code>CCD</code> of a balanced
 Note that in a cycle all elements have the same <code>DependsOn</code> value which will lead to an increased
 CCD. In fact for any non-trivial (<code>n &gt;= 5</code>) acyclic graph of components the RACD is bound by <code>0.6</code>.</p>
 </div>
+<div class="paragraph">
+<p>これらのメトリクスは、システムの依存関係グラフの複雑さに関する洞察をもたらします。
+巡回グラフの全ての要素の <code>DependsOn</code> が同じ値になると、CCD は増加するので注意が必要です。
+実際には、任意の自明でない非巡回グラフ（<code>n &gt;= 5</code>）では、RACD の上限値は <code>0.6</code> になります。</p>
+</div>
 </div>
 <div class="sect4">
-<h5 id="_how_to_use_the_api"><a class="anchor" href="#_how_to_use_the_api"></a>How to use the API</h5>
+<h5 id="_api_の使い方how_to_use_the_api"><a class="anchor" href="#_api_の使い方how_to_use_the_api"></a>API の使い方（How to use the API）</h5>
 <div class="paragraph">
 <p>The values described for these metrics can be calculated in the following way:</p>
+</div>
+<div class="paragraph">
+<p>それぞれのメトリクスは次のように算出できます。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2308,10 +2893,14 @@ System.out.println("NCCD: " + metrics.getNormalizedCumulativeComponentDependency
 </div>
 </div>
 <div class="sect3">
-<h4 id="_component_dependency_metrics_by_robert_c_martin"><a class="anchor" href="#_component_dependency_metrics_by_robert_c_martin"></a>8.6.2. Component Dependency Metrics by Robert C. Martin</h4>
+<h4 id="_ロバートcマーチンの提案したコンポーネント依存性メトリクスcomponent_dependency_metrics_by_robert_c_martin"><a class="anchor" href="#_ロバートcマーチンの提案したコンポーネント依存性メトリクスcomponent_dependency_metrics_by_robert_c_martin"></a>8.6.2. ロバート・C・マーチンの提案したコンポーネント依存性メトリクス（Component Dependency Metrics by Robert C. Martin）</h4>
 <div class="paragraph">
 <p>These software architecture metrics were defined by Robert C. Martin in various sources,
 for example in his book "Clean architecture : a craftsman&#8217;s guide to software structure and design".</p>
+</div>
+<div class="paragraph">
+<p>ロバート・C・マーチンはさまざまなソフトウェアアーキテクチャのメトリクスをいろんなところで紹介しています。
+例えば「Clean archtecture : a craftsman&#8217;s guide to software structure and design」など。</p>
 </div>
 <div class="paragraph">
 <p>The foundation are again components, that must in this case contain classes as their elements
@@ -2320,24 +2909,28 @@ for example in his book "Clean architecture : a craftsman&#8217;s guide to softw
 <div class="paragraph">
 <p>The metrics are based on the following definitions:</p>
 </div>
+<div class="paragraph">
+<p>対象はやはりコンポーネントで、構成要素としてクラスを持っていることになっています（ここで紹介するメトリクスは、抽象クラスの考え方が必須の純粋なオブジェクト指向ソフトウェアのメトリクスです）。</p>
+</div>
+<div class="paragraph">
+<p>それぞれのメトリクスは次のような定義に基づいています。</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Efferent Coupling (<strong>Ce</strong>): The number of outgoing dependencies to any other component</p>
+<p>外向きの結合（Efferent Coupling）（<strong>Ce</strong>）: 他のコンポーネントへ向かう外向きの依存関係の総数</p>
 </li>
 <li>
-<p>Afferent Coupling (<strong>Ca</strong>): The number of incoming dependencies from any other component</p>
+<p>内向きの結合（Afferent Coupling）（<strong>Ca</strong>）: 他のコンポーネントから向かってくる内向きの依存関係の総数</p>
 </li>
 <li>
-<p>Instability (<strong>I</strong>): <code>Ce / (Ca + Ce)</code>, i.e. the relationship of outgoing dependencies
-to all dependencies</p>
+<p>不安定性（Instability）（<strong>I</strong>）: <code>Ce / (Ca + Ce)</code> 全ての依存関係に対する外向きの依存関係の割合</p>
 </li>
 <li>
-<p>Abstractness (<strong>A</strong>): <code>num(abstract_classes) / num(all_classes)</code> in the component</p>
+<p>抽象度（Abstractness）（<strong>A</strong>）: <code>num(抽象クラス) / num(全てのクラス)</code> コンポーネント中の全てのクラスに対する抽象クラスの割合</p>
 </li>
 <li>
-<p>Distance from Main Sequence (<strong>D</strong>): <code>| A + I - 1 |</code>, i.e. the normalized distance from
-the ideal line between <code>(A=1, I=0)</code> and <code>(A=0, I=1)</code></p>
+<p>主系列からの距離（Distance from Main Sequence）（<strong>D</strong>）: <code>| A + I - 1 |</code> 理想直線 <code>(A=1, I=0)</code> と <code>(A=0, I=1)</code> からの正規化した距離</p>
 </li>
 </ul>
 </div>
@@ -2349,22 +2942,33 @@ are metrics with respect to coupling of components. But only classes that are vi
 to the outside can affect coupling between components,
 so it makes sense to only consider those classes to calculate the <strong>A</strong> value.</p>
 </div>
+<div class="paragraph">
+<p>ArchUnit の実装は本来の定義とはやや異なる内容になっているので注意してください。
+ArchUnit では、抽象度を算出するのに、public クラス（つまり外部から参照できるクラス）だけを集計しています。
+抽象度以外の全てのメトリクスはコンポーネント間の結合に関するメトリクスなので、コンポーネント間の結合に寄与するクラスだけを対象にするほうが適切だと考えたからです。</p>
+</div>
 <div class="sect4">
-<h5 id="_example_2"><a class="anchor" href="#_example_2"></a>Example</h5>
+<h5 id="_具体例example_2"><a class="anchor" href="#_具体例example_2"></a>具体例（Example）</h5>
 <div class="paragraph">
 <p>The following provides some example where the <code>A</code> values assume some random factor
 of abstract classes within the respective component.</p>
 </div>
+<div class="paragraph">
+<p>次の例では、コンポーネント中にランダムな数の抽象クラスが存在するものとして、抽象度 <code>A</code> を算出しています。</p>
+</div>
 <div class="imageblock">
 <div class="content">
-<img src="martin-example.png" alt="martin example" width="470" height="711">
+<img src="martin-example.png" alt="martin example" width="445" height="743">
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_how_to_use_the_api_2"><a class="anchor" href="#_how_to_use_the_api_2"></a>How to use the API</h5>
+<h5 id="_api_の使い方how_to_use_the_api_2"><a class="anchor" href="#_api_の使い方how_to_use_the_api_2"></a>API の使い方（How to use the API）</h5>
 <div class="paragraph">
 <p>The values described for these metrics can be calculated in the following way:</p>
+</div>
+<div class="paragraph">
+<p>それぞれのメトリクスは次のように算出できます。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2389,7 +2993,7 @@ System.out.println("D: " + metrics.getNormalizedDistanceFromMainSequence("com.ex
 </div>
 </div>
 <div class="sect3">
-<h4 id="_visibility_metrics_by_herbert_dowalil"><a class="anchor" href="#_visibility_metrics_by_herbert_dowalil"></a>8.6.3. Visibility Metrics by Herbert Dowalil</h4>
+<h4 id="_ハーバートドワリルの提案した可視性メトリクスvisibility_metrics_by_herbert_dowalil"><a class="anchor" href="#_ハーバートドワリルの提案した可視性メトリクスvisibility_metrics_by_herbert_dowalil"></a>8.6.3. ハーバート・ドワリルの提案した可視性メトリクス（Visibility Metrics by Herbert Dowalil）</h4>
 <div class="paragraph">
 <p>These software architecture metrics were defined by Herbert Dowalil in his book
 "Modulare Softwarearchitektur: Nachhaltiger Entwurf durch Microservices, Modulithen und SOA 2.0".
@@ -2399,31 +3003,41 @@ elements within a component.</p>
 <div class="paragraph">
 <p>The metrics are composed from the following definitions:</p>
 </div>
+<div class="paragraph">
+<p>これらのソフトウェアアーキテクチャのメトリクスは、ハーバート・ドワリルが「Modulare Softwarearchitektur: Nachhaltiger Entwurf durch Microservices, Modulithen und SOA 2.0」で提案したものです。
+情報隠蔽の原則に基づく指標として、コンポーネント中の可視要素から不可視要素への関連などを提供します。</p>
+</div>
+<div class="paragraph">
+<p>それぞれのメトリクスは次のような定義に基づいています。</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Relative Visibility (<strong>RV</strong>): <code>num(visible_elements) / num(all_elements)</code> for each component</p>
+<p>相対可視性（<strong>RV</strong>）: <code>num(可視要素) / num(全ての要素)</code> それぞれのコンポーネントについて計算します</p>
 </li>
 <li>
-<p>Average Relative Visibility (<strong>ARV</strong>): The average of all <code>RV</code> values</p>
+<p>平均相対可視性（<strong>ARV</strong>）: 全てのコンポーネントに関する <strong>RV</strong> の平均値</p>
 </li>
 <li>
-<p>Global Relative Visibility (<strong>GRV</strong>): <code>num(visible_elements) / num(all_elements)</code> over all components</p>
+<p>全体相対可視性（<strong>GRV</strong>）: <code>num(可視要素) / num(全ての要素)</code> 全てのコンポーネントについて計算します</p>
 </li>
 </ul>
 </div>
 <div class="sect4">
-<h5 id="_example_3"><a class="anchor" href="#_example_3"></a>Example</h5>
+<h5 id="_具体例example_3"><a class="anchor" href="#_具体例example_3"></a>具体例（Example）</h5>
 <div class="imageblock">
 <div class="content">
-<img src="dowalil-example.png" alt="dowalil example" width="712" height="318">
+<img src="dowalil-example.png" alt="dowalil example" width="685" height="326">
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_how_to_use_the_api_3"><a class="anchor" href="#_how_to_use_the_api_3"></a>How to use the API</h5>
+<h5 id="_api_の使い方how_to_use_the_api_3"><a class="anchor" href="#_api_の使い方how_to_use_the_api_3"></a>API の使い方（How to use the API）</h5>
 <div class="paragraph">
 <p>The values described for these metrics can be calculated in the following way:</p>
+</div>
+<div class="paragraph">
+<p>それぞれのメトリクスは次のように算出できます。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2449,7 +3063,7 @@ System.out.println("GRV: " + metrics.getGlobalRelativeVisibility());</code></pre
 </div>
 </div>
 <div class="sect1">
-<h2 id="_junit_support"><a class="anchor" href="#_junit_support"></a>9. JUnit Support</h2>
+<h2 id="_junit_拡張機能junit_support"><a class="anchor" href="#_junit_拡張機能junit_support"></a>9. JUnit 拡張機能（JUnit Support）</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>At the moment ArchUnit offers extended support for writing tests with JUnit 4 and JUnit 5.
@@ -2457,6 +3071,13 @@ This mainly tackles the problem of caching classes between test runs and to remo
 </div>
 <div class="paragraph">
 <p>Consider a straight forward approach to write tests:</p>
+</div>
+<div class="paragraph">
+<p>現時点の ArchUnit は、JUnit 4 と JUnit 5 でテストを書きやすくするための機能を提供しています。
+主な目的は、実行するテストの間でクラスをキャッシュする仕組みを提供し、典型的な準備コードを不要にすることです。</p>
+</div>
+<div class="paragraph">
+<p>まず、単純なテストを書く方法について検討してみましょう。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2484,18 +3105,31 @@ public void rule2() {
 a noticeable amount of time. Also rules will always be checked against the imported classes, thus
 the explicit call of <code>check(importedClasses)</code> is bloat and error prone (i.e. it can be forgotten).</p>
 </div>
-<div class="sect2">
-<h3 id="_junit_4_5_support"><a class="anchor" href="#_junit_4_5_support"></a>9.1. JUnit 4 &amp; 5 Support</h3>
 <div class="paragraph">
-<p>Make sure you follow the installation instructions at <a href="#_installation">Installation</a>, in particular to include
+<p>プロジェクトが大きくなってくると、このテストはクラスのインポートが完了するまでの時間がとても長くなってしまいます。
+また、ルールはインポートした全てのクラスをチェックするため、<code>check(importedClasses)</code> の呼び出しは多数のクラスをチェックすることになり、間違いを見逃しやすくなってしまいます（あるいは忘れやすくなってしまいます）。</p>
+</div>
+<div class="sect2">
+<h3 id="_junit_4_および_junit_5_への対応junit_4_5_support"><a class="anchor" href="#_junit_4_および_junit_5_への対応junit_4_5_support"></a>9.1. JUnit 4 および JUnit 5 への対応（JUnit 4 &amp; 5 Support）</h3>
+<div class="paragraph">
+<p>Make sure you follow the installation instructions at <a href="#_インストールinstallation">Installation</a>, in particular to include
 the correct dependency for the respective JUnit support.</p>
 </div>
+<div class="paragraph">
+<p><a href="#_インストールinstallation">Installation</a> に記載したインストールの手順に従い、JUnit のバージョンに合わせて適切な依存ライブラリを追加してください。</p>
+</div>
 <div class="sect3">
-<h4 id="_writing_tests"><a class="anchor" href="#_writing_tests"></a>9.1.1. Writing tests</h4>
+<h4 id="_テストを書くwriting_tests"><a class="anchor" href="#_テストを書くwriting_tests"></a>9.1.1. テストを書く（Writing tests）</h4>
 <div class="paragraph">
 <p>Tests look and behave very similar between JUnit 4 and 5. The only difference is, that with JUnit 4
 it is necessary to add a specific <code>Runner</code> to take care of caching and checking rules, while JUnit 5
 picks up the respective <code>TestEngine</code> transparently. A test typically looks the following way:</p>
+</div>
+<div class="paragraph">
+<p>JUnit 4 と JUnit 5 のテストは見た目も振る舞いも非常によく似ています。
+違いは、JUnit 4 でキャッシュやルールをチェックする仕組みを有効にするには、特定の <code>Runner</code> を指定しなければならないところです。
+JUnit 5 なら適切な <code>TestEngine</code> を透過的に選択するだけです。
+いずれにしてもテストは次のような形式になります。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2525,15 +3159,29 @@ so they can be reused by several rules declared within the same class. On the ot
 will cache the classes by location, so a second test that wants to import classes from the same
 URLs will reuse the classes previously imported as well. Note that this second caching uses
 soft references, so the classes will be dropped from memory, if the heap runs low.
-For further information see <a href="#_controlling_the_cache">Controlling the Cache</a>.</p>
+For further information see <a href="#_キャッシュの制御controlling_the_cache">Controlling the Cache</a>.</p>
+</div>
+<div class="paragraph">
+<p><code>JavaClass</code> のキャッシュは2種類の場面で仕事します。
+1つ目は、テストメソッドで扱っているクラスをキャッシュすることです。
+同じテストクラスにフィールドとして定義したいくつものルールで再利用できるのです。
+2つ目は、位置に対応するクラスをキャッシュすることです。
+同じURLからインポートする2つ目のテストでは、前にインポートしたクラスを再利用できるのです。
+ただし、このキャッシュはソフト参照を利用しているため、クラスがヒープメモリから追い出されると無効になってしまいます。
+より詳しく知りたければ <a href="#_キャッシュの制御controlling_the_cache">Controlling the Cache</a> を参照してください。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_controlling_the_import"><a class="anchor" href="#_controlling_the_import"></a>9.1.2. Controlling the Import</h4>
+<h4 id="_インポートの制御controlling_the_import"><a class="anchor" href="#_インポートの制御controlling_the_import"></a>9.1.2. インポートの制御（Controlling the Import）</h4>
 <div class="paragraph">
 <p>Which classes will be imported can be controlled in a declarative way through <code>@AnalyzeClasses</code>.
 If no packages or locations are provided, the whole classpath will be imported.
 You can specify packages to import as strings:</p>
+</div>
+<div class="paragraph">
+<p>インポートするクラスは <code>@AnalyzeClasses</code> により宣言的に指定できるようになっています。
+パッケージや位置を指定しなかった場合、クラスパス上の全てのクラスがインポートされることになります。
+パッケージは文字列で指定できます。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2544,6 +3192,10 @@ You can specify packages to import as strings:</p>
 <p>To better support refactorings, packages can also be declared relative to classes, i.e. the
 packages these classes reside in will be imported:</p>
 </div>
+<div class="paragraph">
+<p>リファクタリングを楽にするため、パッケージを指定するときはクラスに対する相対的な要素として指定するといいでしょう。
+次のようにクラスを指定すると、クラスの所属するパッケージと、そのサブパッケージをインポートするようになります。</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="java" class="language-java hljs">@AnalyzeClasses(packagesOf = {SubOneConfiguration.class, SubTwoConfiguration.class})</code></pre>
@@ -2551,6 +3203,9 @@ packages these classes reside in will be imported:</p>
 </div>
 <div class="paragraph">
 <p>As a third option, locations can be specified freely by implementing a <code>LocationProvider</code>:</p>
+</div>
+<div class="paragraph">
+<p>もう1つの選択肢は、<code>LocationProvider</code> を実装して位置を自由に制御することです。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2567,8 +3222,12 @@ packages these classes reside in will be imported:</p>
 </div>
 <div class="paragraph">
 <p>Furthermore to choose specific classes beneath those locations, <code>ImportOptions</code> can be
-specified (compare <a href="#_the_core_api">The Core API</a>). For example, to import the classpath, but only consider
+specified (compare <a href="#_コア_apithe_core_api">The Core API</a>). For example, to import the classpath, but only consider
 production code, and only consider code that is directly supplied and does not come from JARs:</p>
+</div>
+<div class="paragraph">
+<p>また、位置を指定しつつクラスも指定したければ <code>ImportOptions</code> が利用できます（<a href="#_コア_apithe_core_api">The Core API</a> を参照）。
+例えば、クラスパスからインポートするけど、テストに含まれない製品コードや、JARファイルに含まないけど参照可能なコードを参照したい場合は次のように記述します。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2576,21 +3235,32 @@ production code, and only consider code that is directly supplied and does not c
 </div>
 </div>
 <div class="paragraph">
-<p>As explained in <a href="#_the_core_api">The Core API</a>, you can write your own custom implementation of <code>ImportOption</code>
+<p>As explained in <a href="#_コア_apithe_core_api">The Core API</a>, you can write your own custom implementation of <code>ImportOption</code>
 and then supply the type to <code>@AnalyzeClasses</code>.</p>
+</div>
+<div class="paragraph">
+<p><a href="#_コア_apithe_core_api">The Core API</a> で説明したように、<code>@AnalyzeClasses</code> には、自分で実装した <code>ImportOption</code> を指定できます。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_controlling_the_cache"><a class="anchor" href="#_controlling_the_cache"></a>9.1.3. Controlling the Cache</h4>
+<h4 id="_キャッシュの制御controlling_the_cache"><a class="anchor" href="#_キャッシュの制御controlling_the_cache"></a>9.1.3. キャッシュの制御（Controlling the Cache）</h4>
 <div class="paragraph">
 <p>By default all classes will be cached by location. This means that between different
 test class runs imported Java classes will be reused, if the exact combination of locations has already
 been imported.</p>
 </div>
 <div class="paragraph">
+<p>初期設定では、全てのクラスがインポートした位置と共にキャッシュされます。
+つまり、複数のテストクラスで同じ位置からインポートしている場合、キャッシュを再利用できるのです。</p>
+</div>
+<div class="paragraph">
 <p>If the heap runs low, and thus the garbage collector has to do a big sweep in one run,
 this can cause a noticeable delay. On the other hand, if it is known that no other test class will
 reuse the imported Java classes, it would make sense to deactivate this cache.</p>
+</div>
+<div class="paragraph">
+<p>利用できるヒープメモリが狭すぎる場合や、GC のスイープ処理に時間がかかりすぎる場合は、無視できない遅れが発生します。
+一方、インポートしたクラスを再利用するテストクラスが他に存在しないことが分かっているなら、キャッシュを破棄できることになります。</p>
 </div>
 <div class="paragraph">
 <p>This can be achieved by configuring <code>CacheMode.PER_CLASS</code>, e.g.</p>
@@ -2605,11 +3275,18 @@ reuse the imported Java classes, it would make sense to deactivate this cache.</
 the same test class. After all tests of this class have been run,
 the imported Java classes will simply be dropped.</p>
 </div>
+<div class="paragraph">
+<p>このテストを実行してインポートした Java クラスは、位置に対してキャッシュしませんし、同じテストクラスの中でしか再利用しません。
+このテストクラスの全てのテストが完了したら、インポートした Java クラスは単純に捨てることができます。</p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="_ignoring_tests"><a class="anchor" href="#_ignoring_tests"></a>9.1.4. Ignoring Tests</h4>
+<h4 id="_テストの無視ignoring_tests"><a class="anchor" href="#_テストの無視ignoring_tests"></a>9.1.4. テストの無視（Ignoring Tests）</h4>
 <div class="paragraph">
 <p>It is possible to skip tests by annotating them with <code>@ArchIgnore</code>, for example:</p>
+</div>
+<div class="paragraph">
+<p><code>@ArcIgnore</code> アノテーションを指定するとテストをスキップできます。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2630,13 +3307,22 @@ the imported Java classes will simply be dropped.</p>
 <p>Note for users of JUnit 5: the annotation <code>@Disabled</code> has no effect here.
 Instead, <code>@ArchIgnore</code> should be used.</p>
 </div>
+<div class="paragraph">
+<p>JUnit 5 を使っている場合は <code>@Disabled</code> アノテーションが無効になるので注意してください。
+あくまでも <code>@ArchIgnore</code> を指定しなければなりません。</p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="_grouping_rules"><a class="anchor" href="#_grouping_rules"></a>9.1.5. Grouping Rules</h4>
+<h4 id="_ルールのグループ化grouping_rules"><a class="anchor" href="#_ルールのグループ化grouping_rules"></a>9.1.5. ルールのグループ化（Grouping Rules）</h4>
 <div class="paragraph">
 <p>Often a project might end up with different categories of rules, for example "service rules"
 and "persistence rules". It is possible to write one class for each set of rules, and then
 refer to those sets from another test:</p>
+</div>
+<div class="paragraph">
+<p>最終的にプロジェクトのルールはさまざまな分類に落ち着くことでしょう。
+例えば、「サービスのためのルール」とか「永続化層のためのルール」とか。
+それぞれの分類に対応するルールを1つのクラスとして記述し、テストから参照できます。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2672,27 +3358,41 @@ public class ArchitectureTest {
 them against the classes declared within <code>@AnalyzeClasses</code> on <code>ArchitectureTest</code>.
 This also allows an easy reuse of a rule library in different projects or modules.</p>
 </div>
+<div class="paragraph">
+<p>テストランナーは <code>ServiceRules</code> と <code>PersistenceRules</code> から <code>@ArchTest</code> アノテーションで修飾した全てのメンバーを抽出し、<code>ArchitectureTest</code> の <code>@AnalyzeClasses</code> で指定した全てのクラスに対して評価します。
+他のプロジェクトやモジュールをルールライブラリとして再利用するのも簡単でしょう。</p>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_advanced_configuration"><a class="anchor" href="#_advanced_configuration"></a>10. Advanced Configuration</h2>
+<h2 id="_高度な設定advanced_configuration"><a class="anchor" href="#_高度な設定advanced_configuration"></a>10. 高度な設定（Advanced Configuration）</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Some behavior of ArchUnit can be centrally configured by adding a file <code>archunit.properties</code>
 to the root of the classpath (e.g. under <code>src/test/resources</code>).
 This section will outline some global configuration options.</p>
 </div>
+<div class="paragraph">
+<p>ArchUnit の振る舞いの一部は <code>archunit.properties</code> をクラスパスのルートに配置すると集中管理できるようになります（たとえば <code>src/test/resources</code> に配置するといいでしょう）。
+このセクションでは大域的な設定オプションについて解説します。</p>
+</div>
 <div class="sect2">
-<h3 id="_overriding_configuration"><a class="anchor" href="#_overriding_configuration"></a>10.1. Overriding configuration</h3>
+<h3 id="_設定の上書きoverriding_configuration"><a class="anchor" href="#_設定の上書きoverriding_configuration"></a>10.1. 設定の上書き（Overriding configuration）</h3>
 <div class="paragraph">
 <p>ArchUnit will use exactly the <code>archunit.properties</code> file returned by the context
 <code>ClassLoader</code> from the classpath root, via the standard Java resource loading mechanism.</p>
 </div>
 <div class="paragraph">
+<p>ArchUnit は、Java の標準的なリソース読み取りの仕組みに従い、<code>ClassLoader</code> の発見したクラスパスのルートに配置されている <code>archunit.properties</code> の内容そのものを参照します。</p>
+</div>
+<div class="paragraph">
 <p>It is possible to override any property from <code>archunit.properties</code>, by passing a system property
 to the respective JVM process executing ArchUnit:</p>
+</div>
+<div class="paragraph">
+<p><code>archunit.properties</code> で指定した設定項目は、ArchUnit を実行する JVM のシステムプロパティで上書きできます。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2702,6 +3402,9 @@ to the respective JVM process executing ArchUnit:</p>
 <div class="paragraph">
 <p>E.g. to override the property <code>resolveMissingDependenciesFromClassPath</code> described in the next section, it would be possible to pass:</p>
 </div>
+<div class="paragraph">
+<p>例えば、次のセクションで説明する設定項目 <code>resolveMissingDependenciesFromClassPath</code> を上書きするときは、次のように指定します。</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">-Darchunit.resolveMissingDependenciesFromClassPath=false</code></pre>
@@ -2709,11 +3412,15 @@ to the respective JVM process executing ArchUnit:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_configuring_the_resolution_behavior"><a class="anchor" href="#_configuring_the_resolution_behavior"></a>10.2. Configuring the Resolution Behavior</h3>
+<h3 id="_解決のための振る舞いの構成configuring_the_resolution_behavior"><a class="anchor" href="#_解決のための振る舞いの構成configuring_the_resolution_behavior"></a>10.2. 解決のための振る舞いの構成（Configuring the Resolution Behavior）</h3>
 <div class="paragraph">
-<p>As mentioned in <a href="#_dealing_with_missing_classes">Dealing with Missing Classes</a>, it might be preferable to configure a different
+<p>As mentioned in <a href="#_存在しないクラスの扱いdealing_with_missing_classes">Dealing with Missing Classes</a>, it might be preferable to configure a different
 import behavior if dealing with missing classes wastes too much performance.
 One way that can be chosen out of the box is to never resolve any missing class from the classpath:</p>
+</div>
+<div class="paragraph">
+<p><a href="#_存在しないクラスの扱いdealing_with_missing_classes">Dealing with Missing Classes</a> で説明したように、存在しないクラスの扱いが重大な性能劣化に影響する場合、別のインポートの振る舞いをさせるほうが望ましいです。
+1つの方法として、存在しないクラスをクラスパスから探索しない組み込みの振る舞いを選択できます。</p>
 </div>
 <div class="listingblock">
 <div class="title">archunit.properties</div>
@@ -2725,6 +3432,9 @@ One way that can be chosen out of the box is to never resolve any missing class 
 <p>If you want to resolve just some classes from the classpath (e.g. to import missing classes from
 your own organization but avoid the performance impact of importing classes from 3rd party packages),
 it is possible to configure only specific packages to be resolved from the classpath:</p>
+</div>
+<div class="paragraph">
+<p>クラスパスから解決させたいクラスがいくつか存在するなら、特定のパッケージだけをクラスパスから解決させるように構成できます（例えば、あなたの会社内で利用しているクラスをクラスパスから解決させたいけど、サードパーティのパッケージを探索して性能劣化させたくない場合など）。</p>
 </div>
 <div class="listingblock">
 <div class="title">archunit.properties</div>
@@ -2738,11 +3448,21 @@ classResolver.args=some.pkg.one,some.pkg.two</code></pre>
 classpath, and stub all other missing classes.</p>
 </div>
 <div class="paragraph">
+<p>このように設定すると、<code>some.pkg.one</code> と <code>some.pkg.two</code> のパッケージに所属するクラスをクラスパスから解決し、それ以外のクラスはスタブにすることができます。</p>
+</div>
+<div class="paragraph">
 <p>The last example also demonstrates, how the behavior can be customized freely, for example
 if classes are imported from a different source and are not on the classpath:</p>
 </div>
 <div class="paragraph">
+<p>最後の例では、振る舞いの構成の自由度を示すことにします。
+次のように設定すると、クラスパスではない別のファイルシステムパスからクラスをインポートできるのです。</p>
+</div>
+<div class="paragraph">
 <p>First Supply a custom implementation of</p>
+</div>
+<div class="paragraph">
+<p>まず、<code>ClassResolver</code> を実装したクラスを用意します。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2751,6 +3471,9 @@ if classes are imported from a different source and are not on the classpath:</p
 </div>
 <div class="paragraph">
 <p>Then configure it</p>
+</div>
+<div class="paragraph">
+<p>そして次のように設定します。</p>
 </div>
 <div class="listingblock">
 <div class="title">archunit.properties</div>
@@ -2762,6 +3485,9 @@ if classes are imported from a different source and are not on the classpath:</p
 <p>If the resolver needs some further arguments, create a public constructor with one <code>List&lt;String&gt;</code>
 argument, and supply the concrete arguments as</p>
 </div>
+<div class="paragraph">
+<p>リゾルバーに引数が必要なら、<code>List&lt;String&gt;</code> 型の引数を1つ持つ public コンストラクタを作成すれば、次のように引数を設定できます。</p>
+</div>
 <div class="listingblock">
 <div class="title">archunit.properties</div>
 <div class="content">
@@ -2771,13 +3497,20 @@ argument, and supply the concrete arguments as</p>
 <div class="paragraph">
 <p>For further details, compare the sources of <code>SelectedClassResolverFromClasspath</code>.</p>
 </div>
+<div class="paragraph">
+<p>より詳しい内容が知りたいときは <code>SelectedClassResolverFromClasspath</code> のソースコードを参照してください。</p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_md5_sums_of_classes"><a class="anchor" href="#_md5_sums_of_classes"></a>10.3. MD5 Sums of Classes</h3>
+<h3 id="_クラスの_md5_チェックサムmd5_sums_of_classes"><a class="anchor" href="#_クラスの_md5_チェックサムmd5_sums_of_classes"></a>10.3. クラスの MD5 チェックサム（MD5 Sums of Classes）</h3>
 <div class="paragraph">
 <p>Sometimes it can be valuable to record the MD5 sums of classes being imported to track
 unexpected behavior. Since this has a performance impact, it is disabled by default,
 but it can be activated the following way:</p>
+</div>
+<div class="paragraph">
+<p>インポートするクラスの MD5 チェックサムを記録しておくと、予期せぬ振る舞いの調査に役立つ場合があります。
+この機能は性能に影響するため初期設定では無効になっていますが、次のように有効化できます。</p>
 </div>
 <div class="listingblock">
 <div class="title">archunit.properties</div>
@@ -2788,6 +3521,9 @@ but it can be activated the following way:</p>
 <div class="paragraph">
 <p>If this feature is enabled, the MD5 sum can be queried as</p>
 </div>
+<div class="paragraph">
+<p>この機能を有効化していると、次のように MD5 チェックサムを取得できるようになります。</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="java" class="language-java hljs">javaClass.getSource().get().getMd5sum()</code></pre>
@@ -2795,12 +3531,18 @@ but it can be activated the following way:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_custom_error_messages"><a class="anchor" href="#_custom_error_messages"></a>10.4. Custom Error Messages</h3>
+<h3 id="_エラーメッセージのカスタマイズcustom_error_messages"><a class="anchor" href="#_エラーメッセージのカスタマイズcustom_error_messages"></a>10.4. エラーメッセージのカスタマイズ（Custom Error Messages）</h3>
 <div class="paragraph">
 <p>You can configure a custom format to display the failures of a rule.</p>
 </div>
 <div class="paragraph">
+<p>ルールの評価に失敗したときに表示するメッセージの書式を設定できます。</p>
+</div>
+<div class="paragraph">
 <p>First Supply a custom implementation of</p>
+</div>
+<div class="paragraph">
+<p>まず、<code>FailureDisplayFormat</code> を実装したクラスを用意します。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2810,6 +3552,9 @@ but it can be activated the following way:</p>
 <div class="paragraph">
 <p>Then configure it</p>
 </div>
+<div class="paragraph">
+<p>そして次のように設定します。</p>
+</div>
 <div class="listingblock">
 <div class="title">archunit.properties</div>
 <div class="content">
@@ -2818,6 +3563,9 @@ but it can be activated the following way:</p>
 </div>
 <div class="paragraph">
 <p>One example would be to shorten the fully qualified class names in failure messages:</p>
+</div>
+<div class="paragraph">
+<p>例えば、失敗メッセージの中で完全修飾クラス名の短縮形にしたい場合は次のようにします。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2840,6 +3588,10 @@ in particular by custom predicates and conditions,
 there is at the moment no more sophisticated way than plain text parsing.
 Users can tailor this to their specific environments where they know
 which sorts of failure formats can appear in practice.</p>
+</div>
+<div class="paragraph">
+<p>特に独自の述語式と条件式を使っている場合はそうなのですが、違反の説明文は自由に構成できるため、今のところ平文テキストを解析する以外に効率的な方法はありません。
+ユーザーは、自身の環境で実際にどのような書式の失敗メッセージが得られるのか試してみるしかありません。</p>
 </div>
 </div>
 </div>

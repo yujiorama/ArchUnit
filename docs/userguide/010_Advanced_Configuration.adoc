@@ -1,16 +1,25 @@
-== Advanced Configuration
+[reftext="Advanced Configuration"]
+== 高度な設定（Advanced Configuration）
 
 Some behavior of ArchUnit can be centrally configured by adding a file `archunit.properties`
 to the root of the classpath (e.g. under `src/test/resources`).
 This section will outline some global configuration options.
 
-=== Overriding configuration
+ArchUnit の振る舞いの一部は `archunit.properties` をクラスパスのルートに配置すると集中管理できるようになります（たとえば `src/test/resources` に配置するといいでしょう）。
+このセクションでは大域的な設定オプションについて解説します。
+
+[reftext="Overriding configuration"]
+=== 設定の上書き（Overriding configuration）
 
 ArchUnit will use exactly the `archunit.properties` file returned by the context
 `ClassLoader` from the classpath root, via the standard Java resource loading mechanism.
 
+ArchUnit は、Java の標準的なリソース読み取りの仕組みに従い、`ClassLoader` の発見したクラスパスのルートに配置されている `archunit.properties` の内容そのものを参照します。
+
 It is possible to override any property from `archunit.properties`, by passing a system property
 to the respective JVM process executing ArchUnit:
+
+`archunit.properties` で指定した設定項目は、ArchUnit を実行する JVM のシステムプロパティで上書きできます。
 
 [source,options="nowrap"]
 ----
@@ -19,16 +28,22 @@ to the respective JVM process executing ArchUnit:
 
 E.g. to override the property `resolveMissingDependenciesFromClassPath` described in the next section, it would be possible to pass:
 
+例えば、次のセクションで説明する設定項目 `resolveMissingDependenciesFromClassPath` を上書きするときは、次のように指定します。
+
 [source,options="nowrap"]
 ----
 -Darchunit.resolveMissingDependenciesFromClassPath=false
 ----
 
-=== Configuring the Resolution Behavior
+[reftext="Configuring the Resolution Behavior"]
+=== 解決のための振る舞いの構成（Configuring the Resolution Behavior）
 
 As mentioned in <<Dealing with Missing Classes>>, it might be preferable to configure a different
 import behavior if dealing with missing classes wastes too much performance.
 One way that can be chosen out of the box is to never resolve any missing class from the classpath:
+
+<<Dealing with Missing Classes>> で説明したように、存在しないクラスの扱いが重大な性能劣化に影響する場合、別のインポートの振る舞いをさせるほうが望ましいです。
+1つの方法として、存在しないクラスをクラスパスから探索しない組み込みの振る舞いを選択できます。
 
 [source,options="nowrap"]
 .archunit.properties
@@ -40,6 +55,8 @@ If you want to resolve just some classes from the classpath (e.g. to import miss
 your own organization but avoid the performance impact of importing classes from 3rd party packages),
 it is possible to configure only specific packages to be resolved from the classpath:
 
+クラスパスから解決させたいクラスがいくつか存在するなら、特定のパッケージだけをクラスパスから解決させるように構成できます（例えば、あなたの会社内で利用しているクラスをクラスパスから解決させたいけど、サードパーティのパッケージを探索して性能劣化させたくない場合など）。
+
 [source,options="nowrap"]
 .archunit.properties
 ----
@@ -50,10 +67,17 @@ classResolver.args=some.pkg.one,some.pkg.two
 This configuration would only resolve the packages `some.pkg.one` and `some.pkg.two` from the
 classpath, and stub all other missing classes.
 
+このように設定すると、`some.pkg.one` と `some.pkg.two` のパッケージに所属するクラスをクラスパスから解決し、それ以外のクラスはスタブにすることができます。
+
 The last example also demonstrates, how the behavior can be customized freely, for example
 if classes are imported from a different source and are not on the classpath:
 
+最後の例では、振る舞いの構成の自由度を示すことにします。
+次のように設定すると、クラスパスではない別のファイルシステムパスからクラスをインポートできるのです。
+
 First Supply a custom implementation of
+
+まず、`ClassResolver` を実装したクラスを用意します。
 
 [source,java,options="nowrap"]
 ----
@@ -61,6 +85,8 @@ com.tngtech.archunit.core.importer.resolvers.ClassResolver
 ----
 
 Then configure it
+
+そして次のように設定します。
 
 [source,options="nowrap"]
 .archunit.properties
@@ -71,6 +97,8 @@ classResolver=some.pkg.MyCustomClassResolver
 If the resolver needs some further arguments, create a public constructor with one `List<String>`
 argument, and supply the concrete arguments as
 
+リゾルバーに引数が必要なら、`List<String>` 型の引数を1つ持つ public コンストラクタを作成すれば、次のように引数を設定できます。
+
 [source,options="nowrap"]
 .archunit.properties
 ----
@@ -79,11 +107,17 @@ classResolver.args=myArgOne,myArgTwo
 
 For further details, compare the sources of `SelectedClassResolverFromClasspath`.
 
-=== MD5 Sums of Classes
+より詳しい内容が知りたいときは `SelectedClassResolverFromClasspath` のソースコードを参照してください。
+
+[reftext="MD5 Sums of Classes"]
+=== クラスの MD5 チェックサム（MD5 Sums of Classes）
 
 Sometimes it can be valuable to record the MD5 sums of classes being imported to track
 unexpected behavior. Since this has a performance impact, it is disabled by default,
 but it can be activated the following way:
+
+インポートするクラスの MD5 チェックサムを記録しておくと、予期せぬ振る舞いの調査に役立つ場合があります。
+この機能は性能に影響するため初期設定では無効になっていますが、次のように有効化できます。
 
 [source,options="nowrap"]
 .archunit.properties
@@ -93,16 +127,23 @@ enableMd5InClassSources=true
 
 If this feature is enabled, the MD5 sum can be queried as
 
+この機能を有効化していると、次のように MD5 チェックサムを取得できるようになります。
+
 [source,java,options="nowrap"]
 ----
 javaClass.getSource().get().getMd5sum()
 ----
 
-=== Custom Error Messages
+[reftext="Custom Error Messages"]
+=== エラーメッセージのカスタマイズ（Custom Error Messages）
 
 You can configure a custom format to display the failures of a rule.
 
+ルールの評価に失敗したときに表示するメッセージの書式を設定できます。
+
 First Supply a custom implementation of
+
+まず、`FailureDisplayFormat` を実装したクラスを用意します。
 
 [source,java,options="nowrap"]
 ----
@@ -111,6 +152,8 @@ com.tngtech.archunit.lang.FailureDisplayFormat
 
 Then configure it
 
+そして次のように設定します。
+
 [source,options="nowrap"]
 .archunit.properties
 ----
@@ -118,6 +161,8 @@ failureDisplayFormat=some.pkg.MyCustomFailureDisplayFormat
 ----
 
 One example would be to shorten the fully qualified class names in failure messages:
+
+例えば、失敗メッセージの中で完全修飾クラス名の短縮形にしたい場合は次のようにします。
 
 [source,java,options="nowrap"]
 ----
@@ -139,3 +184,6 @@ in particular by custom predicates and conditions,
 there is at the moment no more sophisticated way than plain text parsing.
 Users can tailor this to their specific environments where they know
 which sorts of failure formats can appear in practice.
+
+特に独自の述語式と条件式を使っている場合はそうなのですが、違反の説明文は自由に構成できるため、今のところ平文テキストを解析する以外に効率的な方法はありません。
+ユーザーは、自身の環境で実際にどのような書式の失敗メッセージが得られるのか試してみるしかありません。

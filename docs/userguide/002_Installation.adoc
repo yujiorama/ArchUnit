@@ -1,4 +1,5 @@
-== Installation
+[reftext="Installation"]
+== インストール（Installation）
 
 To use ArchUnit, it is sufficient to include the respective JAR files in the classpath.
 Most commonly, this is done by adding the dependency to your dependency management tool,
@@ -6,10 +7,16 @@ which is illustrated for Maven and Gradle below. Alternatively you
 can obtain the necessary JAR files directly from
 http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.tngtech.archunit%22[Maven Central].
 
+ArchUnitを使うには、必要なJarファイルをクラスパスに配置します。
+普通ならMavenやGradleなどの依存性管理ツールへ依存ライブラリを追加することになるでしょう。
+http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.tngtech.archunit%22[Maven Central]から必要なJarファイルを直接ダウンロードすることも可能です。
+
 === JUnit 4
 
 To use ArchUnit in combination with JUnit 4, include the following dependency from
 Maven Central:
+
+ArchUnit を JUnit 4 と組み合わせて使用するには、Maven Central から次のような依存ライブラリを追加します。
 
 [source,xml,options="nowrap",subs="verbatim,attributes"]
 .pom.xml
@@ -39,6 +46,12 @@ artifact transitively including both API and engine with the correct scope, whic
 as a test compile dependency. Thus to include ArchUnit's JUnit 5 support, simply add the following dependency
 from Maven Central:
 
+ArchUnit の JUnit 5 向けアーティファクトは、JUnit Jupiter と同じ構成になっています。
+1つはテストを記述するためのAPIを含む、コンパイル依存関係のアーティファクトです。
+もう1つは実際にテストを実行する `TestEngine` を含むアーティファクトです。
+JUnit Jupiter のように、API とエンジン両方のアーティファクトへ適切なスコープで依存するアーティファクトがあるので、テストコンパイル依存関係として追加すれば推移的依存関係として解決されるので便利です。
+ですから、ArchUnit を JUnit 5 と組み合わせて使用するには、Maven Central から次のような依存ライブラリを追加するだけです。
+
 [source,xml,options="nowrap",subs="verbatim,attributes"]
 .pom.xml
 ----
@@ -58,10 +71,14 @@ dependencies {
 }
 ----
 
-=== Other Test Frameworks
+[reftext="Other Test Frameworks"]
+=== その他のテストフレームワークについて（Other Test Frameworks）
 
 ArchUnit works with any test framework that executes Java code. To use ArchUnit in such a
 context, include the core ArchUnit dependency from Maven Central:
+
+ArchUnit は Java に対応するあらゆるテストフレームワークから使用できます。
+その場合、Maven Central から取得したコアモジュールを依存ライブラリとして追加します。
 
 [source,xml,options="nowrap",subs="verbatim,attributes"]
 .pom.xml
@@ -82,7 +99,11 @@ dependencies {
 }
 ----
 
-=== Maven Plugin
+[reftext="Maven Plugin"]
+=== Maven プラグイン（Maven Plugin）
 
 There exists a Maven plugin by Société Générale to run ArchUnit rules straight from Maven. For
 more information visit their GitHub repo: https://github.com/societe-generale/arch-unit-maven-plugin
+
+Société Générale さんが Maven から直接 ArchUnit を実行できるプラグインを公開してくれています。
+詳しくは GitHub のリポジトリ https://github.com/societe-generale/arch-unit-maven-plugin を参照してください。

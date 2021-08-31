@@ -1,8 +1,12 @@
-== What to Check
+[reftext="What to Check"]
+== チェックの対象（What to Check）
 
 The following section illustrates some typical checks you could do with ArchUnit.
 
-=== Package Dependency Checks
+このセクションでは、ArchUnit の典型的なチェック内容を説明します。
+
+[reftext="Package Dependency Checks"]
+=== パッケージの依存性チェック（Package Dependency Checks）
 
 [plantuml, "package-deps-no-access"]
 ----
@@ -45,7 +49,8 @@ classes().that().resideInAPackage("..foo..")
     .should().onlyHaveDependentClassesThat().resideInAnyPackage("..source.one..", "..foo..")
 ----
 
-=== Class Dependency Checks
+[reftext="Class Dependency Checks"]
+=== クラスの依存性チェック（Class Dependency Checks）
 
 [plantuml, "class-naming-deps"]
 ----
@@ -77,7 +82,8 @@ classes().that().haveNameMatching(".*Bar")
     .should().onlyHaveDependentClassesThat().haveSimpleName("Bar")
 ----
 
-=== Class and Package Containment Checks
+[reftext="Class and Package Containment Checks"]
+=== クラスおよびパッケージの閉じ込め状況チェック（Class and Package Containment Checks）
 
 [plantuml, "class-package-contain"]
 ----
@@ -111,7 +117,8 @@ classes().that().haveSimpleNameStartingWith("Foo")
     .should().resideInAPackage("com.foo")
 ----
 
-=== Inheritance Checks
+[reftext="Inheritance Checks"]
+=== 継承関係のチェック（Inheritance Checks）
 
 [plantuml, "inheritance-naming-check"]
 ----
@@ -181,7 +188,8 @@ classes().that().areAssignableTo(EntityManager.class)
     .should().onlyHaveDependentClassesThat().resideInAnyPackage("..persistence..")
 ----
 
-=== Annotation Checks
+[reftext="Annotation Checks"]
+=== アノテーションのチェック（Annotation Checks）
 
 [plantuml, "inheritance-annotation-check"]
 ----
@@ -214,7 +222,8 @@ classes().that().areAssignableTo(EntityManager.class)
     .should().onlyHaveDependentClassesThat().areAnnotatedWith(Transactional.class)
 ----
 
-=== Layer Checks
+[reftext="Layer Checks"]
+=== レイヤーのチェック（Layer Checks）
 
 [plantuml, "layer-check"]
 ----
@@ -267,7 +276,8 @@ layeredArchitecture()
     .whereLayer("Persistence").mayOnlyBeAccessedByLayers("Service")
 ----
 
-=== Cycle Checks
+[reftext="Cycle Checks"]
+=== 循環のチェック（Cycle Checks）
 
 [plantuml, "cycle-check"]
 ----
